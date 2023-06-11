@@ -65,45 +65,6 @@ def mantisa(numero_binario: str, tipo_precision: int):
     return mant_f
 
 
-# Metodo para representar un numero binario, sin normalizar, normalizado y transformado a hexadecimal
-# def norma_bin_hexa(num_dec, num_bin):
-#     num_digitos = len(str(num_bin))
-#     num_resultado = ""
-#     contador = 0
-
-#     # Mostrar numero original
-#     print("\nVariable int\n")
-#     print("     Numero en binario: "+str(num_bin))
-
-#     num_signo = signo(num_dec)
-
-#     # Proceso para aumentar ceros o quitar digitos de ser necesario
-#     if num_digitos <= 31:
-#         num_falta = 31-num_digitos
-#         num_bin_f = num_signo+"0"*num_falta+str(num_bin)
-
-#         bin_hexa(num_bin_f, contador, num_resultado)
-#     else:
-#         num_sobra = int(num_digitos)-31
-#         slicing = slice(0, -num_sobra)
-#         num_bin = str(num_bin)[slicing]
-#         num_bin_f = num_signo+str(num_bin)
-
-#         bin_hexa(num_bin_f, contador, num_resultado)
-
-
-# Metodo usado solamente para transformar un numero binario normalizado a hexadecimal
-# def bin_hexa(num_bin_f, contador, num_resultado):
-#     print("     Numero normalizado: "+num_bin_f)
-#     while (contador < 32):
-#         binario = num_bin_f[contador:contador+4]
-#         decimal = binario_a_decimal(int(binario))
-#         num_hexa = hex(decimal)
-#         num_resultado = num_resultado+num_hexa[2:]
-#         contador += 4
-#     print("     Numero en hexadecimal: "+num_resultado)
-
-
 # Metodo que une las cadenas de texto signo, exponente y mantisa para transformarlas a hexadecimal, sirve para los dos tipos de precisiones
 def bin_a_hex(num_s_bin, num_e_bin, num_m_bin, tipo_pre):
     cadena_binario = num_s_bin+num_e_bin+num_m_bin
@@ -129,6 +90,41 @@ def bin_a_hex(num_s_bin, num_e_bin, num_m_bin, tipo_pre):
     return resultado
 
 
+# Metodo para representar un numero binario normalizado y transformado a hexadecimal
+def norma_bin_hexa(numero_signo, numero_binario):
+    num_digitos = len(numero_binario)
+
+    # Proceso para aumentar ceros o quitar digitos de ser necesario
+    if num_digitos <= 31:
+        num_falta = 31-num_digitos
+        num_bin_f = numero_signo+"0"*num_falta+str(numero_binario)
+
+        numero_hexadecimal = bin_hexa(num_bin_f)
+    else:
+        num_sobra = int(num_digitos)-31
+        slicing = slice(0, -num_sobra)
+        numero_binario = str(numero_binario)[slicing]
+        num_bin_f = numero_signo+str(numero_binario)
+
+        numero_hexadecimal = bin_hexa(num_bin_f)
+
+    return numero_hexadecimal
+
+
+# Metodo usado solamente para transformar un numero binario normalizado a hexadecimal
+def bin_hexa(num_bin_f):
+    num_resultado = str()
+    contador = int()
+    while (contador < 32):
+        binario = num_bin_f[contador:contador+4]
+        decimal = int(binario, 2)
+        num_hexa = hex(decimal)
+        num_resultado = num_resultado+num_hexa[2:]
+        contador += 4
+
+    return num_resultado
+
+
 def flotante(numero_decimal, tipo_precision):
 
     parte_entera, parte_decimal = str(numero_decimal).split(".")
@@ -150,34 +146,75 @@ def flotante(numero_decimal, tipo_precision):
     return parte_entera, parte_decimal
 
 
-def ingreso_decimal():
-    numero_decimal = input("Ingrese su número: ")
-    numero_decimal = float(numero_decimal.replace(",", "."))
-    tipo_precision = menu_secundario()
+def binario_normalizado(numero_decimal: float):
+    numero_signo = signo(numero_decimal)
+    numero_decimal = abs(numero_decimal)
+    parte_entera, parte_decimal = str(numero_decimal).split(".")
+    parte_entera = int(parte_entera)
+    parte_entera = bin(parte_entera).lstrip("0b")
+
+    parte_entera = norma_bin_hexa(numero_signo, parte_entera)
+
+    return parte_entera
+
+
+def ingreso_decimal(numero_decimal, tipo_precision):
 
     if numero_decimal >= 0:
         parte_entera, parte_decimal = flotante(numero_decimal, tipo_precision)
         numero_binario = parte_entera+"."+parte_decimal
         numero_binario, numero_exponente = quitar_punto(numero_binario)
+
+        numero_binario_normalizado = binario_normalizado(numero_decimal)
+
         signo_binario = signo(numero_decimal)
         exponente_binario = exponente(tipo_precision, numero_exponente)
         mantisa_binario = mantisa(numero_binario, tipo_precision)
         hexadecimal = bin_a_hex(
             signo_binario, exponente_binario, mantisa_binario, tipo_precision)
-        print("Signo: {}\nExponente: {}\nMantisa: {}\nHexadecimal: {}".format
-              (signo_binario, exponente_binario, mantisa_binario, hexadecimal))
+        print("Signo: {}\nExponente: {}\nMantisa: {}\nHexadecimal: {}\nComo int, transformado a hexadecimal: {}".format
+              (signo_binario, exponente_binario, mantisa_binario, hexadecimal, numero_binario_normalizado))
     else:
         signo_binario = signo(numero_decimal)
+        numero_binario_normalizado = binario_normalizado(numero_decimal)
         numero_decimal = abs(numero_decimal)
+
         parte_entera, parte_decimal = flotante(numero_decimal, tipo_precision)
         numero_binario = parte_entera+"."+parte_decimal
         numero_binario, numero_exponente = quitar_punto(numero_binario)
+
         exponente_binario = exponente(tipo_precision, numero_exponente)
         mantisa_binario = mantisa(numero_binario, tipo_precision)
         hexadecimal = bin_a_hex(
             signo_binario, exponente_binario, mantisa_binario, tipo_precision)
-        print("Signo: {}\nExponente: {}\nMantisa: {}\nHexadecimal: {}".format
-              (signo_binario, exponente_binario, mantisa_binario, hexadecimal))
+        print("Signo: {}\nExponente: {}\nMantisa: {}\nHexadecimal: {}\nComo int, transformado a hexadecimal: {}".format
+              (signo_binario, exponente_binario, mantisa_binario, hexadecimal, numero_binario_normalizado))
+
+
+def ingreso_decimal_exponente():
+
+    try:
+        numero_decimal = input("Ingrese su número: ")
+        numero_decimal = float(numero_decimal.replace(",", "."))
+        exponente_decimal = int(input("Ingrese el exponente: "))
+        operacion = int(input("Ingrese si hay suma[0] o resta[1]: "))
+        expresion = int(input("Ingrese el número de la expresión: "))
+    except ValueError:
+        print("******Ingrese valores correctos******")
+        menu_principal()
+
+    tipo_precision = menu_secundario()
+
+    if operacion == 0:
+        numero_completo = pow(numero_decimal, exponente_decimal) + expresion
+        print("La expresión da como resultado: {}".format(numero_completo))
+        ingreso_decimal(numero_completo, tipo_precision)
+    elif operacion == 1:
+        numero_completo = pow(numero_decimal, exponente_decimal) - expresion
+        print("La expresión da como resultado: {}".format(numero_completo))
+        ingreso_decimal(numero_completo, tipo_precision)
+    else:
+        print("Ingrese una de las opciones")
 
 
 def menu_final():
@@ -191,7 +228,12 @@ def menu_final():
     print(menu)
 
     while True:
-        opcion = int(input("Seleccione una opción: "))
+        try:
+            opcion = int(input("Seleccione una opción: "))
+
+        except ValueError:
+            opcion = 0
+
         if opcion == 1:
             menu_principal()
         elif opcion == 2:
@@ -210,7 +252,12 @@ def menu_secundario():
     print(menu)
 
     while True:
-        opcion = int(input("Seleccione una opción. "))
+        try:
+            opcion = int(input("Seleccione una opción. "))
+
+        except ValueError:
+            opcion = 0
+
         if opcion == 1:
             return opcion
         elif opcion == 2:
@@ -225,23 +272,32 @@ def menu_principal():
     A continuación selecciona una de las opciones para continuar el proceso:
             
         [1] = Ingreso de dato decimal
-        [2] = Ingreso de dato binario
-        [3] = Ingreso de dato decimal con exponente
-        [4] = Salir'''
+        [2] = Ingreso de dato decimal con exponente
+        [3] = Salir'''
 
     print(menu)
 
     while True:
-        opcion = int(input("Seleccione una opción: "))
+        try:
+            opcion = int(input("Seleccione una opción: "))
+
+        except ValueError:
+            opcion = 0
 
         if opcion == 1:
-            ingreso_decimal()
+            try:
+                numero_decimal = input("Ingrese su número: ")
+                numero_decimal = float(numero_decimal.replace(",", "."))
+            except ValueError:
+                print("******Ingrese valores correctos******")
+                menu_principal()
+            tipo_precision = menu_secundario()
+            ingreso_decimal(numero_decimal, tipo_precision)
             menu_final()
         elif opcion == 2:
-            pass
+            ingreso_decimal_exponente()
+            menu_final()
         elif opcion == 3:
-            pass
-        elif opcion == 4:
             exit(1)
         else:
             print("Ingrese una de las opciones presentadas")
