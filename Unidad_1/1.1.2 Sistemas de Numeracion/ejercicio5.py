@@ -1,13 +1,18 @@
 #DE DECIMAL A BINARIO
 
-decimal= 145
-binario=0
-i=0
+def decimal_a_binario(decimal):
+    binario = ''
+    
+    if decimal == 0:
+        binario = '0'
+    
+    while decimal > 0:
+        residuo = decimal % 2
+        binario = str(residuo) + binario
+        decimal = decimal // 2
+    
+    return binario
 
-while(decimal>0):
-    residuo=decimal%2
-    binario+= residuo *(10**i)
-    decimal //=2
-    i+=1
-
-print("El valor de decimal a binario es: "+str(binario))
+decimal = int(input("Ingrese un número decimal: "))
+binario = decimal_a_binario(decimal)
+print(f"El número binario correspondiente es: {binario}")
