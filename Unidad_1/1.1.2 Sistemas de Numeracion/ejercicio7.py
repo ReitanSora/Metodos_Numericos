@@ -1,5 +1,8 @@
 #HEXADECIMAL A DECIMAL
-hexa="ABCD"
-decimal= int(hexa,16)
+def hexadecimal_a_decimal(hexadecimal):
+    decimal = int(hexadecimal, 16)
+    return decimal
 
-print("El valor de hexa a decimal es: "+str(decimal))
+hexadecimal = input("Ingrese un número hexadecimal: ")
+decimal = hexadecimal_a_decimal(hexadecimal)
+print("El número decimal correspondiente es:", decimal)
