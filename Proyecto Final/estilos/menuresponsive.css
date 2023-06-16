@@ -1,0 +1,79 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    background-color: #333;
+}
+
+img{
+    max-width: 90%;
+}
+
+.toggle-menu{
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    filter: invert(1);
+    width: 40px;
+    z-index: 1;
+    border-radius: 25%;
+    text-align: center;/*para centrar una imagen sin la necesidad de ocupar position*/
+}
+
+
+@media (min-width: 768px){
+    .toggle-menu{
+        display: none;
+    }
+}
+
+.main-menu{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(22, 100, 169);
+    transform: translateY(-100%);
+    transition: 0.5s;
+}
+
+.main-menu--show{
+    transform: translateY(0);
+}
+
+.toggle-menu__checkbox{
+    display: none;
+}
+
+.toggle-menu__checkbox:checked + .main-menu{
+    transform:translateY(0);
+}
+
+@media (min-width: 768px){
+    .main-menu{
+        flex-direction: row-reverse;
+        transform: translateY(0);
+    }
+}
+
+.main-menu__item{
+    padding: 1em;
+}
+
+.main-menu__link{
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: .3s;
+}
+
+.main-menu__link:hover{
+    /*color: rgb(22, 100, 169)*/
+    font-size: 90%;
+}
+ /*Colores Base
+ rgb(59, 31, 152); - Ai
+ rgb(43, 29, 130); o rgb(158, 5, 85); - Ruby
+ rgb(22, 100, 169) - Aqua
+ */
