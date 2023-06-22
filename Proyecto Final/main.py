@@ -1,16 +1,19 @@
 '''
-Tema: Algoritmos de ordenamiento(iterativos y recursivos)
-#Grupo #3
+Tema: Métodos Numéricos
+#Grupo #
 #Integrantes:
-#- Stiven Pilca           CI: 1750450262
-#- Tulcanza Juan          CI: 1755962485
+
+•	Kevin Josue Amaguaña Rivadeneira
+•	Priscila Veronica Chisag Pillajo
+•	Andy RIcardo Galarza Morales
+•	Stiven Anthony Pilca Sánchez
+
 #Carrera: Ingeniería en Sistemas de la información
 #Paralelo: SI4 - 002
-#Fecha de entrega: 21/06/2023
 '''
 
-from manager import Manager
+# from manager import Manager
 
-if __name__ == "__main__":
-    app = Manager()
-    app.mainloop()
+# if __name__ == "__main__":
+#     app = Manager()
+#     app.mainloop()

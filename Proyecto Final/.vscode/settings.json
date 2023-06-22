@@ -2,6 +2,5 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"
     },
-    "python.formatting.provider": "none",
-    "python.analysis.typeCheckingMode": "off"
+    "python.formatting.provider": "none"
 }

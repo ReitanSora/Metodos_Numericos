@@ -1,19 +1,22 @@
 '''
-Tema: Algoritmos de ordenamiento(iterativos y recursivos)
-#Grupo #3
+Tema: Métodos Numéricos
+#Grupo #
 #Integrantes:
-#- Stiven Pilca           CI: 1750450262
-#- Tulcanza Juan          CI: 1755962485
+
+•	Kevin Josue Amaguaña Rivadeneira
+•	Priscila Veronica Chisag Pillajo
+•	Andy RIcardo Galarza Morales
+•	Stiven Anthony Pilca Sánchez
+
 #Carrera: Ingeniería en Sistemas de la información
 #Paralelo: SI4 - 002
-#Fecha de entrega: 21/06/2023
 '''
 
 
-BG = "#666666"
+BG = "#FFF"
 
-COLOR_TITULO = "#FFF"
-COLOR_SUBTITULO = "#FFF"
+COLOR_TITULO = "#666666"
+COLOR_SUBTITULO = "#666666"
 
 BG_ENTRY = "#4C4C4C"
 FG_ENTRY = "#4C4C4C"
@@ -42,6 +45,20 @@ STYLE_BUTTON_BORDER = {
     "width": 12,
 }
 
+STYLE_LABEL_FRAME = {
+    "bg": BG,
+    "relief": "flat",
+    "bd": 0,
+    "width": "200",
+}
+
+STYLE_ENTRY_FRAME = {
+    "bg": BG,
+    "relief": "flat",
+    "bd": 0,
+    "width": "300",
+}
+
 STYLE_BUTTON = {
     "font": ("Corbel", 14, "bold"),
     "bg": BG_BUTTON_DES,
@@ -65,7 +82,7 @@ STYLE_BUTTON_ENTER = {
 STYLE_ENTRY = {
     "font": ("Verdana", 14),
     "bg": BG_ENTRY,
-    "fg": COLOR_TITULO,
+    "fg": "#fff",
     "bd": 1,
     "width": 20,
     "justify": "center"

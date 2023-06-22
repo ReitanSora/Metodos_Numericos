@@ -1,12 +1,15 @@
 '''
-Tema: Algoritmos de ordenamiento(iterativos y recursivos)
-#Grupo #3
+Tema: Métodos Numéricos
+#Grupo #
 #Integrantes:
-#- Stiven Pilca           CI: 1750450262
-#- Tulcanza Juan          CI: 1755962485
+
+•	Kevin Josue Amaguaña Rivadeneira
+•	Priscila Veronica Chisag Pillajo
+•	Andy RIcardo Galarza Morales
+•	Stiven Anthony Pilca Sánchez
+
 #Carrera: Ingeniería en Sistemas de la información
 #Paralelo: SI4 - 002
-#Fecha de entrega: 21/06/2023
 '''
 
 import tkinter as tk
@@ -19,7 +22,7 @@ class Manager(tk.Tk):
     def __init__(self, *args, **kwargs):
         # metodo constructor de la clase Tk
         super().__init__(*args, **kwargs)
-        self.title("Algoritmos de Ordenamiento")
+        self.title("Métodos Numéricos")
         self.geometry("800x600")
 
         # contenedor donde se mostrarán todas las demás ventanas
