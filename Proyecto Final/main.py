@@ -12,8 +12,8 @@ Tema: Métodos Numéricos
 #Paralelo: SI4 - 002
 '''
 
-# from manager import Manager
+from login import Login
 
-# if __name__ == "__main__":
-#     app = Manager()
-#     app.mainloop()
+if __name__ == "__main__":
+    app = Login()
+    app.mainloop()
