@@ -356,6 +356,19 @@ class Burbuja(tk.Frame):
         boton_5.bind('<Leave>', event.on_leave)
 
 
+class MenuTabErrores (tk.Frame):
+    def __init__(self, parent, controller):
+        super().__init__(parent)
+        self.configure(background=style.BG)
+        self.t
+        self.controller = controller
+        self.init_widgets()
+    
+    def init_widgets(self):
+        pass
+
+    
+
 class PropErrores(tk.Frame):
 
     def __init__(self, parent, controller):
