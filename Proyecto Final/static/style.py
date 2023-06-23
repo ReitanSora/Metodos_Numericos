@@ -107,7 +107,7 @@ STYLE_ENTRY_DES = {
     "bg": BG_ENTRY,
     "fg": FG_ENTRY,
     "bd": 1,
-    "width": 40,
+    "width": 35,
     "cursor": "",
     "state": "readonly",
     "justify": "center"
