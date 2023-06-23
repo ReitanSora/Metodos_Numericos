@@ -14,8 +14,7 @@ Tema: Métodos Numéricos
 
 import tkinter as tk
 from static import style
-from screens import Home, Burbuja, Insercion, Seleccion, Shellsort, Mergesort, Quicksort, Heapsort, ShellsortRecursivo
-
+from screens import Home, PuntoFlotante, PropErrores
 
 class Manager(tk.Tk):
 
@@ -42,7 +41,7 @@ class Manager(tk.Tk):
         # diccionario de clases
         self.frames = {}
 
-        for F in (Home, Burbuja, Insercion, Seleccion, Shellsort, Mergesort, Quicksort, Heapsort, ShellsortRecursivo):
+        for F in (Home, PuntoFlotante, PropErrores):
             frame = F(container, self)
             self.frames[F] = frame
 
