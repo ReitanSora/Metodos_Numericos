@@ -41,14 +41,13 @@ class Login (tk.Tk):
         # self.geometry("800x600")
         self.init_widgets()
 
-    def buscar (self, usuario: str):
+    def buscar(self, usuario: str):
         self.lista_usuarios = cargar()
         print(self.lista_usuarios)
         if usuario in self.lista_usuarios.values():
             print("Encontrado")
         posicion = self.lista_usuarios.index(usuario)
         print(self.lista_usuarios[posicion])
-
 
     def ingresar(self, usuario: str, clave: str):
         if usuario == "admin" and clave == "123":
@@ -59,9 +58,10 @@ class Login (tk.Tk):
             messagebox.showerror(
                 "Error usuario", "El usuario o la clave son incorrectos")
 
-    def login_event(self):
-        #self.buscar(self.texto_usuario.get())
+    def login_event(self, event):
+        # self.buscar(self.texto_usuario.get())
         self.ingresar(self.texto_usuario.get(), self.texto_clave.get())
+
 
     def register_event(self):
         self.destroy()
@@ -92,6 +92,8 @@ class Login (tk.Tk):
                                     textvariable=self.texto_clave,
                                     **style.STYLE_ENTRY)
         self.entry_clave.pack(side=tk.TOP, expand=True)
+
+        self.entry_clave.bind("<Return>", self.login_event)
 
         # boton para logearse
         borde_1 = tk.LabelFrame(self,
