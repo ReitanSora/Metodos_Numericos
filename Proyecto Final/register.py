@@ -16,7 +16,6 @@ import tkinter as tk
 from tkinter import messagebox
 from static import style
 
-
 def on_enter(e):
     e.widget.config(**style.STYLE_BUTTON_ENTER)
 
@@ -25,83 +24,133 @@ def on_leave(e):
     e.widget.config(**style.STYLE_BUTTON)
 
 
+def on_enter_return(e):
+    e.widget.config(**style.STYLE_BUTTON_RETURN_ENTER)
+
+
+def on_leave_return(e):
+    e.widget.config(**style.STYLE_BUTTON_RETURN)
+
+
 class Register(tk.Tk):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.configure(background=style.BG)
         self.title("Registro nuevo usuario")
-        self.geometry("500x700")
-        #self.resizable(False, False)
+        self.geometry("500x600")
+        # self.resizable(False, False)
         self.init_widgets()
 
+    def move_to_login(self):
+        self.destroy()
+        # ventana_login = Login()
+        # ventana_login.mainloop()
 
     def init_widgets(self):
 
-        
-        tk.Label(self, 
+        # titulo del frame
+        tk.Label(self,
                  text="Registro",
                  **style.STYLE_TITTLE
                  ).pack(side=tk.TOP, fill=tk.BOTH, pady="10")
 
         infoFrame = tk.Frame(self, background=style.BG)
+
+        infoFrame.columnconfigure(0, weight=1)
         infoFrame.pack(side=tk.TOP, fill=tk.BOTH, expand=True,)
 
-        # ingreso nombre de usuario
-        borde_1 = tk.LabelFrame(infoFrame,
-                                **style.STYLE_LABEL_FRAME)
-        borde_1.grid(row=1,column=0, pady="20", padx="10")
+        # label nombre de usuario
+        tk.Label(infoFrame,
+                 text="Nombre",
+                 **style.STYLE_SUBTITTLE,
+                 justify="center"
+                 ).grid(row=1, column=0)
 
-        tk.Label(borde_1, 
-                 text="Ingrese su nombre", 
+        # label apellido del usuario
+        tk.Label(infoFrame,
+                 text="Apellido",
                  **style.STYLE_SUBTITTLE
-                 ).pack()
+                 ).grid(row=2, column=0)
 
-        borde_2 = tk.LabelFrame(infoFrame,
-                                **style.STYLE_LABEL_FRAME)
-        borde_2.grid(row=1,column=1, pady="20",padx="30")
+        # label nickname
+        tk.Label(infoFrame,
+                 text="Nickname",
+                 **style.STYLE_SUBTITTLE
+                 ).grid(row=3, column=0)
 
+        # label correo electrocnico
+        tk.Label(infoFrame,
+                 text="Correo",
+                 **style.STYLE_SUBTITTLE
+                 ).grid(row=4, column=0)
+
+        # label clave
+        tk.Label(infoFrame,
+                 text="Clave",
+                 **style.STYLE_SUBTITTLE
+                 ).grid(row=5, column=0)
+
+        # entry nombre usuario
         self.texto_usuario = tk.StringVar()
-        self.entry_usuario = tk.Entry(borde_2,
-                                      textvariable=self.texto_usuario,
-                                      **style.STYLE_ENTRY)
-        self.entry_usuario.pack(side=tk.RIGHT, expand=True)
+        tk.Entry(infoFrame,
+                 textvariable=self.texto_usuario,
+                 **style.STYLE_ENTRY,
+                 ).grid(row=1, column=1, pady="20", padx="20")
 
-        # ingreso clave del usuario
-        tk.Label(self,
-                 text="Ingrese su clave",
-                 **style.STYLE_SUBTITTLE).pack(side=tk.LEFT, fill=tk.BOTH, expand=True, pady=0)
-
+        # entry apellido
         self.texto_clave = tk.StringVar()
-        self.entry_clave = tk.Entry(self,
-                                    textvariable=self.texto_clave,
-                                    **style.STYLE_ENTRY)
-        self.entry_clave.pack(side=tk.RIGHT, expand=True)
+        tk.Entry(infoFrame,
+                 textvariable=self.texto_clave,
+                 **style.STYLE_ENTRY
+                 ).grid(row=2, column=1, pady="20", padx="20")
 
-        # # boton para logearse
-        # borde_1 = tk.LabelFrame(self,
-        #                         **style.STYLE_BUTTON_BORDER)
-        # borde_1.pack(side=tk.TOP, expand=True)
+        # entry nickname
+        self.texto_clave = tk.StringVar()
+        tk.Entry(infoFrame,
+                 textvariable=self.texto_clave,
+                 **style.STYLE_ENTRY
+                 ).grid(row=3, column=1, pady="20", padx="20")
 
-        # boton_login = tk.Button(borde_1,
-        #                         text="Ingresar",
-        #                         **style.STYLE_BUTTON,
-        #                         )
-        # boton_login.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
+        # entry correo
+        self.texto_clave = tk.StringVar()
+        tk.Entry(infoFrame,
+                 textvariable=self.texto_clave,
+                 **style.STYLE_ENTRY
+                 ).grid(row=4, column=1, pady="20", padx="20")
 
-        # boton_login.bind('<Enter>', on_enter)
-        # boton_login.bind('<Leave>', on_leave)
+        # entry clave
+        self.texto_clave = tk.StringVar()
+        tk.Entry(infoFrame,
+                 textvariable=self.texto_clave,
+                 **style.STYLE_ENTRY
+                 ).grid(row=5, column=1, pady="20", padx="20")
 
-        # # boton para registrarse
-        # borde_2 = tk.LabelFrame(self,
-        #                         **style.STYLE_BUTTON_BORDER)
-        # borde_2.pack(side=tk.TOP, expand=True)
+        # boton para registrarse
+        borde_1 = tk.LabelFrame(infoFrame,
+                                **style.STYLE_BUTTON_BORDER)
+        borde_1.grid(row=6, column=0, pady="30")
 
-        # boton_registro = tk.Button(borde_2,
-        #                            text="Registrarse",
-        #                            **style.STYLE_BUTTON,
-        #                            )
-        # boton_registro.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
+        boton_register = tk.Button(borde_1,
+                                   text="Registrar",
+                                   **style.STYLE_BUTTON,
+                                   )
+        boton_register.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
 
-        # boton_registro.bind('<Enter>', on_enter)
-        # boton_registro.bind('<Leave>', on_leave)
+        boton_register.bind('<Enter>', on_enter)
+        boton_register.bind('<Leave>', on_leave)
+
+        # boton para regresar
+        borde_2 = tk.LabelFrame(infoFrame,
+                                **style.STYLE_BUTTON_RETURN_BORDER)
+        borde_2.grid(row=6, column=1, pady="30")
+
+        boton_registro = tk.Button(borde_2,
+                                   text="Regresar",
+                                   **style.STYLE_BUTTON_RETURN,
+                                   command=self.move_to_login
+                                   )
+        boton_registro.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
+
+        boton_registro.bind('<Enter>', on_enter_return)
+        boton_registro.bind('<Leave>', on_leave_return)
