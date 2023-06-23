@@ -33,7 +33,7 @@ class Home(tk.Frame):
         self.init_widgets()
 
     def move_to_errores(self):
-        self.controller.show_frame(PropErrores)
+        self.controller.show_frame(MenuTabErrores)
 
     def move_to_sistemas(self):
         self.controller.show_frame()
@@ -360,9 +360,47 @@ class MenuTabErrores (tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
         self.configure(background=style.BG)
-        self.t
         self.controller = controller
-        self.init_widgets()
+
+        errores = ttk.Notebook(self)
+        errores.pack(expand=True, fill=tk.BOTH)
+
+        errores.columnconfigure(0, weight=1)
+        errores.rowconfigure(0, weight=1)
+
+        
+        subventana1= PropErrores(self, controller)
+        subventana2 = PuntoFlotante(self, controller)
+
+        errores.add(subventana1, text="Propagación")
+        errores.add(subventana2, text="Propagación")
+
+        # for F in (PropErrores, PuntoFlotante):
+        #     frame = F(errores, self)
+        #     self.frames[F] = frame
+
+        #     # configuracion de filas, columnas y rellenado del frame
+        #     frame.grid(row=0, column=0, sticky=tk.NSEW)
+        # self.show_frame( errores ,PropErrores)
+
+    # def show_frame(self, container, frame):
+        
+    #     container.add(frame, text="Propagación Errores")
+
+        # para poner una pantalla encima de la otra
+        
+
+        # tab1 = tk.Frame(errores, width=400, height=400, bg="#000")
+        # tab2 = tk.Frame(errores, width=400, height=400, bg="#fff")
+
+        # tab1.pack(fill=tk.BOTH, expand=True)
+        # tab2.pack(fill=tk.BOTH, expand=True)
+
+        # errores.add(tab1, text="negro")
+        # errores.add(tab2, text="blanco")
+        # self.init_widgets()
+
+
     
     def init_widgets(self):
         pass
