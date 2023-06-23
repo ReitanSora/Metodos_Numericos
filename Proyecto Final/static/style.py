@@ -26,6 +26,11 @@ BG_BUTTON_EN = "#3b1f98"
 FG_BUTTON_DES = "#3b1f98"
 FG_BUTTON_EN = "#FFF"
 
+BG_BUTTON_RETURN_DES = "#FFF"
+BG_BUTTON_RETURN_EN = "#257dca"
+FG_BUTTON_RETURN_DES = "#257dca"
+FG_BUTTON_RETURN_EN = "#FFF"
+
 STYLE_TITTLE = {
     "font": ("Corbel", 20, "bold"),
     "bg": BG,
@@ -45,18 +50,11 @@ STYLE_BUTTON_BORDER = {
     "width": 12,
 }
 
-STYLE_LABEL_FRAME = {
-    "bg": BG,
+STYLE_BUTTON_RETURN_BORDER = {
+    "bg": BG_BUTTON_RETURN_EN,
     "relief": "flat",
-    "bd": 0,
-    "width": "200",
-}
-
-STYLE_ENTRY_FRAME = {
-    "bg": BG,
-    "relief": "flat",
-    "bd": 0,
-    "width": "300",
+    "bd": 3,
+    "width": 12,
 }
 
 STYLE_BUTTON = {
@@ -72,11 +70,27 @@ STYLE_BUTTON = {
     "padx": 20,
 }
 
-STYLE_BUTTON_ENTER = {
+STYLE_BUTTON_RETURN= {
     "font": ("Corbel", 14, "bold"),
+    "bg": BG_BUTTON_RETURN_DES,
+    "fg": FG_BUTTON_RETURN_DES,
+    "activeforeground": FG_BUTTON_RETURN_DES,
+    "activebackground": BG_BUTTON_RETURN_DES,
+    "relief": "sunken",
+    "cursor": "hand2",
+    "bd": 0,
+    "width": 10,
+    "padx": 20,
+}
+
+STYLE_BUTTON_ENTER = {
     "bg": BG_BUTTON_EN,
-    "fg": FG_BUTTON_EN,
-    
+    "fg": FG_BUTTON_EN, 
+}
+
+STYLE_BUTTON_RETURN_ENTER = {
+    "bg": BG_BUTTON_RETURN_EN,
+    "fg": FG_BUTTON_RETURN_EN, 
 }
 
 STYLE_ENTRY = {
