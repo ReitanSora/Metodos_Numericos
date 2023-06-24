@@ -1,5 +1,4 @@
 from .conection import ConectionDB
-from tkinter import messagebox
 import sqlite3
 
 
