@@ -14,10 +14,12 @@ Tema: Métodos Numéricos
 
 import tkinter as tk
 from static import style
+from model.usuario import crear_tabla
+from model.usuario import Usuario, ingresar
 import functions.events as event
 
 
-class Register(tk.Tk):
+class Register(tk.Toplevel):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -27,10 +29,11 @@ class Register(tk.Tk):
         # self.resizable(False, False)
         self.init_widgets()
 
-    def move_to_login(self):
-        self.destroy()
-        # ventana_login = Login()
-        # ventana_login.mainloop()
+    def registrar_usuario(self):
+        crear_tabla()
+        if self.texto_nickname != "" and self.texto_clave != "":
+            usuario = Usuario(self.texto_nickname.get(), self.texto_clave.get())
+            ingresar(usuario)
 
     def init_widgets(self):
 
@@ -76,30 +79,30 @@ class Register(tk.Tk):
                  ).grid(row=4, column=0)
 
         # entry nombre usuario
-        self.texto_usuario = tk.StringVar()
+        self.texto_nombre = tk.StringVar()
         tk.Entry(infoFrame,
-                 textvariable=self.texto_usuario,
+                 textvariable=self.texto_nombre,
                  **style.STYLE_ENTRY,
                  ).grid(row=0, column=1, pady="20", padx="20")
 
         # entry apellido
-        self.texto_clave = tk.StringVar()
+        self.texto_apellido = tk.StringVar()
         tk.Entry(infoFrame,
-                 textvariable=self.texto_clave,
+                 textvariable=self.texto_apellido,
                  **style.STYLE_ENTRY
                  ).grid(row=1, column=1, pady="20", padx="20")
 
         # entry nickname
-        self.texto_clave = tk.StringVar()
+        self.texto_nickname = tk.StringVar()
         tk.Entry(infoFrame,
-                 textvariable=self.texto_clave,
+                 textvariable=self.texto_nickname,
                  **style.STYLE_ENTRY
                  ).grid(row=2, column=1, pady="20", padx="20")
 
         # entry correo
-        self.texto_clave = tk.StringVar()
+        self.texto_correo = tk.StringVar()
         tk.Entry(infoFrame,
-                 textvariable=self.texto_clave,
+                 textvariable=self.texto_correo,
                  **style.STYLE_ENTRY
                  ).grid(row=3, column=1, pady="20", padx="20")
 
@@ -118,6 +121,7 @@ class Register(tk.Tk):
         boton_register = tk.Button(borde_1,
                                    text="Registrar",
                                    **style.STYLE_BUTTON,
+                                   command=self.registrar_usuario
                                    )
         boton_register.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
 
@@ -132,7 +136,7 @@ class Register(tk.Tk):
         boton_registro = tk.Button(borde_2,
                                    text="Regresar",
                                    **style.STYLE_BUTTON_RETURN,
-                                   command=self.move_to_login
+                                   command=self.destroy
                                    )
         boton_registro.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
 
