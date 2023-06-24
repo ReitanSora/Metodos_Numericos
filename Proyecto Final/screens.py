@@ -15,7 +15,6 @@ Tema: Métodos Numéricos
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-import random as r
 from static import style
 # from modules.form_punto_flotante import PuntoFlotante
 from functions import ordenamiento
@@ -365,47 +364,12 @@ class MenuTabErrores (tk.Frame):
         errores = ttk.Notebook(self)
         errores.pack(expand=True, fill=tk.BOTH)
 
-        errores.columnconfigure(0, weight=1)
-        errores.rowconfigure(0, weight=1)
+        subventana_1 = PuntoFlotante(self, controller)
+        subventana_2 = PropErrores(self, controller)
 
-        
-        subventana1= PropErrores(self, controller)
-        subventana2 = PuntoFlotante(self, controller)
+        errores.add(subventana_1, text="Errores")
+        errores.add(subventana_2, text="Propagación")
 
-        errores.add(subventana1, text="Propagación")
-        errores.add(subventana2, text="Propagación")
-
-        # for F in (PropErrores, PuntoFlotante):
-        #     frame = F(errores, self)
-        #     self.frames[F] = frame
-
-        #     # configuracion de filas, columnas y rellenado del frame
-        #     frame.grid(row=0, column=0, sticky=tk.NSEW)
-        # self.show_frame( errores ,PropErrores)
-
-    # def show_frame(self, container, frame):
-        
-    #     container.add(frame, text="Propagación Errores")
-
-        # para poner una pantalla encima de la otra
-        
-
-        # tab1 = tk.Frame(errores, width=400, height=400, bg="#000")
-        # tab2 = tk.Frame(errores, width=400, height=400, bg="#fff")
-
-        # tab1.pack(fill=tk.BOTH, expand=True)
-        # tab2.pack(fill=tk.BOTH, expand=True)
-
-        # errores.add(tab1, text="negro")
-        # errores.add(tab2, text="blanco")
-        # self.init_widgets()
-
-
-    
-    def init_widgets(self):
-        pass
-
-    
 
 class PropErrores(tk.Frame):
 
