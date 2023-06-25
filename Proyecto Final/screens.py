@@ -63,7 +63,7 @@ class Home(tk.Frame):
         self.controller.show_frame(MenuTabErrores)
 
     def move_to_sistemas(self):
-        self.controller.show_frame()
+        self.controller.show_frame(MenuTabSistemasNumeracion)
 
     def move_to_flotante(self):
         self.controller.show_frame(PuntoFlotante)
@@ -524,6 +524,25 @@ class PuntoFlotante(tk.Frame):
         boton_return.bind('<Enter>', event.on_enter_return)
         boton_return.bind('<Leave>', event.on_leave_return)
 
+
+class MenuTabSistemasNumeracion(tk.Frame):
+    def __init__(self, parent, controller):
+        super().__init__(parent)
+        self.configure(background=style.BG)
+        self.controller = controller
+
+        sistemas_numeracion = ttk.Notebook(self)
+        sistemas_numeracion.pack(expand=True, fill=tk.BOTH)
+
+        subventana_1 = Errores(self, controller)
+        subventana_2 = Errores(self, controller)
+        subventana_3 = PropErrores(self, controller)
+        subventana_4 = PropErrores(self, controller)
+
+        sistemas_numeracion.add(subventana_1, text="Errores")
+        sistemas_numeracion.add(subventana_2, text="Errores")
+        sistemas_numeracion.add(subventana_3, text="Propagación")
+        sistemas_numeracion.add(subventana_4, text="Propagación")
 
 class Seleccion(tk.Frame):
 
