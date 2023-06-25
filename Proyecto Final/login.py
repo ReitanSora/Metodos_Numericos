@@ -17,6 +17,8 @@ from manager import Manager
 from register import Register
 from static import style
 from model.usuario import buscar_clave
+import model.usuario as usuario
+import model.persona as persona
 import functions.events as event
 
 
@@ -30,8 +32,10 @@ class Login (tk.Tk):
         self.resizable(False, False)
         self.init_widgets()
 
-    def ingresar(self, usuario: str, clave: str):
-        clave_registro = buscar_clave(usuario)
+    def ingresar(self, usuario_nick: str, clave: str):
+        usuario.crear_tabla()
+        persona.crear_tabla()
+        clave_registro = buscar_clave(usuario_nick)
         if clave_registro is not None:
             if clave == clave_registro:
                 self.destroy()
