@@ -15,7 +15,7 @@ Tema: Métodos Numéricos
 
 BG = "#FFF"
 
-COLOR_TITULO = "#666666"
+COLOR_TITULO = "#000"
 COLOR_SUBTITULO = "#666666"
 
 BG_ENTRY = "#4C4C4C"
@@ -41,6 +41,19 @@ STYLE_SUBTITTLE = {
     "font": ("Corbel", 16, "bold"),
     "bg": BG,
     "fg": COLOR_TITULO,
+}
+
+STYLE_WARNING = {
+    "font": ("Corbel", 10, "bold"),
+    "bg": BG,
+    "fg": "red",
+}
+
+STYLE_ENTRY_BORDER = {
+    "bg": BG,
+    "relief": "flat",
+    "bd": 3,
+    "height": 10
 }
 
 STYLE_BUTTON_BORDER = {
@@ -70,7 +83,7 @@ STYLE_BUTTON = {
     "padx": 20,
 }
 
-STYLE_BUTTON_RETURN= {
+STYLE_BUTTON_RETURN = {
     "font": ("Corbel", 14, "bold"),
     "bg": BG_BUTTON_RETURN_DES,
     "fg": FG_BUTTON_RETURN_DES,
@@ -85,22 +98,23 @@ STYLE_BUTTON_RETURN= {
 
 STYLE_BUTTON_ENTER = {
     "bg": BG_BUTTON_EN,
-    "fg": FG_BUTTON_EN, 
+    "fg": FG_BUTTON_EN,
 }
 
 STYLE_BUTTON_RETURN_ENTER = {
     "bg": BG_BUTTON_RETURN_EN,
-    "fg": FG_BUTTON_RETURN_EN, 
+    "fg": FG_BUTTON_RETURN_EN,
 }
 
 STYLE_ENTRY = {
-    "font": ("Verdana", 14),
+    "font": ("Corbel", 14),
     "bg": BG_ENTRY,
     "fg": "#fff",
     "bd": 1,
-    "width": 20,
+    "width": 25,
     "justify": "center"
 }
+
 
 STYLE_ENTRY_DES = {
     "font": ("Verdana", 14),
