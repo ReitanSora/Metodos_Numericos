@@ -14,7 +14,7 @@ Tema: Métodos Numéricos
 
 import tkinter as tk
 from static import style
-from screens import Home, Errores, PuntoFlotante, PropErrores, MenuTabErrores, Menu
+from screens import  Menu, Home, Errores, PuntoFlotante, PropErrores, MenuTabErrores, MenuTabSistemasNumeracion
 
 class Manager(tk.Tk):
 
@@ -44,7 +44,7 @@ class Manager(tk.Tk):
         # diccionario de clases
         self.frames = {}
 
-        for F in (Home, Errores, PuntoFlotante, PropErrores, MenuTabErrores):
+        for F in (Home, Errores, PuntoFlotante, PropErrores, MenuTabErrores, MenuTabSistemasNumeracion):
             frame = F(container, self)
             self.frames[F] = frame
 
