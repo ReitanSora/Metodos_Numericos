@@ -95,43 +95,43 @@ class Register(tk.Toplevel):
                  **style.STYLE_TITTLE
                  ).pack(side=tk.TOP, fill=tk.BOTH, pady="10")
 
-        infoFrame = tk.Frame(self, background=style.BG)
-        infoFrame.columnconfigure(0, weight=1)
-        infoFrame.pack(side=tk.TOP, fill=tk.BOTH, expand=True,)
+        info_frame = tk.Frame(self, background=style.BG)
+        info_frame.columnconfigure(0, weight=1)
+        info_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True,)
 
         # label nombre de usuario
-        tk.Label(infoFrame,
+        tk.Label(info_frame,
                  text="Nombre",
                  **style.STYLE_SUBTITTLE,
                  justify="center"
                  ).grid(row=0, column=0)
 
         # label apellido del usuario
-        tk.Label(infoFrame,
+        tk.Label(info_frame,
                  text="Apellido",
                  **style.STYLE_SUBTITTLE
                  ).grid(row=1, column=0)
 
         # label nickname
-        tk.Label(infoFrame,
+        tk.Label(info_frame,
                  text="Nickname",
                  **style.STYLE_SUBTITTLE
                  ).grid(row=2, column=0)
 
         # label correo electrocnico
-        tk.Label(infoFrame,
+        tk.Label(info_frame,
                  text="Correo",
                  **style.STYLE_SUBTITTLE
                  ).grid(row=3, column=0)
 
         # label clave
-        tk.Label(infoFrame,
+        tk.Label(info_frame,
                  text="Clave",
                  **style.STYLE_SUBTITTLE
                  ).grid(row=4, column=0)
 
         # entry nombre usuario
-        borde_entry_1 = tk.LabelFrame(infoFrame,
+        borde_entry_1 = tk.LabelFrame(info_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
         borde_entry_1.grid(row=0, column=1, pady=(10, 0), padx="20")
@@ -151,7 +151,7 @@ class Register(tk.Toplevel):
                  ).pack()
 
         # entry apellido
-        borde_entry_2 = tk.LabelFrame(infoFrame,
+        borde_entry_2 = tk.LabelFrame(info_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
         borde_entry_2.grid(row=1, column=1, pady=(10, 0), padx="20")
@@ -171,7 +171,7 @@ class Register(tk.Toplevel):
                  ).pack()
 
         # entry nickname
-        borde_entry_3 = tk.LabelFrame(infoFrame,
+        borde_entry_3 = tk.LabelFrame(info_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
         borde_entry_3.grid(row=2, column=1, pady=(10, 0), padx="20")
@@ -191,7 +191,7 @@ class Register(tk.Toplevel):
                  ).pack()
 
         # entry correo
-        borde_entry_4 = tk.LabelFrame(infoFrame,
+        borde_entry_4 = tk.LabelFrame(info_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
         borde_entry_4.grid(row=3, column=1, pady=(10, 0), padx="20")
@@ -211,7 +211,7 @@ class Register(tk.Toplevel):
                  ).pack()
 
         # entry clave
-        borde_entry_5 = tk.LabelFrame(infoFrame,
+        borde_entry_5 = tk.LabelFrame(info_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
         borde_entry_5.grid(row=4, column=1, pady=(10, 0), padx="20")
