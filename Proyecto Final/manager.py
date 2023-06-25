@@ -14,7 +14,7 @@ Tema: Métodos Numéricos
 
 import tkinter as tk
 from static import style
-from screens import Home, PuntoFlotante, PropErrores, MenuTabErrores
+from screens import Home, Errores, PuntoFlotante, PropErrores, MenuTabErrores, Menu
 
 class Manager(tk.Tk):
 
@@ -33,6 +33,9 @@ class Manager(tk.Tk):
         )
         container.configure(background=style.BG)
 
+        # cinta de opciones
+        Menu(parent=self)
+
         # creacion de filas y clumnas disponibles en el frame container,
         # 0 = 1 columna/fila ; weight = espacio que ocupa
         container.columnconfigure(0, weight=1)
@@ -41,7 +44,7 @@ class Manager(tk.Tk):
         # diccionario de clases
         self.frames = {}
 
-        for F in (Home, PuntoFlotante, PropErrores, MenuTabErrores):
+        for F in (Home, Errores, PuntoFlotante, PropErrores, MenuTabErrores):
             frame = F(container, self)
             self.frames[F] = frame
 
