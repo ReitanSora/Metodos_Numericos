@@ -83,10 +83,11 @@ def buscar_correo(correo_persona: str) -> int:
     sql = "SELECT * FROM personas WHERE correo_persona = ?"
     dato = (correo_persona,)
 
-    puntero.execute(sql, dato)
-    registro = puntero.fetchone()
-    conexion.close()
+    
     try:
+        puntero.execute(sql, dato)
+        registro = puntero.fetchone()
+        conexion.close()
         return registro[0]
-    except TypeError:
+    except (sqlite3.OperationalError, TypeError):
         pass

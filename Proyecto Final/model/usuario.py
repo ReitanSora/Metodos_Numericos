@@ -80,13 +80,12 @@ def buscar_clave(nombre_usuario: str) -> str:
 
     sql = "SELECT * FROM usuarios WHERE nombre_usuario = ?"
     dato = (nombre_usuario,)
-
-    puntero.execute(sql, dato)
-    registro = puntero.fetchone()
-    conexion.close()
     try:
+        puntero.execute(sql, dato)
+        registro = puntero.fetchone()
+        conexion.close()
         return registro[2]
-    except TypeError:
+    except (sqlite3.OperationalError, TypeError):
         pass
 
 
@@ -97,10 +96,10 @@ def buscar_nickname(nombre_usuario: str) -> int:
     sql = "SELECT * FROM usuarios WHERE nombre_usuario = ?"
     dato = (nombre_usuario,)
 
-    puntero.execute(sql, dato)
-    registro = puntero.fetchone()
-    conexion.close()
     try:
+        puntero.execute(sql, dato)
+        registro = puntero.fetchone()
+        conexion.close()
         return registro[0]
-    except TypeError:
+    except (sqlite3.OperationalError, TypeError):
         pass
