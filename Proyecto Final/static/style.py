@@ -38,7 +38,7 @@ STYLE_TITTLE = {
 }
 
 STYLE_SUBTITTLE = {
-    "font": ("Corbel", 16, "bold"),
+    "font": ("Corbel", 14, "bold"),
     "bg": BG,
     "fg": COLOR_TITULO,
 }
@@ -115,6 +115,14 @@ STYLE_ENTRY = {
     "justify": "center"
 }
 
+STYLE_ENTRY_SCREENS = {
+    "font": ("Corbel", 13),
+    "bg": BG_ENTRY,
+    "fg": "#fff",
+    "bd": 1,
+    "width": 15,
+    "justify": "center"
+}
 
 STYLE_ENTRY_DES = {
     "font": ("Verdana", 14),
@@ -122,6 +130,17 @@ STYLE_ENTRY_DES = {
     "fg": FG_ENTRY,
     "bd": 1,
     "width": 35,
+    "cursor": "",
+    "state": "readonly",
+    "justify": "center"
+}
+
+STYLE_ENTRY_SCREENS_DES = {
+    "font": ("Verdana", 13),
+    "bg": BG_ENTRY,
+    "fg": FG_ENTRY,
+    "bd": 1,
+    "width": 15,
     "cursor": "",
     "state": "readonly",
     "justify": "center"
