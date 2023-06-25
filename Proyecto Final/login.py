@@ -13,7 +13,6 @@ Tema: Métodos Numéricos
 '''
 
 import tkinter as tk
-from tkinter import messagebox
 from manager import Manager
 from register import Register
 from static import style
