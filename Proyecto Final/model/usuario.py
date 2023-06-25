@@ -2,10 +2,10 @@ from .conection import ConectionDB
 import sqlite3
 
 
-def crear_tabla():
+def crear_tabla() -> None:
     conexion = ConectionDB()
 
-    puntero = conexion.cursor()
+    puntero = conexion.cursor_usuario()
 
     sql = '''
     CREATE TABLE usuarios(
@@ -13,7 +13,8 @@ def crear_tabla():
         nombre_usuario VARCHAR(50),
         clave_usuario VARCHAR(10),
         PRIMARY KEY(id_usuario AUTOINCREMENT) 
-    )'''
+        )
+        '''
     try:
         puntero.execute(sql)
         conexion.close()
@@ -25,7 +26,7 @@ def crear_tabla():
 def borrar_tabla():
     conexion = ConectionDB()
 
-    puntero = conexion.cursor()
+    puntero = conexion.cursor_usuario()
 
     sql = 'DROP TABLE usuarios'
 
@@ -46,10 +47,10 @@ class Usuario:
         return f'Usuario[{self.nombre_usuario},{self.clave_usuario}]'
 
 
-def ingresar(objeto: Usuario):
+def ingresar(objeto: Usuario) -> None:
     conexion = ConectionDB()
 
-    puntero = conexion.cursor()
+    puntero = conexion.cursor_usuario()
 
     sql = "INSERT INTO usuarios(nombre_usuario, clave_usuario) VALUES(?,?)"
 
@@ -62,7 +63,7 @@ def ingresar(objeto: Usuario):
 def editar(objeto: Usuario, id_usuario):
     conexion = ConectionDB()
 
-    puntero = conexion.cursor()
+    puntero = conexion.cursor_usuario()
 
     sql = "UPDATE peliculas SET nombre_usuario = ?, clave_usuario = ? WHERE id_usuario = ?"
 
@@ -72,10 +73,10 @@ def editar(objeto: Usuario, id_usuario):
     conexion.close()
 
 
-def buscar(nombre_usuario: str):
+def buscar_clave(nombre_usuario: str) -> str:
     conexion = ConectionDB()
 
-    puntero = conexion.cursor()
+    puntero = conexion.cursor_usuario()
 
     sql = "SELECT * FROM usuarios WHERE nombre_usuario = ?"
     dato = (nombre_usuario,)
@@ -85,5 +86,21 @@ def buscar(nombre_usuario: str):
     conexion.close()
     try:
         return registro[2]
+    except TypeError:
+        pass
+
+
+def buscar_nickname(nombre_usuario: str) -> int:
+    conexion = ConectionDB()
+    puntero = conexion.cursor_usuario()
+
+    sql = "SELECT * FROM usuarios WHERE nombre_usuario = ?"
+    dato = (nombre_usuario,)
+
+    puntero.execute(sql, dato)
+    registro = puntero.fetchone()
+    conexion.close()
+    try:
+        return registro[0]
     except TypeError:
         pass
