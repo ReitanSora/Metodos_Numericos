@@ -20,7 +20,35 @@ from static import style
 from functions import ordenamiento
 import functions.events as event
 
-# from PIL import ImageTk, Image
+
+class Menu(tk.Menu):
+    def __init__(self, parent):
+        super().__init__(parent)
+
+        barra_menu = tk.Menu(parent)
+        parent.config(menu=barra_menu)
+
+        opcion_user = tk.Menu(barra_menu, tearoff=0)
+        opcion_file = tk.Menu(barra_menu, tearoff=0)
+        opcion_edit = tk.Menu(barra_menu, tearoff=0)
+
+        barra_menu.add_cascade(label="File", menu=opcion_file)
+        barra_menu.add_cascade(label="Edit", menu=opcion_edit)
+        barra_menu.add_cascade(label="User", menu=opcion_user)
+
+        opcion_file.add_command(label="Guardar Imágen")
+        opcion_file.add_command(label="Nueva ventana")
+        opcion_file.add_separator()
+        opcion_file.add_command(label="Salir", command=quit)
+
+        opcion_edit.add_command(label="Copiar")
+        opcion_edit.add_command(label="Cortar")
+
+        opcion_user.add_command(label="Actualizar Información")
+        opcion_user.add_command(label="Cambiar Clave")
+        opcion_user.add_command(label="Cerrar Sesión")
+        opcion_user.add_separator()
+        opcion_user.add_command(label="Eliminar Cuenta")
 
 
 class Home(tk.Frame):
@@ -46,11 +74,9 @@ class Home(tk.Frame):
     def move_to_biseccion(self):
         self.controller.show_frame(Mergesort)
 
-    def move_to_6(self):
-        self.controller.show_frame(Quicksort)
-
     def init_widgets(self):
 
+        # label titulo bienvenida
         tk.Label(
             self,
             text="Bienvenido al programa de\nMétodos Numéricos",
@@ -139,221 +165,6 @@ class Home(tk.Frame):
         boton_5.bind('<Enter>', event.on_enter)
         boton_5.bind('<Leave>', event.on_leave)
 
-        # Sexta opcion
-        borde_6 = tk.LabelFrame(optionsFrame, **style.STYLE_BUTTON_BORDER)
-        borde_6.grid(row=2, column=1, pady="20")
-
-        boton_6 = tk.Button(
-            borde_6,
-            text="Quicksort",
-            command=self.move_to_6,
-            ** style.STYLE_BUTTON,
-        )
-        boton_6.pack(expand=True, fill=tk.BOTH)
-
-        boton_6.bind('<Enter>', event.on_enter)
-        boton_6.bind('<Leave>', event.on_leave)
-
-
-class Burbuja(tk.Frame):
-    matriz = list()
-    count = 0
-    auxiliar_numeros_ingresados = ""
-
-    def __init__(self, parent, controller):
-        super().__init__(parent)
-        self.configure(background=style.BG)
-        self.controller = controller
-        self.init_widgets()
-
-    def move_to_0(self):
-        self.matriz.clear()
-        self.count = 0
-        self.auxiliar_numeros_ingresados = ""
-        self.numeros_ingresados.set("")
-        self.resultado.set("")
-        self.controller.show_frame(Home)
-
-    def aleatorio(self):
-        aux = r.randint(-1000, 1000)
-        self.matriz.insert(self.count, aux)
-        self.count += 1
-        self.auxiliar_numeros_ingresados = "{} , {}".format(
-            self.auxiliar_numeros_ingresados, aux) if self.count > 1 else " {}".format(aux)
-        self.numeros_ingresados.set(self.auxiliar_numeros_ingresados)
-
-    def ingreso(self):
-        try:
-            aux = int(self.dato.get())
-            self.matriz.insert(self.count, aux)
-            self.count += 1
-            self.auxiliar_numeros_ingresados = "{} , {}".format(
-                self.auxiliar_numeros_ingresados, aux) if self.count > 1 else " {}".format(aux)
-            self.numeros_ingresados.set(self.auxiliar_numeros_ingresados)
-        except ValueError:
-            self.entry.insert(0, "")
-            messagebox.showerror(
-                "Error de valor", "Solamente puede ingresar números")
-
-    def eliminar(self):
-        try:
-            self.matriz.pop(self.count-1)
-            self.count -= 1
-            self.auxiliar_numeros_ingresados = ""
-            for posicion in range(self.count):
-                self.auxiliar_numeros_ingresados = "{} , {}".format(
-                    self.auxiliar_numeros_ingresados, self.matriz[posicion]) if self.auxiliar_numeros_ingresados != "" else " {}".format(self.matriz[posicion])
-
-            self.numeros_ingresados.set(self.auxiliar_numeros_ingresados)
-
-        except IndexError:
-            messagebox.showwarning(
-                "Error de indice", "No ha ingresado ningún número")
-
-    def calculo(self):
-        ordenamiento.burbuja(self.matriz)
-        resultado = str(self.matriz)[1:len(str(self.matriz))-1]
-        self.resultado.set(str(resultado).replace(",", ", "))
-
-    def init_widgets(self):
-        tk.Label(
-            self,
-            text="Algoritmo Burbuja",
-            # desempaquetado del diccionario STYLE
-            **style.STYLE_TITTLE,
-        ).pack(side=tk.TOP, fill=tk.X, expand=True, pady=30)
-
-        optionsFrame = tk.Frame(self, background=style.BG)
-        optionsFrame.pack(side=tk.TOP, fill=tk.BOTH, expand=True,)
-
-        tk.Label(
-            optionsFrame,
-            text="Ingrese un número",
-            # desempaquetado del diccionario STYLE
-            **style.STYLE_SUBTITTLE,
-        ).pack(side=tk.LEFT, expand=True,)
-
-        self.dato = tk.StringVar()
-
-        self.entry = tk.Entry(
-            optionsFrame,
-            textvariable=self.dato,
-            **style.STYLE_ENTRY,
-        )
-        self.entry.pack(side=tk.LEFT, expand=True,)
-
-        # botones pertenecientes al ingreso de numeros
-        # Primer boton, boton para ingresar numeros
-        borde_1 = tk.LabelFrame(optionsFrame, **style.STYLE_BUTTON_BORDER)
-        borde_1.pack(side=tk.TOP, expand=True)
-
-        boton_1 = tk.Button(
-            borde_1,
-            text="Ingresar",
-            command=self.ingreso,
-            **style.STYLE_BUTTON,
-        )
-        boton_1.pack(expand=True, fill=tk.BOTH)
-
-        boton_1.bind('<Enter>', event.on_enter)
-        boton_1.bind('<Leave>', event.on_leave)
-
-        # Segundo boton, boton para ingresar numeros aleatorios
-        borde_2 = tk.LabelFrame(optionsFrame, **style.STYLE_BUTTON_BORDER)
-        borde_2.pack(side=tk.TOP, expand=True, padx=50)
-
-        boton_2 = tk.Button(
-            borde_2,
-            text="Aleatorio",
-            command=self.aleatorio,
-            **style.STYLE_BUTTON,
-        )
-        boton_2.pack(expand=True, fill=tk.BOTH)
-
-        boton_2.bind('<Enter>', event.on_enter)
-        boton_2.bind('<Leave>', event.on_leave)
-
-        # tercer boton, boton para eliminar un numero
-        borde_3 = tk.LabelFrame(optionsFrame, **style.STYLE_BUTTON_BORDER)
-        borde_3.pack(side=tk.TOP, expand=True)
-
-        boton_3 = tk.Button(
-            borde_3,
-            text="Eliminar",
-            command=self.eliminar,
-            **style.STYLE_BUTTON,
-        )
-        boton_3.pack(expand=True, fill=tk.BOTH)
-
-        boton_3.bind('<Enter>', event.on_enter)
-        boton_3.bind('<Leave>', event.on_leave)
-
-        # frame para visualizar la informacion ingresada y el resultado
-        visualFrame = tk.Frame(self, background=style.BG)
-        visualFrame.pack(side=tk.TOP, fill=tk.BOTH, expand=True,
-                         )
-
-        tk.Label(
-            visualFrame,
-            text="Numeros ingresados",
-            # desempaquetado del diccionario STYLE
-            **style.STYLE_SUBTITTLE,
-        ).pack(side=tk.TOP, pady=20, expand=True,)
-
-        self.numeros_ingresados = tk.StringVar()
-        self.entry_1 = tk.Entry(
-            visualFrame,
-            textvariable=self.numeros_ingresados,
-            **style.STYLE_ENTRY_DES
-        )
-        self.entry_1.pack(side=tk.TOP, expand=True,)
-
-        # para mostrar el resultado final
-        tk.Label(
-            visualFrame,
-            text="Resultado",
-            # desempaquetado del diccionario STYLE
-            **style.STYLE_SUBTITTLE,
-        ).pack(side=tk.TOP, pady=20, expand=True,)
-
-        self.resultado = tk.StringVar()
-        self.entry_2 = tk.Entry(
-            visualFrame,
-            textvariable=self.resultado,
-            **style.STYLE_ENTRY_DES
-        )
-        self.entry_2.pack(side=tk.TOP, expand=True,)
-
-        # Cuarto boton, boton para mostrar el resultado
-        borde_4 = tk.LabelFrame(self, **style.STYLE_BUTTON_BORDER)
-        borde_4.pack(side=tk.LEFT, expand=True, pady=50)
-
-        boton_4 = tk.Button(
-            borde_4,
-            text="Ordenar",
-            command=self.calculo,
-            **style.STYLE_BUTTON
-        )
-        boton_4.pack(expand=True, fill=tk.BOTH)
-
-        boton_4.bind('<Enter>', event.on_enter)
-        boton_4.bind('<Leave>', event.on_leave)
-
-        # Quinto boton, boton para regresar al menu principal
-        borde_5 = tk.LabelFrame(self, **style.STYLE_BUTTON_BORDER)
-        borde_5.pack(side=tk.LEFT, expand=True, padx=50)
-
-        boton_5 = tk.Button(
-            borde_5,
-            text="Regresar",
-            command=Home.move_to_home
-            ** style.STYLE_BUTTON
-        )
-        boton_5.pack(expand=True, fill=tk.BOTH)
-
-        boton_5.bind('<Enter>', event.on_enter)
-        boton_5.bind('<Leave>', event.on_leave)
-
 
 class MenuTabErrores (tk.Frame):
     def __init__(self, parent, controller):
@@ -364,11 +175,127 @@ class MenuTabErrores (tk.Frame):
         errores = ttk.Notebook(self)
         errores.pack(expand=True, fill=tk.BOTH)
 
-        subventana_1 = PuntoFlotante(self, controller)
+        subventana_1 = Errores(self, controller)
         subventana_2 = PropErrores(self, controller)
 
         errores.add(subventana_1, text="Errores")
         errores.add(subventana_2, text="Propagación")
+
+
+class Errores(tk.Frame):
+    def __init__(self, parent, controller):
+        super().__init__(parent)
+        self.controller = controller
+        self.configure(background=style.BG)
+        self.init_widgets()
+
+    def move_to_home(self):
+        self.controller.show_frame(Home)
+
+    def init_widgets(self):
+        tk.Label(self,
+                 text="Errores",
+                 **style.STYLE_TITTLE,
+                 ).pack(side=tk.TOP, fill=tk.BOTH, pady=30)
+
+        inputFrame = tk.Frame(self, background=style.BG)
+        inputFrame.columnconfigure(0, weight=1)
+        inputFrame.pack(side=tk.TOP, fill=tk.BOTH)
+
+        # label ecuacion
+        tk.Label(inputFrame,
+                 text="Valor expresión 1",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=0, column=0)
+
+        # label exponente
+        tk.Label(inputFrame,
+                 text="Valor expresión 2",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=1, column=0)
+
+        # label respuesta
+        tk.Label(inputFrame,
+                 text="Respuesta\necuación 1",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=2, column=0)
+
+        # label respuesta
+        tk.Label(inputFrame,
+                 text="Respuesta\necuación 2",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=3, column=0)
+
+        # entry valor 1
+        self.valor_1 = tk.StringVar()
+        tk.Entry(inputFrame,
+                 textvariable=self.valor_1,
+                 **style.STYLE_ENTRY_SCREENS,
+                 ).grid(row=0, column=1, pady=(10, 20), padx="20")
+
+        # entry valor 2
+        self.valor_2 = tk.StringVar()
+        tk.Entry(inputFrame,
+                 textvariable=self.valor_2,
+                 **style.STYLE_ENTRY_SCREENS,
+                 ).grid(row=1, column=1, pady=(20, 20), padx="20")
+
+        # entry desactivado formula 1
+        self.formula_1 = tk.StringVar()
+        tk.Entry(inputFrame,
+                 textvariable=self.formula_1,
+                 **style.STYLE_ENTRY_SCREENS_DES,
+                 ).grid(row=0, column=2, pady=(10, 20), padx="20")
+
+        # entry desactivado formula 2
+        self.formula_2 = tk.StringVar()
+        tk.Entry(inputFrame,
+                 textvariable=self.formula_2,
+                 **style.STYLE_ENTRY_SCREENS_DES,
+                 ).grid(row=1, column=2, pady=(20, 20), padx="20")
+
+        # entry desactivado respuesta
+        self.respuesta_1 = tk.StringVar()
+        tk.Entry(inputFrame,
+                 textvariable=self.respuesta_1,
+                 **style.STYLE_ENTRY_SCREENS_DES,
+                 ).grid(row=2, column=1, columnspan=2, pady=(50, 20), padx="20", sticky=tk.EW)
+
+        # entry desactivado respuesta
+        self.respuesta_2 = tk.StringVar()
+        tk.Entry(inputFrame,
+                 textvariable=self.respuesta_2,
+                 **style.STYLE_ENTRY_SCREENS_DES,
+                 ).grid(row=3, column=1, columnspan=2, pady=(20, 20), padx="20", sticky=tk.EW)
+
+        # boton para calcular
+        borde_1 = tk.LabelFrame(inputFrame,
+                                **style.STYLE_BUTTON_BORDER)
+        borde_1.grid(row=0, rowspan=2, column=3, pady="30", padx="20")
+
+        boton_calculo = tk.Button(borde_1,
+                                  text="Calcular",
+                                  **style.STYLE_BUTTON,
+                                  )
+        boton_calculo.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
+
+        boton_calculo.bind('<Enter>', event.on_enter)
+        boton_calculo.bind('<Leave>', event.on_leave)
+
+        # boton para regresar
+        borde_2 = tk.LabelFrame(self,
+                                **style.STYLE_BUTTON_RETURN_BORDER)
+        borde_2.pack(side=tk.BOTTOM, pady=(0, 20))
+
+        boton_return = tk.Button(borde_2,
+                                 text="Regresar",
+                                 **style.STYLE_BUTTON_RETURN,
+                                 command=self.move_to_home
+                                 )
+        boton_return.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
+
+        boton_return.bind('<Enter>', event.on_enter_return)
+        boton_return.bind('<Leave>', event.on_leave_return)
 
 
 class PropErrores(tk.Frame):
@@ -424,12 +351,12 @@ class PropErrores(tk.Frame):
                  **style.STYLE_ENTRY_DES,
                  ).grid(row=2, column=1, pady="10", padx="20")
 
-        # entry desactivado exponente
+        # entry exponente
         self.exponente = tk.StringVar()
         tk.Entry(inputFrame,
                  textvariable=self.exponente,
                  **style.STYLE_ENTRY,
-                 ).grid(row=1, column=1, pady="10", padx="20")
+                 ).grid(row=1, column=1, pady="10", padx="20", sticky=tk.EW)
 
         # boton para calcular
         borde_1 = tk.LabelFrame(inputFrame,
@@ -527,6 +454,7 @@ class PuntoFlotante(tk.Frame):
         boton_calculo.bind('<Leave>', event.on_leave)
 
         outputFrame = tk.Frame(self, background=style.BG)
+        outputFrame.columnconfigure(0, weight=1)
         outputFrame.pack(side=tk.TOP, fill=tk.BOTH, expand=True,)
 
         # label signo
@@ -558,33 +486,33 @@ class PuntoFlotante(tk.Frame):
         tk.Entry(outputFrame,
                  textvariable=self.resultado_signo,
                  **style.STYLE_ENTRY_DES,
-                 ).grid(row=0, column=1, pady="20", padx="20")
+                 ).grid(row=0, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
 
         # entry desactivado exponente
         self.resultado_exponente = tk.StringVar()
         tk.Entry(outputFrame,
                  textvariable=self.resultado_exponente,
                  **style.STYLE_ENTRY_DES,
-                 ).grid(row=1, column=1, pady="20", padx="20")
+                 ).grid(row=1, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
 
         # entry desactivado mantisa
         self.resultado_mantisa = tk.StringVar()
         tk.Entry(outputFrame,
                  textvariable=self.resultado_mantisa,
                  **style.STYLE_ENTRY_DES,
-                 ).grid(row=2, column=1, pady="20", padx="20")
+                 ).grid(row=2, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
 
         # entry desactivado hexadecimal
         self.resultado_hexadecimal = tk.StringVar()
         tk.Entry(outputFrame,
                  textvariable=self.resultado_hexadecimal,
                  **style.STYLE_ENTRY_DES,
-                 ).grid(row=3, column=1, pady="20", padx="20")
+                 ).grid(row=3, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
 
         # boton para regresar
-        borde_2 = tk.LabelFrame(outputFrame,
+        borde_2 = tk.LabelFrame(self,
                                 **style.STYLE_BUTTON_RETURN_BORDER)
-        borde_2.grid(row=4, rowspan=2, column=1, pady="30")
+        borde_2.pack(side=tk.BOTTOM, pady=(0, 20))
 
         boton_return = tk.Button(borde_2,
                                  text="Regresar",
@@ -1064,207 +992,6 @@ class Mergesort(tk.Frame):
         tk.Label(
             self,
             text="Algoritmo Mergesort",
-            # desempaquetado del diccionario STYLE
-            **style.STYLE_TITTLE,
-        ).pack(side=tk.TOP, fill=tk.X, expand=True, pady=30)
-
-        optionsFrame = tk.Frame(self, background=style.BG)
-        optionsFrame.pack(side=tk.TOP, fill=tk.BOTH, expand=True,)
-
-        tk.Label(
-            optionsFrame,
-            text="Ingrese un número",
-            # desempaquetado del diccionario STYLE
-            **style.STYLE_SUBTITTLE,
-        ).pack(side=tk.LEFT, expand=True,)
-
-        self.dato = tk.StringVar()
-
-        self.entry = tk.Entry(
-            optionsFrame,
-            textvariable=self.dato,
-            **style.STYLE_ENTRY
-        )
-        self.entry.pack(side=tk.LEFT, expand=True,)
-
-        # botones pertenecientes al ingreso de numeros
-        # Primer boton, boton para ingresar numeros
-        borde_1 = tk.LabelFrame(optionsFrame, **style.STYLE_BUTTON_BORDER)
-        borde_1.pack(side=tk.TOP, expand=True)
-
-        boton_1 = tk.Button(
-            borde_1,
-            text="Ingresar",
-            command=self.ingreso,
-            **style.STYLE_BUTTON,
-        )
-        boton_1.pack(expand=True, fill=tk.BOTH)
-
-        boton_1.bind('<Enter>', on_enter)
-        boton_1.bind('<Leave>', on_leave)
-
-        # Segundo boton, boton para ingresar numeros aleatorios
-        borde_2 = tk.LabelFrame(optionsFrame, **style.STYLE_BUTTON_BORDER)
-        borde_2.pack(side=tk.TOP, expand=True, padx=50)
-
-        boton_2 = tk.Button(
-            borde_2,
-            text="Aleatorio",
-            command=self.aleatorio,
-            **style.STYLE_BUTTON,
-        )
-        boton_2.pack(expand=True, fill=tk.BOTH)
-
-        boton_2.bind('<Enter>', on_enter)
-        boton_2.bind('<Leave>', on_leave)
-
-        # tercer boton, boton para eliminar un numero
-        borde_3 = tk.LabelFrame(optionsFrame, **style.STYLE_BUTTON_BORDER)
-        borde_3.pack(side=tk.TOP, expand=True)
-
-        boton_3 = tk.Button(
-            borde_3,
-            text="Eliminar",
-            command=self.eliminar,
-            **style.STYLE_BUTTON,
-        )
-        boton_3.pack(expand=True, fill=tk.BOTH)
-
-        boton_3.bind('<Enter>', on_enter)
-        boton_3.bind('<Leave>', on_leave)
-
-        # frame para visualizar la informacion ingresada y el resultado
-        visualFrame = tk.Frame(self, background=style.BG)
-        visualFrame.pack(side=tk.TOP, fill=tk.BOTH, expand=True,
-                         )
-
-        tk.Label(
-            visualFrame,
-            text="Numeros ingresados",
-            # desempaquetado del diccionario STYLE
-            **style.STYLE_SUBTITTLE,
-        ).pack(side=tk.TOP, pady=20, expand=True,)
-
-        self.numeros_ingresados = tk.StringVar()
-        self.entry_1 = tk.Entry(
-            visualFrame,
-            textvariable=self.numeros_ingresados,
-            **style.STYLE_ENTRY_DES
-        )
-        self.entry_1.pack(side=tk.TOP, expand=True,)
-
-        # para mostrar el resultado final
-        tk.Label(
-            visualFrame,
-            text="Resultado",
-            # desempaquetado del diccionario STYLE
-            **style.STYLE_SUBTITTLE,
-        ).pack(side=tk.TOP, pady=20, expand=True,)
-
-        self.resultado = tk.StringVar()
-        self.entry_2 = tk.Entry(
-            visualFrame,
-            textvariable=self.resultado,
-            **style.STYLE_ENTRY_DES
-        )
-        self.entry_2.pack(side=tk.TOP, expand=True,)
-
-        # Cuarto boton, boton para mostrar el resultado
-        borde_4 = tk.LabelFrame(self, **style.STYLE_BUTTON_BORDER)
-        borde_4.pack(side=tk.LEFT, expand=True, pady=50)
-
-        boton_4 = tk.Button(
-            borde_4,
-            text="Ordenar",
-            command=self.calculo,
-            **style.STYLE_BUTTON
-        )
-        boton_4.pack(expand=True, fill=tk.BOTH)
-
-        boton_4.bind('<Enter>', on_enter)
-        boton_4.bind('<Leave>', on_leave)
-
-        # Quinto boton, boton para regresar al menu principal
-        borde_5 = tk.LabelFrame(self, **style.STYLE_BUTTON_BORDER)
-        borde_5.pack(side=tk.LEFT, expand=True, padx=50)
-
-        boton_5 = tk.Button(
-            borde_5,
-            text="Regresar",
-            command=self.move_to_0,
-            **style.STYLE_BUTTON
-        )
-        boton_5.pack(expand=True, fill=tk.BOTH)
-
-        boton_5.bind('<Enter>', on_enter)
-        boton_5.bind('<Leave>', on_leave)
-
-
-class Quicksort(tk.Frame):
-
-    matriz = list()
-    count = 0
-    auxiliar_numeros_ingresados = ""
-
-    def __init__(self, parent, controller):
-        super().__init__(parent)
-        self.configure(background=style.BG)
-        self.controller = controller
-        self.init_widgets()
-
-    def move_to_0(self):
-        self.matriz.clear()
-        self.count = 0
-        self.auxiliar_numeros_ingresados = ""
-        self.numeros_ingresados.set("")
-        self.resultado.set("")
-        self.controller.show_frame(Home)
-
-    def aleatorio(self):
-        aux = r.randint(-1000, 1000)
-        self.matriz.insert(self.count, aux)
-        self.count += 1
-        self.auxiliar_numeros_ingresados = "{} , {}".format(
-            self.auxiliar_numeros_ingresados, aux) if self.count > 1 else " {}".format(aux)
-        self.numeros_ingresados.set(self.auxiliar_numeros_ingresados)
-
-    def ingreso(self):
-        try:
-            aux = int(self.dato.get())
-            self.matriz.insert(self.count, aux)
-            self.count += 1
-            self.auxiliar_numeros_ingresados = "{} , {}".format(
-                self.auxiliar_numeros_ingresados, aux) if self.count > 1 else " {}".format(aux)
-            self.numeros_ingresados.set(self.auxiliar_numeros_ingresados)
-        except ValueError:
-            self.entry.insert(0, "")
-            messagebox.showerror(
-                "Error de valor", "Solamente puede ingresar números")
-
-    def eliminar(self):
-        try:
-            self.matriz.pop(self.count-1)
-            self.count -= 1
-            self.auxiliar_numeros_ingresados = ""
-            for posicion in range(self.count):
-                self.auxiliar_numeros_ingresados = "{} , {}".format(
-                    self.auxiliar_numeros_ingresados, self.matriz[posicion]) if self.auxiliar_numeros_ingresados != "" else " {}".format(self.matriz[posicion])
-
-            self.numeros_ingresados.set(self.auxiliar_numeros_ingresados)
-
-        except IndexError:
-            messagebox.showwarning(
-                "Error de indice", "No ha ingresado ningún número")
-
-    def calculo(self):
-        ordenamiento.quickSort(self.matriz)
-        resultado = str(self.matriz)[1:len(str(self.matriz))-1]
-        self.resultado.set(str(resultado).replace(",", ", "))
-
-    def init_widgets(self):
-        tk.Label(
-            self,
-            text="Algoritmo Quicksort",
             # desempaquetado del diccionario STYLE
             **style.STYLE_TITTLE,
         ).pack(side=tk.TOP, fill=tk.X, expand=True, pady=30)
