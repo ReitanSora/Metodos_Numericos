@@ -534,215 +534,265 @@ class MenuTabSistemasNumeracion(tk.Frame):
         sistemas_numeracion = ttk.Notebook(self)
         sistemas_numeracion.pack(expand=True, fill=tk.BOTH)
 
-        subventana_1 = Errores(self, controller)
-        subventana_2 = Errores(self, controller)
-        subventana_3 = PropErrores(self, controller)
-        subventana_4 = PropErrores(self, controller)
+        subventana_1 = BinarioDecimal(self, controller)
+        subventana_2 = OctalHexaDecimal(self, controller)
 
-        sistemas_numeracion.add(subventana_1, text="Errores")
-        sistemas_numeracion.add(subventana_2, text="Errores")
-        sistemas_numeracion.add(subventana_3, text="Propagación")
-        sistemas_numeracion.add(subventana_4, text="Propagación")
+        sistemas_numeracion.add(subventana_1, text="B & D")
+        sistemas_numeracion.add(subventana_2, text="O & H & D")
 
-class Seleccion(tk.Frame):
 
-    matriz = list()
-    count = 0
-    auxiliar_numeros_ingresados = ""
-
+class BinarioDecimal(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
-        self.configure(background=style.BG)
         self.controller = controller
+        self.configure(background=style.BG)
         self.init_widgets()
 
-    def move_to_0(self):
-        self.matriz.clear()
-        self.count = 0
-        self.auxiliar_numeros_ingresados = ""
-        self.numeros_ingresados.set("")
-        self.resultado.set("")
+    def move_to_home(self):
         self.controller.show_frame(Home)
 
-    def aleatorio(self):
-        aux = r.randint(-1000, 1000)
-        self.matriz.insert(self.count, aux)
-        self.count += 1
-        self.auxiliar_numeros_ingresados = "{} , {}".format(
-            self.auxiliar_numeros_ingresados, aux) if self.count > 1 else " {}".format(aux)
-        self.numeros_ingresados.set(self.auxiliar_numeros_ingresados)
-
-    def ingreso(self):
-        try:
-            aux = int(self.dato.get())
-            self.matriz.insert(self.count, aux)
-            self.count += 1
-            self.auxiliar_numeros_ingresados = "{} , {}".format(
-                self.auxiliar_numeros_ingresados, aux) if self.count > 1 else " {}".format(aux)
-            self.numeros_ingresados.set(self.auxiliar_numeros_ingresados)
-        except ValueError:
-            self.entry.insert(0, "")
-            messagebox.showerror(
-                "Error de valor", "Solamente puede ingresar números")
-
-    def eliminar(self):
-        try:
-            self.matriz.pop(self.count-1)
-            self.count -= 1
-            self.auxiliar_numeros_ingresados = ""
-            for posicion in range(self.count):
-                self.auxiliar_numeros_ingresados = "{} , {}".format(
-                    self.auxiliar_numeros_ingresados, self.matriz[posicion]) if self.auxiliar_numeros_ingresados != "" else " {}".format(self.matriz[posicion])
-
-            self.numeros_ingresados.set(self.auxiliar_numeros_ingresados)
-
-        except IndexError:
-            messagebox.showwarning(
-                "Error de indice", "No ha ingresado ningún número")
-
-    def calculo(self):
-        ordenamiento.seleccion(self.matriz)
-        resultado = str(self.matriz)[1:len(str(self.matriz))-1]
-        self.resultado.set(str(resultado).replace(",", ", "))
-
     def init_widgets(self):
-        tk.Label(
-            self,
-            text="Algoritmo por Selección",
-            # desempaquetado del diccionario STYLE
-            **style.STYLE_TITTLE,
-        ).pack(side=tk.TOP, fill=tk.X, expand=True, pady=30)
+        # label titulo
+        tk.Label(self,
+                 text="Transformación de Binario a Decimal",
+                 **style.STYLE_TITTLE,
+                 ).pack(side=tk.TOP, fill=tk.BOTH, pady=30)
 
-        optionsFrame = tk.Frame(self, background=style.BG)
-        optionsFrame.pack(side=tk.TOP, fill=tk.BOTH, expand=True,)
+        info_frame = tk.Frame(self, background=style.BG)
+        info_frame.columnconfigure(0, weight=1)
+        info_frame.pack(side=tk.TOP, fill=tk.BOTH)
 
-        tk.Label(
-            optionsFrame,
-            text="Ingrese un número",
-            # desempaquetado del diccionario STYLE
-            **style.STYLE_SUBTITTLE,
-        ).pack(side=tk.LEFT, expand=True,)
+        # label ecuacion
+        tk.Label(info_frame,
+                 text="Valor",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=0, column=0)
 
-        self.dato = tk.StringVar()
+        # label exponente
+        tk.Label(info_frame,
+                 text="Resultado",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=1, column=0)
 
-        self.entry = tk.Entry(
-            optionsFrame,
-            textvariable=self.dato,
-            **style.STYLE_ENTRY
-        )
-        self.entry.pack(side=tk.LEFT, expand=True,)
+        # entry valor
+        self.valor_binario = tk.StringVar()
+        tk.Entry(info_frame,
+                 textvariable=self.valor_binario,
+                 **style.STYLE_ENTRY_SCREENS,
+                 ).grid(row=0, column=1, pady=(10, 20), padx="20", sticky=tk.EW)
 
-        # botones pertenecientes al ingreso de numeros
-        # Primer boton, boton para ingresar numeros
-        borde_1 = tk.LabelFrame(optionsFrame, **style.STYLE_BUTTON_BORDER)
-        borde_1.pack(side=tk.TOP, expand=True)
+        # entry desactivado respuesta
+        self.respuesta_decimal = tk.StringVar()
+        tk.Entry(info_frame,
+                 textvariable=self.respuesta_decimal,
+                 **style.STYLE_ENTRY_SCREENS_DES,
+                 ).grid(row=1, column=1, pady=(20, 20), padx="20", sticky=tk.EW)
+        
+        # label titulo
+        tk.Label(self,
+                 text="Transformación de Decimal a Binario",
+                 **style.STYLE_TITTLE,
+                 ).pack(side=tk.TOP, fill=tk.BOTH, pady=30)
 
-        boton_1 = tk.Button(
-            borde_1,
-            text="Ingresar",
-            command=self.ingreso,
-            **style.STYLE_BUTTON,
-        )
-        boton_1.pack(expand=True, fill=tk.BOTH)
+        info_frame_2 = tk.Frame(self, background=style.BG)
+        info_frame_2.columnconfigure(0, weight=1)
+        info_frame_2.pack(side=tk.TOP, fill=tk.BOTH)
 
-        boton_1.bind('<Enter>', on_enter)
-        boton_1.bind('<Leave>', on_leave)
+         # label ecuacion
+        tk.Label(info_frame_2,
+                 text="Valor",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=0, column=0)
 
-        # Segundo boton, boton para ingresar numeros aleatorios
-        borde_2 = tk.LabelFrame(optionsFrame, **style.STYLE_BUTTON_BORDER)
-        borde_2.pack(side=tk.TOP, expand=True, padx=50)
+        # label exponente
+        tk.Label(info_frame_2,
+                 text="Resultado",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=1, column=0)
 
-        boton_2 = tk.Button(
-            borde_2,
-            text="Aleatorio",
-            command=self.aleatorio,
-            **style.STYLE_BUTTON,
-        )
-        boton_2.pack(expand=True, fill=tk.BOTH)
+        # entry valor
+        self.valor_decimal = tk.StringVar()
+        tk.Entry(info_frame_2,
+                 textvariable=self.valor_decimal,
+                 **style.STYLE_ENTRY_SCREENS,
+                 ).grid(row=0, column=1, pady=(10, 20), padx="20", sticky=tk.EW)
 
-        boton_2.bind('<Enter>', on_enter)
-        boton_2.bind('<Leave>', on_leave)
+        # entry desactivado respuesta
+        self.respuesta_binario = tk.StringVar()
+        tk.Entry(info_frame_2,
+                 textvariable=self.respuesta_binario,
+                 **style.STYLE_ENTRY_SCREENS_DES,
+                 ).grid(row=1, column=1, pady=(20, 20), padx="20", sticky=tk.EW)
 
-        # tercer boton, boton para eliminar un numero
-        borde_3 = tk.LabelFrame(optionsFrame, **style.STYLE_BUTTON_BORDER)
-        borde_3.pack(side=tk.TOP, expand=True)
+        # boton para calcular de binario a decimal
+        borde_1 = tk.LabelFrame(info_frame,
+                                **style.STYLE_BUTTON_BORDER)
+        borde_1.grid(row=0, rowspan=2, column=3, pady="30", padx="20")
 
-        boton_3 = tk.Button(
-            borde_3,
-            text="Eliminar",
-            command=self.eliminar,
-            **style.STYLE_BUTTON,
-        )
-        boton_3.pack(expand=True, fill=tk.BOTH)
+        boton_calculo_1 = tk.Button(borde_1,
+                                    text="Calcular",
+                                    **style.STYLE_BUTTON,
+                                    )
+        boton_calculo_1.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
 
-        boton_3.bind('<Enter>', on_enter)
-        boton_3.bind('<Leave>', on_leave)
+        boton_calculo_1.bind('<Enter>', event.on_enter)
+        boton_calculo_1.bind('<Leave>', event.on_leave)
 
-        # frame para visualizar la informacion ingresada y el resultado
-        visualFrame = tk.Frame(self, background=style.BG)
-        visualFrame.pack(side=tk.TOP, fill=tk.BOTH, expand=True,
-                         )
+        # boton para calcular de decimal a binario
+        borde_2 = tk.LabelFrame(info_frame_2,
+                                **style.STYLE_BUTTON_BORDER)
+        borde_2.grid(row=0, rowspan=2, column=3, pady="30", padx="20")
 
-        tk.Label(
-            visualFrame,
-            text="Numeros ingresados",
-            # desempaquetado del diccionario STYLE
-            **style.STYLE_SUBTITTLE,
-        ).pack(side=tk.TOP, pady=20, expand=True,)
+        boton_calculo_2 = tk.Button(borde_2,
+                                    text="Calcular",
+                                    **style.STYLE_BUTTON,
+                                    )
+        boton_calculo_2.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
 
-        self.numeros_ingresados = tk.StringVar()
-        self.entry_1 = tk.Entry(
-            visualFrame,
-            textvariable=self.numeros_ingresados,
-            **style.STYLE_ENTRY_DES
-        )
-        self.entry_1.pack(side=tk.TOP, expand=True,)
+        boton_calculo_2.bind('<Enter>', event.on_enter)
+        boton_calculo_2.bind('<Leave>', event.on_leave)
 
-        # para mostrar el resultado final
-        tk.Label(
-            visualFrame,
-            text="Resultado",
-            # desempaquetado del diccionario STYLE
-            **style.STYLE_SUBTITTLE,
-        ).pack(side=tk.TOP, pady=20, expand=True,)
+        # boton para regresar
+        borde_3 = tk.LabelFrame(self,
+                                **style.STYLE_BUTTON_RETURN_BORDER)
+        borde_3.pack(side=tk.BOTTOM, pady=(0, 20))
 
-        self.resultado = tk.StringVar()
-        self.entry_2 = tk.Entry(
-            visualFrame,
-            textvariable=self.resultado,
-            **style.STYLE_ENTRY_DES
-        )
-        self.entry_2.pack(side=tk.TOP, expand=True,)
+        boton_return = tk.Button(borde_3,
+                                 text="Regresar",
+                                 **style.STYLE_BUTTON_RETURN,
+                                 command=self.move_to_home
+                                 )
+        boton_return.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
 
-        # Cuarto boton, boton para mostrar el resultado
-        borde_4 = tk.LabelFrame(self, **style.STYLE_BUTTON_BORDER)
-        borde_4.pack(side=tk.LEFT, expand=True, pady=50)
+        boton_return.bind('<Enter>', event.on_enter_return)
+        boton_return.bind('<Leave>', event.on_leave_return)
 
-        boton_4 = tk.Button(
-            borde_4,
-            text="Ordenar",
-            command=self.calculo,
-            **style.STYLE_BUTTON
-        )
-        boton_4.pack(expand=True, fill=tk.BOTH)
 
-        boton_4.bind('<Enter>', on_enter)
-        boton_4.bind('<Leave>', on_leave)
+class OctalHexaDecimal(tk.Frame):
+    def __init__(self, parent, controller):
+        super().__init__(parent)
+        self.controller = controller
+        self.configure(background=style.BG)
+        self.init_widgets()
 
-        # Quinto boton, boton para regresar al menu principal
-        borde_5 = tk.LabelFrame(self, **style.STYLE_BUTTON_BORDER)
-        borde_5.pack(side=tk.LEFT, expand=True, padx=50)
+    def move_to_home(self):
+        self.controller.show_frame(Home)
+    
+    def init_widgets(self):
+        # label titulo
+        tk.Label(self,
+                 text="Transformación de Octal a Decimal",
+                 **style.STYLE_TITTLE,
+                 ).pack(side=tk.TOP, fill=tk.BOTH, pady=30)
 
-        boton_5 = tk.Button(
-            borde_5,
-            text="Regresar",
-            command=self.move_to_0,
-            **style.STYLE_BUTTON
-        )
-        boton_5.pack(expand=True, fill=tk.BOTH)
+        info_frame = tk.Frame(self, background=style.BG)
+        info_frame.columnconfigure(0, weight=1)
+        info_frame.pack(side=tk.TOP, fill=tk.BOTH)
 
-        boton_5.bind('<Enter>', on_enter)
-        boton_5.bind('<Leave>', on_leave)
+        # label valor
+        tk.Label(info_frame,
+                 text="Valor",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=0, column=0)
+
+        # label resultado
+        tk.Label(info_frame,
+                 text="Resultado",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=1, column=0)
+
+        # entry valor octal
+        self.valor_octal = tk.StringVar()
+        tk.Entry(info_frame,
+                 textvariable=self.valor_octal,
+                 **style.STYLE_ENTRY_SCREENS,
+                 ).grid(row=0, column=1, pady=(10, 20), padx="20", sticky=tk.EW)
+
+        # entry desactivado respuesta de octal a decimal
+        self.respuesta_odecimal = tk.StringVar()
+        tk.Entry(info_frame,
+                 textvariable=self.respuesta_odecimal,
+                 **style.STYLE_ENTRY_SCREENS_DES,
+                 ).grid(row=1, column=1, pady=(20, 20), padx="20", sticky=tk.EW)
+        
+        # label titulo
+        tk.Label(self,
+                 text="Transformación de Hexadecimal a Decimal",
+                 **style.STYLE_TITTLE,
+                 ).pack(side=tk.TOP, fill=tk.BOTH, pady=30)
+
+        info_frame_2 = tk.Frame(self, background=style.BG)
+        info_frame_2.columnconfigure(0, weight=1)
+        info_frame_2.pack(side=tk.TOP, fill=tk.BOTH)
+
+         # label valor
+        tk.Label(info_frame_2,
+                 text="Valor",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=0, column=0)
+
+        # label resultado
+        tk.Label(info_frame_2,
+                 text="Resultado",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=1, column=0)
+
+        # entry valor
+        self.valor_hexadecimal = tk.StringVar()
+        tk.Entry(info_frame_2,
+                 textvariable=self.valor_hexadecimal,
+                 **style.STYLE_ENTRY_SCREENS,
+                 ).grid(row=0, column=1, pady=(10, 20), padx="20", sticky=tk.EW)
+
+        # entry desactivado respuesta de hexa a decimal
+        self.respuesta_hdecimal = tk.StringVar()
+        tk.Entry(info_frame_2,
+                 textvariable=self.respuesta_hdecimal,
+                 **style.STYLE_ENTRY_SCREENS_DES,
+                 ).grid(row=1, column=1, pady=(20, 20), padx="20", sticky=tk.EW)
+
+        # boton para calcular de octal a decimal
+        borde_1 = tk.LabelFrame(info_frame,
+                                **style.STYLE_BUTTON_BORDER)
+        borde_1.grid(row=0, rowspan=2, column=3, pady="30", padx="20")
+
+        boton_calculo_1 = tk.Button(borde_1,
+                                    text="Calcular",
+                                    **style.STYLE_BUTTON,
+                                    )
+        boton_calculo_1.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
+
+        boton_calculo_1.bind('<Enter>', event.on_enter)
+        boton_calculo_1.bind('<Leave>', event.on_leave)
+
+        # boton para calcular de hexa a decimal
+        borde_2 = tk.LabelFrame(info_frame_2,
+                                **style.STYLE_BUTTON_BORDER)
+        borde_2.grid(row=0, rowspan=2, column=3, pady="30", padx="20")
+
+        boton_calculo_2 = tk.Button(borde_2,
+                                    text="Calcular",
+                                    **style.STYLE_BUTTON,
+                                    )
+        boton_calculo_2.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
+
+        boton_calculo_2.bind('<Enter>', event.on_enter)
+        boton_calculo_2.bind('<Leave>', event.on_leave)
+
+        # boton para regresar
+        borde_3 = tk.LabelFrame(self,
+                                **style.STYLE_BUTTON_RETURN_BORDER)
+        borde_3.pack(side=tk.BOTTOM, pady=(0, 20))
+
+        boton_return = tk.Button(borde_3,
+                                 text="Regresar",
+                                 **style.STYLE_BUTTON_RETURN,
+                                 command=self.move_to_home
+                                 )
+        boton_return.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
+
+        boton_return.bind('<Enter>', event.on_enter_return)
+        boton_return.bind('<Leave>', event.on_leave_return)
 
 
 class Shellsort(tk.Frame):
