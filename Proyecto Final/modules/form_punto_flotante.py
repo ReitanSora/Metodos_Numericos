@@ -25,6 +25,9 @@ class PuntoFlotante(tk.Frame):
         self.controller = controller
         self.init_widgets()
 
+    
+    
+
     def init_widgets(self):
         tk.Label(self,
                  text="Punto Flotante",
@@ -61,7 +64,7 @@ class PuntoFlotante(tk.Frame):
                  **style.STYLE_ENTRY,
                  ).grid(row=1, column=1, pady="20", padx="20")
 
-        # boton para registrarse
+        # boton para calcular
         borde_1 = tk.LabelFrame(inputFrame,
                                 **style.STYLE_BUTTON_BORDER)
         borde_1.grid(row=0, rowspan=2, column=2, pady="30", padx="20")
@@ -132,14 +135,15 @@ class PuntoFlotante(tk.Frame):
 
         # boton para regresar
         borde_2 = tk.LabelFrame(outputFrame,
-                                **style.STYLE_BUTTON_BORDER)
+                                **style.STYLE_BUTTON_RETURN_BORDER)
         borde_2.grid(row=4, rowspan=2, column=1, pady="30")
 
         boton_return = tk.Button(borde_2,
                                  text="Regresar",
-                                 **style.STYLE_BUTTON
+                                 **style.STYLE_BUTTON_RETURN,
+                                 command=self.move_to_home
                                  )
         boton_return.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
 
-        boton_return.bind('<Enter>', event.on_enter)
-        boton_return.bind('<Leave>', event.on_leave)
+        boton_return.bind('<Enter>', event.on_enter_return)
+        boton_return.bind('<Leave>', event.on_leave_return)
