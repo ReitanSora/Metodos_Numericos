@@ -12,7 +12,7 @@ Tema: Métodos Numéricos
 #Paralelo: SI4 - 002
 '''
 
-from login import Login
+from modules.login import Login
 
 if __name__ == "__main__":
     app = Login()
