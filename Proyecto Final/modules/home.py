@@ -34,6 +34,9 @@ class Home(tk.Frame):
     def move_to_flotante(self):
         self.controller.move_to_flotante()
 
+    def move_to_bolzano(self):
+        self.controller.move_to_bolzano()
+
     def init_widgets(self):
 
         # label titulo bienvenida
@@ -102,6 +105,7 @@ class Home(tk.Frame):
         boton_4 = tk.Button(
             borde_4,
             text="Teorema de\nBolzano",
+            command=self.move_to_bolzano,
             ** style.STYLE_BUTTON,
         )
         boton_4.pack(expand=True, fill=tk.BOTH)

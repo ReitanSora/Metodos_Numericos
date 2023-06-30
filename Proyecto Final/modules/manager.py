@@ -19,6 +19,7 @@ from modules.tab_numeracion import MenuTabSistemasNumeracion
 from modules.flotante import PuntoFlotante
 from modules.home import Home
 from modules.menu import Menu
+from modules.bolzano import Bolzano
 
 
 class Manager(tk.Tk):
@@ -49,7 +50,7 @@ class Manager(tk.Tk):
         # diccionario de clases
         self.frames = {}
 
-        for F in (Home, PuntoFlotante, MenuTabErrores, MenuTabSistemasNumeracion):
+        for F in (Home, PuntoFlotante, MenuTabErrores, MenuTabSistemasNumeracion, Bolzano):
             frame = F(container, self)
             self.frames[F] = frame
 
@@ -75,3 +76,6 @@ class Manager(tk.Tk):
 
     def move_to_flotante(self):
         self.show_frame(PuntoFlotante)
+
+    def move_to_bolzano(self):
+        self.show_frame(Bolzano)
