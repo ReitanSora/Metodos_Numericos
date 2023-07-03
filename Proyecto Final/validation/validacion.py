@@ -1,5 +1,5 @@
 import re
-
+import ast
 
 def validate_email(correo: str) -> bool:
     EMAIL_REGEX = re.compile(
@@ -25,3 +25,11 @@ def validate_numbers(numeros: str) -> bool:
     NUMBERS_REGEX = re.compile(r"^[0-9]{1,}$")
     is_valid = False if not NUMBERS_REGEX.match(numeros) else True
     return is_valid
+
+# método para validar los números de cédula de los socios
+def validate_decimal(numeros: str) -> bool:
+    is_valid = type(ast.literal_eval(numeros))
+    if is_valid == float:
+        return True
+    else:
+        return False
