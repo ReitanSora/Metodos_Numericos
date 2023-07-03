@@ -1,13 +1,9 @@
-# a = 0.5 * pow(10, 2)
-# a1 = 0.51 * pow(10, 2)
 
+def calculo_errores(valor_verdadero: float):
 
-def errores(valor_verdadero, valor_aproximado):
-
-    valor_verdadero *= pow(10, 2)
-    valor_aproximado *= pow(10, 2)
+    valor_aproximado = round(valor_verdadero, 1)
 
     error_absoluto = abs(valor_aproximado-valor_verdadero)
     error_relativo = error_absoluto/valor_aproximado
 
-    return error_absoluto, error_relativo
+    return valor_aproximado, error_absoluto, error_relativo
