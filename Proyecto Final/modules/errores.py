@@ -13,9 +13,10 @@ Paralelo: SI4 - 002
 '''
 
 import tkinter as tk
-from tkinter import messagebox
 from static import style
+from validation import validacion
 import functions.events as event
+import functions.funcion_errores as error
 
 
 class Errores(tk.Frame):
@@ -26,7 +27,31 @@ class Errores(tk.Frame):
         self.init_widgets()
 
     def move(self):
+        self.vaciar_campos()
         self.controller.move_to_home()
+
+    def vaciar_campos(self):
+        self.valor_decimal.set("")
+        self.valor_aproximado.set("")
+        self.respuesta_error_abs.set("")
+        self.respuesta_error_rel.set("")
+
+    def validacion_campos(self):
+        try:
+            if validacion.validate_decimal(self.valor_decimal.get()) is True:
+                self.texto_alerta_valor_decimal.set("")
+                self.calculo_errores()
+            else:
+                self.texto_alerta_valor_decimal.set("Ingrese un valor decimal con punto")
+        except (SyntaxError, ValueError):
+            self.texto_alerta_valor_decimal.set("Ingrese un valor decimal con punto")
+
+    def calculo_errores(self):
+        valor_aproximado, error_absoluto, error_relativo= error.calculo_errores(float(self.valor_decimal.get()))
+        self.valor_aproximado.set(str(valor_aproximado))
+        self.respuesta_error_abs.set(str(error_absoluto))
+        self.respuesta_error_rel.set(str(error_relativo))
+
 
     def init_widgets(self):
         tk.Label(self,
@@ -40,69 +65,73 @@ class Errores(tk.Frame):
 
         # label ecuacion
         tk.Label(inputFrame,
-                 text="Valor expresión 1",
+                 text="Valor decimal",
                  **style.STYLE_SUBTITTLE,
-                 ).grid(row=0, column=0)
+                 ).grid(row=0, column=0, pady=10, sticky=tk.N)
 
         # label exponente
         tk.Label(inputFrame,
-                 text="Valor expresión 2",
+                 text="Valor aproximado",
                  **style.STYLE_SUBTITTLE,
                  ).grid(row=1, column=0)
 
         # label respuesta
         tk.Label(inputFrame,
-                 text="Respuesta\necuación 1",
-                 **style.STYLE_SUBTITTLE,
-                 ).grid(row=2, column=0)
-
-        # label respuesta
-        tk.Label(inputFrame,
-                 text="Respuesta\necuación 2",
+                 text="Error absoluto",
                  **style.STYLE_SUBTITTLE,
                  ).grid(row=3, column=0)
 
-        # entry valor 1
-        self.valor_1 = tk.StringVar()
-        tk.Entry(inputFrame,
-                 textvariable=self.valor_1,
+        # label respuesta
+        tk.Label(inputFrame,
+                 text="Error relativo",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=4, column=0)
+
+        # label informacion
+        tk.Label(inputFrame,
+                 text="Calculo de errores entre el valor ingresado y el aproximado",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=2, column=0, columnspan=4, pady=20)
+
+        # entry valor decimal
+        borde_entry_1 = tk.LabelFrame(inputFrame,
+                                      **style.STYLE_ENTRY_BORDER
+                                      )
+        borde_entry_1.grid(row=0, column=1, pady=(10, 20), padx="20")
+
+        self.valor_decimal = tk.StringVar()
+        tk.Entry(borde_entry_1,
+                 textvariable=self.valor_decimal,
                  **style.STYLE_ENTRY_SCREENS,
-                 ).grid(row=0, column=1, pady=(10, 20), padx="20")
+                 ).pack()
 
-        # entry valor 2
-        self.valor_2 = tk.StringVar()
-        tk.Entry(inputFrame,
-                 textvariable=self.valor_2,
-                 **style.STYLE_ENTRY_SCREENS,
-                 ).grid(row=1, column=1, pady=(20, 20), padx="20")
+        # label alerta valor decimal
+        self.texto_alerta_valor_decimal = tk.StringVar()
+        tk.Label(borde_entry_1,
+                 textvariable=self.texto_alerta_valor_decimal,
+                 **style.STYLE_WARNING
+                 ).pack()
 
-        # entry desactivado formula 1
-        self.formula_1 = tk.StringVar()
+        # entry valor aproximado
+        self.valor_aproximado = tk.StringVar()
         tk.Entry(inputFrame,
-                 textvariable=self.formula_1,
+                 textvariable=self.valor_aproximado,
                  **style.STYLE_ENTRY_SCREENS_DES,
-                 ).grid(row=0, column=2, pady=(10, 20), padx="20")
-
-        # entry desactivado formula 2
-        self.formula_2 = tk.StringVar()
-        tk.Entry(inputFrame,
-                 textvariable=self.formula_2,
-                 **style.STYLE_ENTRY_SCREENS_DES,
-                 ).grid(row=1, column=2, pady=(20, 20), padx="20")
+                 ).grid(row=1, column=1, pady=20, padx="20")
 
         # entry desactivado respuesta
-        self.respuesta_1 = tk.StringVar()
+        self.respuesta_error_abs = tk.StringVar()
         tk.Entry(inputFrame,
-                 textvariable=self.respuesta_1,
+                 textvariable=self.respuesta_error_abs,
                  **style.STYLE_ENTRY_SCREENS_DES,
-                 ).grid(row=2, column=1, columnspan=2, pady=(50, 20), padx="20", sticky=tk.EW)
+                 ).grid(row=3, column=1, columnspan=2, pady=30, padx="20", sticky=tk.EW)
 
         # entry desactivado respuesta
-        self.respuesta_2 = tk.StringVar()
+        self.respuesta_error_rel = tk.StringVar()
         tk.Entry(inputFrame,
-                 textvariable=self.respuesta_2,
+                 textvariable=self.respuesta_error_rel,
                  **style.STYLE_ENTRY_SCREENS_DES,
-                 ).grid(row=3, column=1, columnspan=2, pady=(20, 20), padx="20", sticky=tk.EW)
+                 ).grid(row=4, column=1, columnspan=2, pady=30, padx="20", sticky=tk.EW)
 
         # boton para calcular
         borde_1 = tk.LabelFrame(inputFrame,
@@ -112,6 +141,7 @@ class Errores(tk.Frame):
         boton_calculo = tk.Button(borde_1,
                                   text="Calcular",
                                   **style.STYLE_BUTTON,
+                                  command=self.validacion_campos
                                   )
         boton_calculo.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
 
