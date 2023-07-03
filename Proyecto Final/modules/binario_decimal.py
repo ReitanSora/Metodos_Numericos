@@ -37,14 +37,14 @@ class BinarioDecimal(tk.Frame):
         self.respuesta_decimal.set("")
 
     def validacion_calculo_1(self):
-        if validacion.validate_numbers(self.valor_binario.get()) is True:
+        if validacion.validate_number_binary(self.valor_binario.get()) is True:
             self.texto_alerta_valor_binario.set("")
             self.calcular_decimal()
         else:
             self.texto_alerta_valor_binario.set("Ingrese un valor correcto")
 
     def validacion_calculo_2(self):
-        if validacion.validate_numbers(self.valor_decimal.get()) is True:
+        if validacion.validate_number_decimal(self.valor_decimal.get()) is True:
             self.calcular_binario()
         else:
             self.texto_alerta_valor_decimal.set("Ingrese un valor correcto")
