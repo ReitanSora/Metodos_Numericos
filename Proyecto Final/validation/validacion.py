@@ -10,12 +10,18 @@ def validate_email(correo: str) -> bool:
 
 
 def validate_password(clave: str) -> bool:
-    PASSWORD_REGEX = re.compile(r"^[a-zA-Z0-9.]{4,25}$")
+    PASSWORD_REGEX = re.compile(r"^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.]{4,25}$")
     is_valid = False if not PASSWORD_REGEX.match(clave) else True
     return is_valid
 
 
 def validate_letters(expresion: str) -> bool:
-    EXPRESSION_REGEX = re.compile(r"^[a-zA-Z.]{2,50}$")
-    is_valid = False if not EXPRESSION_REGEX.match(expresion) else False
+    EXPRESSION_REGEX = re.compile(r"^[a-zA-ZñÑáéíóúÁÉÍÓÚ.\s]{2,50}$")
+    is_valid = False if not EXPRESSION_REGEX.match(expresion) else True
+    return is_valid
+
+# método para validar los números de cédula de los socios
+def validate_numbers(numeros: str) -> bool:
+    NUMBERS_REGEX = re.compile(r"^[0-9]{1,}$")
+    is_valid = False if not NUMBERS_REGEX.match(numeros) else True
     return is_valid
