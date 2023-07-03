@@ -21,8 +21,14 @@ def validate_letters(expresion: str) -> bool:
     return is_valid
 
 # método para validar los números de cédula de los socios
-def validate_numbers(numeros: str) -> bool:
+def validate_number_decimal(numeros: str) -> bool:
     NUMBERS_REGEX = re.compile(r"^[0-9]{1,}$")
+    is_valid = False if not NUMBERS_REGEX.match(numeros) else True
+    return is_valid
+
+# método para validar los números de cédula de los socios
+def validate_number_binary(numeros: str) -> bool:
+    NUMBERS_REGEX = re.compile(r"^[0-1]{1,}$")
     is_valid = False if not NUMBERS_REGEX.match(numeros) else True
     return is_valid
 
