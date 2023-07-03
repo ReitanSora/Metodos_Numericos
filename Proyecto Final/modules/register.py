@@ -45,27 +45,27 @@ class Register(tk.Toplevel):
 
     def validar_email(self):
         estado = val.validate_email(self.texto_correo.get())
-        texto = "Correo con formato erroneo" if estado is False else ""
-        self.texto_alerta_correo.set(texto)
+        self.texto_alerta_correo.set(
+            "Correo con formato erroneo" if estado is False else "")
         return estado
 
     def validar_nickname_clave(self):
         estado_clave = val.validate_password(self.texto_clave.get())
         estado_nickname = val.validate_password(self.texto_nickname.get())
         self.texto_alerta_clave.set(
-            "La clave debe tener de 4 a 25 carácteres") if estado_clave is False else self.texto_alerta_clave.set("")
+            "La clave debe tener de 4 a 25 carácteres" if estado_clave is False else "")
         self.texto_alerta_nickname.set(
-            "Campo obligatorio, hasta 25 carácteres") if estado_nickname is False else self.texto_alerta_nickname.set("")
+            "Campo obligatorio, hasta 25 carácteres" if estado_nickname is False else "")
         return estado_nickname * estado_clave
 
     def validar_letras(self):
-        estado_nombre = val.validate_password(self.texto_nombre.get())
-        estado_apellido = val.validate_password(self.texto_apellido.get())
+        estado_nombre = val.validate_letters(self.texto_nombre.get())
+        estado_apellido = val.validate_letters(self.texto_apellido.get())
 
         self.texto_alerta_nombre.set(
-            "Campo obligatorio, hasta 50 carácteres") if estado_nombre is False else self.texto_alerta_nombre.set("")
+            "Campo obligatorio, hasta 50 carácteres" if estado_nombre is False else "")
         self.texto_alerta_apellido.set(
-            "Campo obligatorio, hasta 50 carácteres") if estado_apellido is False else self.texto_alerta_apellido.set("")
+            "Campo obligatorio, hasta 50 carácteres" if estado_apellido is False else "")
         return estado_nombre * estado_apellido
 
     def validar(self):
