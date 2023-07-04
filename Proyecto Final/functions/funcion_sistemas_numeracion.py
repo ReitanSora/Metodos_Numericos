@@ -54,3 +54,7 @@ def octal_decimal(numero_octal: int) -> int:
 
     return decimal
 
+
+# funcion para convertir de hexadecimal a decimal
+def hexa_decimal(numero_hexa: str) -> int:
+    return int(numero_hexa, 16)
