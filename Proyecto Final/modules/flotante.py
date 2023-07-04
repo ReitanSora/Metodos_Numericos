@@ -69,6 +69,9 @@ class PuntoFlotante(tk.Frame):
     def calcular_normal(self):
         pass
 
+    def calcular_exponente(self):
+        pass
+
     def init_widgets(self):
 
         # label del título
