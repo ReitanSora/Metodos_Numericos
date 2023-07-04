@@ -1,22 +1,22 @@
 '''
 Tema: Métodos Numéricos
-#Grupo #
-#Integrantes:
+Grupo 6
+Integrantes:
 
 •	Kevin Josue Amaguaña Rivadeneira
 •	Priscila Veronica Chisag Pillajo
-•	Andy RIcardo Galarza Morales
+•	Andy Ricardo Galarza Morales
 •	Stiven Anthony Pilca Sánchez
 
-#Carrera: Ingeniería en Sistemas de la información
-#Paralelo: SI4 - 002
+Carrera: Ingeniería en Sistemas de la información
+Paralelo: SI4 - 002
 '''
 
 import tkinter as tk
-from static import style
-from validation import validacion
 import functions.events as event
 import functions.funcion_sistemas_numeracion as sistemas
+from static import style
+from validation import validacion
 
 
 class BinarioDecimal(tk.Frame):
@@ -50,12 +50,10 @@ class BinarioDecimal(tk.Frame):
             self.texto_alerta_valor_decimal.set("Ingrese un valor correcto")
 
     def calcular_decimal(self):
-        respuesta = sistemas.binario_decimal(int(self.valor_binario.get()))
-        self.respuesta_decimal.set(respuesta)
+        self.respuesta_decimal.set(sistemas.binario_decimal(int(self.valor_binario.get())))
 
     def calcular_binario(self):
-        respuesta = sistemas.decimal_binario(int(self.valor_decimal.get()))
-        self.respuesta_binario.set(respuesta)
+        self.respuesta_binario.set(sistemas.decimal_binario(int(self.valor_decimal.get())))
 
     def init_widgets(self):
         # label titulo
@@ -89,7 +87,7 @@ class BinarioDecimal(tk.Frame):
         self.valor_binario = tk.StringVar()
         tk.Entry(borde_entry_1,
                  textvariable=self.valor_binario,
-                 **style.STYLE_ENTRY_SCREENS,
+                 **style.STYLE_ENTRY_NUMBERS,
                  ).pack(fill=tk.BOTH, expand=True)
 
         # label alerta valor binario
@@ -103,7 +101,7 @@ class BinarioDecimal(tk.Frame):
         self.respuesta_decimal = tk.StringVar()
         tk.Entry(info_frame,
                  textvariable=self.respuesta_decimal,
-                 **style.STYLE_ENTRY_SCREENS_DES,
+                 **style.STYLE_ENTRY_DES,
                  ).grid(row=1, column=1, pady=(20, 20), sticky=tk.EW)
 
         # label titulo
@@ -137,7 +135,7 @@ class BinarioDecimal(tk.Frame):
         self.valor_decimal = tk.StringVar()
         tk.Entry(borde_entry_2,
                  textvariable=self.valor_decimal,
-                 **style.STYLE_ENTRY_SCREENS,
+                 **style.STYLE_ENTRY_NUMBERS,
                  ).pack(fill=tk.BOTH, expand=True)
 
         # label alerta valor decimal
@@ -151,7 +149,7 @@ class BinarioDecimal(tk.Frame):
         self.respuesta_binario = tk.StringVar()
         tk.Entry(info_frame_2,
                  textvariable=self.respuesta_binario,
-                 **style.STYLE_ENTRY_SCREENS_DES,
+                 **style.STYLE_ENTRY_DES,
                  ).grid(row=1, column=1, pady=(20, 20), sticky=tk.EW)
 
         # boton para calcular de binario a decimal
