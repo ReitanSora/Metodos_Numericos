@@ -111,16 +111,14 @@ STYLE_ENTRY = {
     "bg": BG_ENTRY,
     "fg": "#fff",
     "bd": 1,
-    "width": 25,
     "justify": "center"
 }
 
-STYLE_ENTRY_SCREENS = {
-    "font": ("Corbel", 13),
+STYLE_ENTRY_NUMBERS = {
+    "font": ("Verdana", 13),
     "bg": BG_ENTRY,
     "fg": "#fff",
     "bd": 1,
-    "width": 15,
     "justify": "center"
 }
 
@@ -129,18 +127,6 @@ STYLE_ENTRY_DES = {
     "bg": BG_ENTRY,
     "fg": FG_ENTRY,
     "bd": 1,
-    "width": 35,
-    "cursor": "",
-    "state": "readonly",
-    "justify": "center"
-}
-
-STYLE_ENTRY_SCREENS_DES = {
-    "font": ("Verdana", 13),
-    "bg": BG_ENTRY,
-    "fg": FG_ENTRY,
-    "bd": 1,
-    "width": 15,
     "cursor": "",
     "state": "readonly",
     "justify": "center"
