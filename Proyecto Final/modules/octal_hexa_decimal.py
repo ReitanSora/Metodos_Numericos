@@ -35,6 +35,8 @@ class OctalHexaDecimal(tk.Frame):
         self.valor_hexadecimal.set("")
         self.respuesta_odecimal.set("")
         self.respuesta_hdecimal.set("")
+        self.texto_alerta_valor_octal.set("")
+        self.texto_alerta_valor_hexadecimal.set("")
 
     def validacion_calculo_octal(self):
         if validacion.validate_number_octal(self.valor_octal.get()) is True:
@@ -43,8 +45,18 @@ class OctalHexaDecimal(tk.Frame):
         else:
             self.texto_alerta_valor_octal.set("Ingrese numeros entre 0-7")
 
+    def validacion_calculo_hexadecimal(self):
+        if validacion.validate_number_hexa(self.valor_hexadecimal.get()) is True:
+            self.texto_alerta_valor_hexadecimal.set("")
+            self.calcular_hexadecimal()
+        else:
+            self.texto_alerta_valor_hexadecimal.set("Ingrese numeros entre 0-9 o ABCDEF")
+
     def calcular_octal(self):
         self.respuesta_odecimal.set(sistemas.octal_decimal(int(self.valor_octal.get())))
+
+    def calcular_hexadecimal(self):
+        self.respuesta_hdecimal.set(sistemas.hexa_decimal(self.valor_hexadecimal.get()))
 
     def init_widgets(self):
         # label titulo
@@ -166,6 +178,7 @@ class OctalHexaDecimal(tk.Frame):
         boton_calculo_2 = tk.Button(borde_2,
                                     text="Calcular",
                                     **style.STYLE_BUTTON,
+                                    command=self.validacion_calculo_hexadecimal
                                     )
         boton_calculo_2.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
 
