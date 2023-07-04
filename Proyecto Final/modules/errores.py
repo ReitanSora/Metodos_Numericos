@@ -39,7 +39,7 @@ class Errores(tk.Frame):
 
     def validacion_campos(self):
         try:
-            if validacion.validate_decimal(self.valor_decimal.get()) is True:
+            if validacion.validate_float(self.valor_decimal.get()) is True:
                 self.texto_alerta_valor_decimal.set("")
                 self.calculo_errores()
             else:

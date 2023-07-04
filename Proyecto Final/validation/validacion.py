@@ -44,8 +44,8 @@ def validate_number_hexa(numeros: str) -> bool:
     is_valid = False if not NUMBERS_REGEX.match(numeros) else True
     return is_valid
 
-# método para validar los números de cédula de los socios
-def validate_decimal(numeros: str) -> bool:
+# método para numeros con punto flotante
+def validate_float(numeros: str) -> bool:
     is_valid = type(ast.literal_eval(numeros))
     if is_valid == float:
         return True
