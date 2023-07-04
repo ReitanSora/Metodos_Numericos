@@ -52,7 +52,6 @@ STYLE_WARNING = {
 STYLE_ENTRY_BORDER = {
     "bg": BG,
     "relief": "flat",
-    "bd": 3,
     "height": 10
 }
 
@@ -110,15 +109,14 @@ STYLE_ENTRY = {
     "font": ("Corbel", 14),
     "bg": BG_ENTRY,
     "fg": "#fff",
-    "bd": 1,
     "justify": "center"
 }
 
 STYLE_ENTRY_NUMBERS = {
     "font": ("Verdana", 13),
     "bg": BG_ENTRY,
+    "width": "10",
     "fg": "#fff",
-    "bd": 1,
     "justify": "center"
 }
 
