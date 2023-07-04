@@ -26,9 +26,8 @@ def binario_decimal(numero_binario: int) -> int:
 
     return decimal
 
+
 # funcion para convertir de decimal a binario
-
-
 def decimal_binario(numero_decimal: int) -> int:
     binario = int()
     i = int()
@@ -40,3 +39,18 @@ def decimal_binario(numero_decimal: int) -> int:
         i += 1
 
     return binario
+
+
+# funcion para convertir de octal a decimal
+def octal_decimal(numero_octal: int) -> int:
+    decimal=int()
+    i=int()
+
+    while(numero_octal>0):
+        digito= numero_octal%10
+        decimal+= digito*(8**i)
+        numero_octal //=10
+        i+=1
+
+    return decimal
+
