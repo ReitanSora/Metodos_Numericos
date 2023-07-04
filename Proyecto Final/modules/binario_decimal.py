@@ -35,6 +35,8 @@ class BinarioDecimal(tk.Frame):
         self.valor_decimal.set("")
         self.respuesta_binario.set("")
         self.respuesta_decimal.set("")
+        self.texto_alerta_valor_binario.set("")
+        self.texto_alerta_valor_decimal.set("")
 
     def validacion_calculo_1(self):
         if validacion.validate_number_binary(self.valor_binario.get()) is True:
