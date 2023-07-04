@@ -33,6 +33,12 @@ def validate_number_binary(numeros: str) -> bool:
     return is_valid
 
 # método para validar los números de cédula de los socios
+def validate_number_octal(numeros: str) -> bool:
+    NUMBERS_REGEX = re.compile(r"^[0-7]{1,}$")
+    is_valid = False if not NUMBERS_REGEX.match(numeros) else True
+    return is_valid
+
+# método para validar los números de cédula de los socios
 def validate_decimal(numeros: str) -> bool:
     is_valid = type(ast.literal_eval(numeros))
     if is_valid == float:
