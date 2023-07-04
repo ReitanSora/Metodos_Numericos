@@ -35,6 +35,7 @@ class Errores(tk.Frame):
         self.valor_aproximado.set("")
         self.respuesta_error_abs.set("")
         self.respuesta_error_rel.set("")
+        self.texto_alerta_valor_decimal.set("")
 
     def validacion_campos(self):
         try:
