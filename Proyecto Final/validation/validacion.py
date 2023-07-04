@@ -20,21 +20,27 @@ def validate_letters(expresion: str) -> bool:
     is_valid = False if not EXPRESSION_REGEX.match(expresion) else True
     return is_valid
 
-# método para validar los números de cédula de los socios
+# método para validar los números en base 10
 def validate_number_decimal(numeros: str) -> bool:
     NUMBERS_REGEX = re.compile(r"^[0-9]{1,}$")
     is_valid = False if not NUMBERS_REGEX.match(numeros) else True
     return is_valid
 
-# método para validar los números de cédula de los socios
+# método para validar los números en base 2
 def validate_number_binary(numeros: str) -> bool:
     NUMBERS_REGEX = re.compile(r"^[0-1]{1,}$")
     is_valid = False if not NUMBERS_REGEX.match(numeros) else True
     return is_valid
 
-# método para validar los números de cédula de los socios
+# método para validar los números en base 8
 def validate_number_octal(numeros: str) -> bool:
     NUMBERS_REGEX = re.compile(r"^[0-7]{1,}$")
+    is_valid = False if not NUMBERS_REGEX.match(numeros) else True
+    return is_valid
+
+# método para validar los números en base 16
+def validate_number_hexa(numeros: str) -> bool:
+    NUMBERS_REGEX = re.compile(r"^[ABCDEFabcdef0-9]{1,}$")
     is_valid = False if not NUMBERS_REGEX.match(numeros) else True
     return is_valid
 
