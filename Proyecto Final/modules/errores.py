@@ -42,16 +42,18 @@ class Errores(tk.Frame):
                 self.texto_alerta_valor_decimal.set("")
                 self.calculo_errores()
             else:
-                self.texto_alerta_valor_decimal.set("Ingrese un valor decimal con punto")
+                self.texto_alerta_valor_decimal.set(
+                    "Ingrese un valor decimal con punto")
         except (SyntaxError, ValueError):
-            self.texto_alerta_valor_decimal.set("Ingrese un valor decimal con punto")
+            self.texto_alerta_valor_decimal.set(
+                "Ingrese un valor decimal con punto")
 
     def calculo_errores(self):
-        valor_aproximado, error_absoluto, error_relativo= error.calculo_errores(float(self.valor_decimal.get()))
+        valor_aproximado, error_absoluto, error_relativo = error.calculo_errores(
+            float(self.valor_decimal.get()))
         self.valor_aproximado.set(str(valor_aproximado))
         self.respuesta_error_abs.set(str(error_absoluto))
         self.respuesta_error_rel.set(str(error_relativo))
-
 
     def init_widgets(self):
         tk.Label(self,
@@ -97,13 +99,13 @@ class Errores(tk.Frame):
         borde_entry_1 = tk.LabelFrame(inputFrame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
-        borde_entry_1.grid(row=0, column=1, pady=(10, 20), padx="20")
+        borde_entry_1.grid(row=0, column=1, pady=(10, 20), sticky=tk.EW)
 
         self.valor_decimal = tk.StringVar()
         tk.Entry(borde_entry_1,
                  textvariable=self.valor_decimal,
-                 **style.STYLE_ENTRY_SCREENS,
-                 ).pack()
+                 **style.STYLE_ENTRY_NUMBERS,
+                 ).pack(fill=tk.BOTH, expand=True)
 
         # label alerta valor decimal
         self.texto_alerta_valor_decimal = tk.StringVar()
@@ -112,26 +114,26 @@ class Errores(tk.Frame):
                  **style.STYLE_WARNING
                  ).pack()
 
-        # entry valor aproximado
+        # entry desactivado valor aproximado
         self.valor_aproximado = tk.StringVar()
         tk.Entry(inputFrame,
                  textvariable=self.valor_aproximado,
-                 **style.STYLE_ENTRY_SCREENS_DES,
-                 ).grid(row=1, column=1, pady=20, padx="20")
+                 **style.STYLE_ENTRY_DES,
+                 ).grid(row=1, column=1, pady=20, sticky=tk.EW)
 
         # entry desactivado respuesta
         self.respuesta_error_abs = tk.StringVar()
         tk.Entry(inputFrame,
                  textvariable=self.respuesta_error_abs,
-                 **style.STYLE_ENTRY_SCREENS_DES,
-                 ).grid(row=3, column=1, columnspan=2, pady=30, padx="20", sticky=tk.EW)
+                 **style.STYLE_ENTRY_DES,
+                 ).grid(row=3, column=1, columnspan=2, pady=30, sticky=tk.EW)
 
         # entry desactivado respuesta
         self.respuesta_error_rel = tk.StringVar()
         tk.Entry(inputFrame,
                  textvariable=self.respuesta_error_rel,
-                 **style.STYLE_ENTRY_SCREENS_DES,
-                 ).grid(row=4, column=1, columnspan=2, pady=30, padx="20", sticky=tk.EW)
+                 **style.STYLE_ENTRY_DES,
+                 ).grid(row=4, column=1, columnspan=2, pady=30, sticky=tk.EW)
 
         # boton para calcular
         borde_1 = tk.LabelFrame(inputFrame,
