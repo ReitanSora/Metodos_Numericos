@@ -32,7 +32,7 @@ class Menu(tk.Menu):
         opcion_file.add_command(label="Guardar Imágen")
         opcion_file.add_command(label="Nueva ventana")
         opcion_file.add_separator()
-        opcion_file.add_command(label="Salir", command=quit)
+        opcion_file.add_command(label="Salir" , command=parent.salir)
 
         opcion_edit.add_command(label="Copiar")
         opcion_edit.add_command(label="Cortar")
