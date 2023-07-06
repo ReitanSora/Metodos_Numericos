@@ -13,13 +13,14 @@ Tema: Métodos Numéricos
 '''
 
 import tkinter as tk
-from modules.manager import Manager
-from modules.register import Register
+import functions.events as event
+from modules import manager
+from modules import register
 from static import style
 from model.usuario import buscar_clave
-import model.usuario as usuario
-import model.persona as persona
-import functions.events as event
+from model import usuario
+from model import persona
+
 
 
 class Login (tk.Tk):
@@ -39,7 +40,8 @@ class Login (tk.Tk):
         if clave_registro is not None:
             if clave == clave_registro:
                 self.destroy()
-                Manager()
+                ventana = manager.Manager()
+                ventana.mainloop()
             else:
                 self.texto_alerta.set("Usuario o contraseña mal ingresados")
         else:
@@ -52,7 +54,8 @@ class Login (tk.Tk):
         self.ingresar(self.texto_usuario.get(), self.texto_clave.get())
 
     def register_event(self):
-        Register()
+        ventana = register.Register()
+        ventana.mainloop()
 
     def clean(self, event):
         self.texto_alerta.set("")
