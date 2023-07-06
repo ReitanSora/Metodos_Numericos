@@ -44,7 +44,7 @@ STYLE_SUBTITTLE = {
 }
 
 STYLE_WARNING = {
-    "font": ("Corbel", 10, "bold"),
+    "font": ("Corbel", 9, "bold"),
     "bg": BG,
     "fg": "red",
 }
@@ -52,7 +52,6 @@ STYLE_WARNING = {
 STYLE_ENTRY_BORDER = {
     "bg": BG,
     "relief": "flat",
-    "height": 10
 }
 
 STYLE_BUTTON_BORDER = {
