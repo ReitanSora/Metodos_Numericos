@@ -65,6 +65,9 @@ class Manager(tk.Tk):
         # para poner una pantalla encima de la otra
         frame.tkraise()
 
+    def salir(self):
+        self.destroy()
+
     def move_to_home(self):
         self.show_frame(Home)
 
