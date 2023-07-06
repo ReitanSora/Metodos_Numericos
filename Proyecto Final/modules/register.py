@@ -36,7 +36,7 @@ class Register(tk.Toplevel):
 
         if posicion_usuario is not None:
             self.texto_alerta_nickname.set(
-                "Ya existe un usuario con este nickaname")
+                "Ya existe un usuario con este nickname")
         elif posicion_persona is not None:
             self.texto_alerta_correo.set(
                 "Ya existe un usuario con este correo")
@@ -55,7 +55,7 @@ class Register(tk.Toplevel):
         self.texto_alerta_clave.set(
             "La clave debe tener de 4 a 25 carácteres" if estado_clave is False else "")
         self.texto_alerta_nickname.set(
-            "Campo obligatorio, hasta 25 carácteres" if estado_nickname is False else "")
+            "Campo de hasta 25 carácteres" if estado_nickname is False else "")
         return estado_nickname * estado_clave
 
     def validar_letras(self):
@@ -63,9 +63,9 @@ class Register(tk.Toplevel):
         estado_apellido = val.validate_letters(self.texto_apellido.get())
 
         self.texto_alerta_nombre.set(
-            "Campo obligatorio, hasta 50 carácteres" if estado_nombre is False else "")
+            "Campo de hasta 50 carácteres" if estado_nombre is False else "")
         self.texto_alerta_apellido.set(
-            "Campo obligatorio, hasta 50 carácteres" if estado_apellido is False else "")
+            "Campo de hasta 50 carácteres" if estado_apellido is False else "")
         return estado_nombre * estado_apellido
 
     def validar(self):
@@ -93,10 +93,11 @@ class Register(tk.Toplevel):
         tk.Label(self,
                  text="Registro",
                  **style.STYLE_TITTLE
-                 ).pack(side=tk.TOP, fill=tk.BOTH, pady="10")
+                 ).pack(side=tk.TOP, fill=tk.BOTH, pady=10)
 
         info_frame = tk.Frame(self, background=style.BG)
         info_frame.columnconfigure(0, weight=1)
+        info_frame.columnconfigure(1, weight=1)
         info_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True,)
 
         # label nombre de usuario
@@ -104,44 +105,44 @@ class Register(tk.Toplevel):
                  text="Nombre",
                  **style.STYLE_SUBTITTLE,
                  justify="center"
-                 ).grid(row=0, column=0)
+                 ).grid(row=0, column=0, pady=10, sticky=tk.N)
 
         # label apellido del usuario
         tk.Label(info_frame,
                  text="Apellido",
                  **style.STYLE_SUBTITTLE
-                 ).grid(row=1, column=0)
+                 ).grid(row=1, column=0, pady=10, sticky=tk.N)
 
         # label nickname
         tk.Label(info_frame,
                  text="Nickname",
                  **style.STYLE_SUBTITTLE
-                 ).grid(row=2, column=0)
+                 ).grid(row=2, column=0, pady=10, sticky=tk.N)
 
         # label correo electrocnico
         tk.Label(info_frame,
                  text="Correo",
                  **style.STYLE_SUBTITTLE
-                 ).grid(row=3, column=0)
+                 ).grid(row=3, column=0, pady=10, sticky=tk.N)
 
         # label clave
         tk.Label(info_frame,
                  text="Clave",
                  **style.STYLE_SUBTITTLE
-                 ).grid(row=4, column=0)
+                 ).grid(row=4, column=0, pady=10, sticky=tk.N)
 
         # entry nombre usuario
         borde_entry_1 = tk.LabelFrame(info_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
-        borde_entry_1.grid(row=0, column=1, pady=(10, 0), padx="20")
+        borde_entry_1.grid(row=0, column=1, pady=(10,0), sticky=tk.EW)
 
         self.texto_nombre = tk.StringVar()
         entry_nombre = tk.Entry(borde_entry_1,
                                 textvariable=self.texto_nombre,
                                 **style.STYLE_ENTRY,
                                 )
-        entry_nombre.pack()
+        entry_nombre.pack(side=tk.TOP , expand=True)
 
         # label alerta nombre
         self.texto_alerta_nombre = tk.StringVar()
@@ -154,14 +155,14 @@ class Register(tk.Toplevel):
         borde_entry_2 = tk.LabelFrame(info_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
-        borde_entry_2.grid(row=1, column=1, pady=(10, 0), padx="20")
+        borde_entry_2.grid(row=1, column=1, pady=(10,0), sticky=tk.EW)
 
         self.texto_apellido = tk.StringVar()
         entry_apellido = tk.Entry(borde_entry_2,
                                   textvariable=self.texto_apellido,
                                   **style.STYLE_ENTRY
                                   )
-        entry_apellido.pack()
+        entry_apellido.pack(side=tk.TOP , expand=True)
 
         # label alerta apellido
         self.texto_alerta_apellido = tk.StringVar()
@@ -174,14 +175,14 @@ class Register(tk.Toplevel):
         borde_entry_3 = tk.LabelFrame(info_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
-        borde_entry_3.grid(row=2, column=1, pady=(10, 0), padx="20")
+        borde_entry_3.grid(row=2, column=1, pady=(10,0), sticky=tk.EW)
 
         self.texto_nickname = tk.StringVar()
         entry_nickname = tk.Entry(borde_entry_3,
                                   textvariable=self.texto_nickname,
                                   **style.STYLE_ENTRY
                                   )
-        entry_nickname.pack()
+        entry_nickname.pack(side=tk.TOP , expand=True)
 
         # label alerta nickname
         self.texto_alerta_nickname = tk.StringVar()
@@ -194,14 +195,14 @@ class Register(tk.Toplevel):
         borde_entry_4 = tk.LabelFrame(info_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
-        borde_entry_4.grid(row=3, column=1, pady=(10, 0), padx="20")
+        borde_entry_4.grid(row=3, column=1, pady=(10,0), sticky=tk.EW)
 
         self.texto_correo = tk.StringVar()
         entry_correo = tk.Entry(borde_entry_4,
                                 textvariable=self.texto_correo,
                                 **style.STYLE_ENTRY
                                 )
-        entry_correo.pack()
+        entry_correo.pack(side=tk.TOP , expand=True)
 
         # label alerta correo
         self.texto_alerta_correo = tk.StringVar()
@@ -214,21 +215,21 @@ class Register(tk.Toplevel):
         borde_entry_5 = tk.LabelFrame(info_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
-        borde_entry_5.grid(row=4, column=1, pady=(10, 0), padx="20")
+        borde_entry_5.grid(row=4, column=1, pady=(10,0), sticky=tk.EW)
 
         self.texto_clave = tk.StringVar()
         entry_clave = tk.Entry(borde_entry_5,
                                textvariable=self.texto_clave,
                                **style.STYLE_ENTRY,
                                )
-        entry_clave.pack()
+        entry_clave.pack(side=tk.TOP , expand=True)
 
         # label alerta clave
         self.texto_alerta_clave = tk.StringVar()
         tk.Label(borde_entry_5,
                  textvariable=self.texto_alerta_clave,
                  **style.STYLE_WARNING
-                 ).pack()
+                 ).pack(side=tk.TOP , expand=True)
 
         # boton para registrarse
         borde_1 = tk.LabelFrame(self,
@@ -248,7 +249,7 @@ class Register(tk.Toplevel):
         # boton para regresar
         borde_2 = tk.LabelFrame(self,
                                 **style.STYLE_BUTTON_RETURN_BORDER)
-        borde_2.pack(side=tk.TOP, pady=(20, 80))
+        borde_2.pack(side=tk.TOP, pady=(20, 50))
 
         boton_regresar = tk.Button(borde_2,
                                    text="Regresar",
