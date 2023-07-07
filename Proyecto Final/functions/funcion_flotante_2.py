@@ -24,12 +24,8 @@ def busqueda_puesta_punto(numero_binario: str):
 
 # Metodo para quitar la coma
 def quitar_punto(numero_binario: str):
-    print(numero_binario)
     posicion = int(numero_binario.find("."))
-    print(posicion)
     num_exponente = int(len(numero_binario[1:posicion]))
-    print(num_exponente)
-    # numero_decimal = str(numero_decimal)
     posicion = int(numero_binario.find("."))
     resultado = numero_binario[:posicion]+numero_binario[posicion+1:]
 
