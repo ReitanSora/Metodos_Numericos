@@ -29,3 +29,11 @@ def on_enter_return(e):
 
 def on_leave_return(e):
     e.widget.config(**style.STYLE_BUTTON_RETURN)
+
+
+def on_enter_nav(e):
+    e.widget.config(**style.STYLE_BUTTON_NAV_ENTER)
+
+
+def on_leave_nav(e):
+    e.widget.config(**style.STYLE_BUTTON_NAV)
