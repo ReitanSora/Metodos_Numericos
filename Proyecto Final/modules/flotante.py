@@ -118,7 +118,7 @@ class PuntoFlotante(tk.Frame):
 
         # label exponente
         tk.Label(input_frame,
-                 text="x 10 ^ ",
+                 text=" ^ ",
                  **style.STYLE_SUBTITTLE,
                  ).grid(row=1, column=2, pady=20, sticky=tk.N)
 
