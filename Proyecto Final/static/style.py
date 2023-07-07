@@ -17,6 +17,8 @@ BG = "#FFF"
 
 COLOR_TITULO = "#000"
 COLOR_SUBTITULO = "#666666"
+COLOR_AQUA = "#257dca"
+
 
 BG_ENTRY = "#4C4C4C"
 FG_ENTRY = "#4C4C4C"
@@ -94,6 +96,19 @@ STYLE_BUTTON_RETURN = {
     "padx": 20,
 }
 
+STYLE_BUTTON_NAV= {
+    "font": ("Corbel", 14, "bold"),
+    "bg": COLOR_AQUA,
+    "fg": "#FFF",
+    "activeforeground": COLOR_AQUA,
+    "activebackground": "#FFF",
+    "relief": "sunken",
+    "cursor": "hand2",
+    "bd": 0,
+    "width": 10,
+    "padx": 20,
+}
+
 STYLE_BUTTON_ENTER = {
     "bg": BG_BUTTON_EN,
     "fg": FG_BUTTON_EN,
@@ -102,6 +117,11 @@ STYLE_BUTTON_ENTER = {
 STYLE_BUTTON_RETURN_ENTER = {
     "bg": BG_BUTTON_RETURN_EN,
     "fg": FG_BUTTON_RETURN_EN,
+}
+
+STYLE_BUTTON_NAV_ENTER = {
+    "bg": "#FFF",
+    "fg": COLOR_AQUA
 }
 
 STYLE_ENTRY = {
