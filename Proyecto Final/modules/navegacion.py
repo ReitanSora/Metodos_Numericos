@@ -23,14 +23,14 @@ class Navegacion (tk.Frame):
 
         nav_frame = tk.Frame(parent)
         nav_frame.pack(side=tk.LEFT, fill=tk.Y)
-        nav_frame.configure(bd=0)
+        nav_frame.configure(background=style.COLOR_AQUA, borderwidth=0)
 
         boton_inicio = tk.Button(nav_frame,
                   text="Inicio",
                   **style.STYLE_BUTTON_NAV,
                   command=parent.move_to_home
                   )
-        boton_inicio.pack(side= tk.TOP, fill=tk.BOTH, expand=True)
+        boton_inicio.pack(side= tk.TOP, fill=tk.BOTH, expand=False)
 
         boton_inicio.bind('<Enter>', event.on_enter_nav)
         boton_inicio.bind('<Leave>', event.on_leave_nav)
@@ -40,7 +40,7 @@ class Navegacion (tk.Frame):
                   **style.STYLE_BUTTON_NAV,
                   command=parent.move_to_errores
                   )
-        boton_errores.pack(side= tk.TOP, fill=tk.BOTH, expand=True)
+        boton_errores.pack(side= tk.TOP, fill=tk.BOTH, expand=False)
 
         boton_errores.bind('<Enter>', event.on_enter_nav)
         boton_errores.bind('<Leave>', event.on_leave_nav)
@@ -50,7 +50,7 @@ class Navegacion (tk.Frame):
                   **style.STYLE_BUTTON_NAV,
                   command=parent.move_to_sistemas
                   )
-        boton_numeracion.pack(side= tk.TOP, fill=tk.BOTH, expand=True)
+        boton_numeracion.pack(side= tk.TOP, fill=tk.BOTH, expand=False)
 
         boton_numeracion.bind('<Enter>', event.on_enter_nav)
         boton_numeracion.bind('<Leave>', event.on_leave_nav)
@@ -60,7 +60,7 @@ class Navegacion (tk.Frame):
                   **style.STYLE_BUTTON_NAV,
                   command=parent.move_to_flotante
                   )
-        boton_flotante.pack(side= tk.TOP, fill=tk.BOTH, expand=True)
+        boton_flotante.pack(side= tk.TOP, fill=tk.BOTH, expand=False)
 
         boton_flotante.bind('<Enter>', event.on_enter_nav)
         boton_flotante.bind('<Leave>', event.on_leave_nav)
@@ -71,7 +71,7 @@ class Navegacion (tk.Frame):
                   **style.STYLE_BUTTON_NAV,
                   command=parent.move_to_bolzano
                   )
-        boton_bolzano.pack(side= tk.TOP, fill=tk.BOTH, expand=True)
+        boton_bolzano.pack(side= tk.TOP, fill=tk.BOTH, expand=False)
 
         boton_bolzano.bind('<Enter>', event.on_enter_nav)
         boton_bolzano.bind('<Leave>', event.on_leave_nav)
@@ -81,7 +81,16 @@ class Navegacion (tk.Frame):
                   text="Método de\nBisección",
                   **style.STYLE_BUTTON_NAV,
                   )
-        boton_biseccion.pack(side= tk.TOP, fill=tk.BOTH, expand=True)
+        boton_biseccion.pack(side= tk.TOP, fill=tk.BOTH, expand=False)
 
         boton_biseccion.bind('<Enter>', event.on_enter_nav)
         boton_biseccion.bind('<Leave>', event.on_leave_nav)
+
+        # label de información - footer
+        tk.Label(nav_frame,
+                text="Proyecto Primer Hemi\nGrupo-6",
+                font=("Corbel", 10, "normal"),
+                background=style.COLOR_AQUA,
+                foreground="#FFF",
+                justify="center"
+                ).pack(side=tk.BOTTOM, fill=tk.BOTH)
