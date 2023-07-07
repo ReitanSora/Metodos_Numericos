@@ -1,15 +1,15 @@
 '''
 Tema: Métodos Numéricos
-#Grupo #
-#Integrantes:
+Grupo 6
+Integrantes:
 
 •	Kevin Josue Amaguaña Rivadeneira
 •	Priscila Veronica Chisag Pillajo
-•	Andy RIcardo Galarza Morales
+•	Andy Ricardo Galarza Morales
 •	Stiven Anthony Pilca Sánchez
 
-#Carrera: Ingeniería en Sistemas de la información
-#Paralelo: SI4 - 002
+Carrera: Ingeniería en Sistemas de la información
+Paralelo: SI4 - 002
 '''
 
 import tkinter as tk
@@ -19,6 +19,7 @@ from modules.tab_numeracion import MenuTabSistemasNumeracion
 from modules.flotante import PuntoFlotante
 from modules.home import Home
 from modules.menu import Menu
+from modules.navegacion import Navegacion
 from modules.bolzano import Bolzano
 
 
@@ -28,16 +29,20 @@ class Manager(tk.Tk):
         # metodo constructor de la clase Tk
         super().__init__(*args, **kwargs)
         self.title("Métodos Numéricos")
-        self.geometry("800x600")
+        self.geometry("1000x600")
+
+        # contenedor para los botones de navegacion
+        Navegacion(self)
 
         # contenedor donde se mostrarán todas las demás ventanas
         container = tk.Frame(self)
         container.pack(
-            side=tk.TOP,
+            side=tk.RIGHT,
             fill=tk.BOTH,
             expand=True
         )
-        container.configure(background=style.BG)
+        container.configure(background=style.BG, bd=0)
+        container.config(width="800")
 
         # cinta de opciones
         Menu(parent=self)
