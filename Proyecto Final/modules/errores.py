@@ -38,16 +38,12 @@ class Errores(tk.Frame):
         self.texto_alerta_valor_decimal.set("")
 
     def validacion_campos(self):
-        try:
-            if validacion.validate_float(self.valor_decimal.get()) is True:
-                self.texto_alerta_valor_decimal.set("")
-                self.calculo_errores()
-            else:
-                self.texto_alerta_valor_decimal.set(
-                    "Ingrese un valor decimal con punto")
-        except (SyntaxError, ValueError):
+        if validacion.validate_number_float(self.valor_decimal.get()) is True:
+            self.texto_alerta_valor_decimal.set("")
+            self.calculo_errores()
+        else:
             self.texto_alerta_valor_decimal.set(
-                "Ingrese un valor decimal con punto")
+                "Números 0-9 y '.'")
 
     def calculo_errores(self):
         valor_aproximado, error_absoluto, error_relativo = error.calculo_errores(
