@@ -42,8 +42,7 @@ class Errores(tk.Frame):
             self.texto_alerta_valor_decimal.set("")
             self.calculo_errores()
         else:
-            self.texto_alerta_valor_decimal.set(
-                "Números 0-9 y '.'")
+            self.texto_alerta_valor_decimal.set("Números 0-9 y '.'")
 
     def calculo_errores(self):
         valor_aproximado, error_absoluto, error_relativo = error.calculo_errores(
