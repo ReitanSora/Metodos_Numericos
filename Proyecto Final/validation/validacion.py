@@ -5,7 +5,6 @@ def validate_email(correo: str) -> bool:
     EMAIL_REGEX = re.compile(
         r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[A-Za-z]*$")
     is_valid = False if not EMAIL_REGEX.match(correo) else True
-
     return is_valid
 
 
@@ -41,6 +40,12 @@ def validate_number_octal(numeros: str) -> bool:
 # método para validar los números en base 16
 def validate_number_hexa(numeros: str) -> bool:
     NUMBERS_REGEX = re.compile(r"^[ABCDEFabcdef0-9]{1,}$")
+    is_valid = False if not NUMBERS_REGEX.match(numeros) else True
+    return is_valid
+
+# método para numeros con punto flotante de otra forma
+def validate_number_float(numeros: str) -> bool:
+    NUMBERS_REGEX = re.compile(r"^\-?[0-9]{1,}+\.?[0-9]*$")
     is_valid = False if not NUMBERS_REGEX.match(numeros) else True
     return is_valid
 
