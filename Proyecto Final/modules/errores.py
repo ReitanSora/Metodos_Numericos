@@ -145,18 +145,3 @@ class Errores(tk.Frame):
 
         boton_calculo.bind('<Enter>', event.on_enter)
         boton_calculo.bind('<Leave>', event.on_leave)
-
-        # boton para regresar
-        borde_2 = tk.LabelFrame(self,
-                                **style.STYLE_BUTTON_RETURN_BORDER)
-        borde_2.pack(side=tk.BOTTOM, pady=(0, 20))
-
-        boton_return = tk.Button(borde_2,
-                                 text="Regresar",
-                                 **style.STYLE_BUTTON_RETURN,
-                                 command=self.move
-                                 )
-        boton_return.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
-
-        boton_return.bind('<Enter>', event.on_enter_return)
-        boton_return.bind('<Leave>', event.on_leave_return)
