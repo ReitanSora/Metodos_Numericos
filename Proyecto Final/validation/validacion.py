@@ -1,5 +1,18 @@
+'''
+Tema: Métodos Numéricos
+Grupo 6
+Integrantes:
+
+•	Kevin Josue Amaguaña Rivadeneira
+•	Priscila Veronica Chisag Pillajo
+•	Andy Ricardo Galarza Morales
+•	Stiven Anthony Pilca Sánchez
+
+Carrera: Ingeniería en Sistemas de la información
+Paralelo: SI4 - 002
+'''
+
 import re
-import ast
 
 def validate_email(correo: str) -> bool:
     EMAIL_REGEX = re.compile(
@@ -48,11 +61,3 @@ def validate_number_float(numeros: str) -> bool:
     NUMBERS_REGEX = re.compile(r"^\-?[0-9]{1,}+\.?[0-9]*$")
     is_valid = False if not NUMBERS_REGEX.match(numeros) else True
     return is_valid
-
-# método para numeros con punto flotante
-def validate_float(numeros: str) -> bool:
-    is_valid = type(ast.literal_eval(numeros))
-    if is_valid == float:
-        return True
-    else:
-        return False
