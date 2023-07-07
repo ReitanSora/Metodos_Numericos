@@ -43,34 +43,50 @@ class PuntoFlotante(tk.Frame):
         self.texto_alerta_edecimal.set("")
         self.texto_alerta_exponente.set("")
 
-    def validar_campo_unico_1 (self):
-        if self.decimal_normal != "" and self.decimal_exponente == "":
+    def clean(self):
+        self.texto_alerta_ndecimal.set("")
+        self.texto_alerta_edecimal.set("")
+        self.texto_alerta_exponente.set("")
+
+    def validar_campo_unico(self):
+        if self.decimal_normal.get() != "" and self.decimal_exponente.get() == "":
             self.validar_calculo_normal()
-        elif self.decimal_normal == "" and self.decimal_exponente != "":
+        elif self.decimal_normal.get() == "" and self.decimal_exponente.get() != "":
             self.validar_calculo_exponente()
         else:
-            self.texto_alerta_ndecimal.set("Solo debe completar uno de los dos campos")
-            self.texto_alerta_edecimal.set("Solo debe completar uno de los dos campos")
+            self.texto_alerta_ndecimal.set("Solo un dato")
+            self.texto_alerta_edecimal.set("Solo un dato")
 
     def validar_calculo_normal(self):
-        if validacion.validate_float(self.decimal_normal.get()) is True:
+        if validacion.validate_number_float(self.decimal_normal.get()) is True:
             self.texto_alerta_ndecimal.set("")
-            self.calcular_normal()
+            self.calcular(float(self.decimal_normal.get()))
         else:
-            self.texto_alerta_ndecimal.set("Ingrese números del 0-9")
+            self.texto_alerta_ndecimal.set("Números del 0-9 y .")
 
     def validar_calculo_exponente(self):
-        if validacion.validate_float(self.decimal_exponente.get()) is True:
-            self.texto_alerta_edecimal.set("")
-            self.calcular_exponente()
+        if validacion.validate_number_float(self.decimal_exponente.get()) is True:
+            if validacion.validate_number_float(self.exponente.get()) is True:
+                self.texto_alerta_edecimal.set("")
+                print(float(self.exponente.get()))
+                self.calcular(
+                    pow(float(self.decimal_exponente.get()), float(self.exponente.get())))
+            else:
+                self.texto_alerta_exponente.set("Exponente erroneo")
         else:
-            self.texto_alerta_edecimal.set("Ingrese números del 0-9")
+            self.texto_alerta_edecimal.set("Números del 0-9 y .")
 
-    def calcular_normal(self):
-        pass
-
-    def calcular_exponente(self):
-        pass
+    def calcular(self, valor: float):
+        self.clean()
+        try:
+            (valor_signo, valor_exponente, valor_mantisa, valor_hexa,
+             valor_normalizado) = flotante.ingreso_decimal(valor, self.precision.get())
+            self.resultado_signo.set(valor_signo)
+            self.resultado_exponente.set(valor_exponente)
+            self.resultado_mantisa.set(valor_mantisa)
+            self.resultado_hexadecimal.set(valor_hexa)
+        except ValueError:
+            self.texto_alerta_edecimal.set("Imposible representar")
 
     def init_widgets(self):
 
@@ -110,13 +126,14 @@ class PuntoFlotante(tk.Frame):
         borde_entry_1 = tk.LabelFrame(input_frame,
                                       **style.STYLE_ENTRY_BORDER,
                                       )
-        borde_entry_1.grid(row=0, column=1, columnspan=3, pady=(20,0), sticky=tk.EW)
+        borde_entry_1.grid(row=0, column=1, columnspan=3,
+                           pady=(20, 0), sticky=tk.EW)
 
         self.decimal_normal = tk.StringVar()
         tk.Entry(borde_entry_1,
                  textvariable=self.decimal_normal,
                  **style.STYLE_ENTRY_NUMBERS,
-                 ).pack(fill=tk.BOTH, expand=True)
+                 ).pack(side=tk.TOP, fill=tk.X, expand=True)
 
         # label alerta decimal normal
         self.texto_alerta_ndecimal = tk.StringVar()
@@ -129,13 +146,13 @@ class PuntoFlotante(tk.Frame):
         borde_entry_2 = tk.LabelFrame(input_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
-        borde_entry_2.grid(row=1, column=1, pady=(20,0), sticky=tk.EW)
+        borde_entry_2.grid(row=1, column=1, pady=(20, 0), sticky=tk.EW)
 
         self.decimal_exponente = tk.StringVar()
         tk.Entry(borde_entry_2,
                  textvariable=self.decimal_exponente,
                  **style.STYLE_ENTRY_NUMBERS,
-                 ).pack(fill=tk.BOTH, expand=True)
+                 ).pack(side=tk.TOP, fill=tk.X, expand=True)
 
         # label alerta decimal exponente
         self.texto_alerta_edecimal = tk.StringVar()
@@ -148,13 +165,13 @@ class PuntoFlotante(tk.Frame):
         borde_entry_3 = tk.LabelFrame(input_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
-        borde_entry_3.grid(row=1, column=3, pady=(20,0))
+        borde_entry_3.grid(row=1, column=3, pady=(20, 0))
 
         self.exponente = tk.StringVar()
         tk.Entry(borde_entry_3,
                  textvariable=self.exponente,
                  **style.STYLE_ENTRY_NUMBERS,
-                 ).pack(fill=tk.BOTH, expand=True)
+                 ).pack(side=tk.TOP, fill=tk.X, expand=True)
 
         # label alerta decimal exponente
         self.texto_alerta_exponente = tk.StringVar()
@@ -171,66 +188,89 @@ class PuntoFlotante(tk.Frame):
         boton_calculo = tk.Button(borde_1,
                                   text="Calcular",
                                   **style.STYLE_BUTTON,
+                                  command=self.validar_campo_unico
                                   )
         boton_calculo.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
 
         boton_calculo.bind('<Enter>', event.on_enter)
         boton_calculo.bind('<Leave>', event.on_leave)
 
-        outputFrame = tk.Frame(self, background=style.BG)
-        outputFrame.columnconfigure(0, weight=1)
-        outputFrame.columnconfigure(1, weight=1)
-        outputFrame.columnconfigure(2, weight=1)
-        outputFrame.pack(side=tk.TOP, fill=tk.BOTH, expand=True,)
+        PRESICION = {
+            "Simple": 1,
+            "Doble": 2
+        }
+
+        borde_seleccion = tk.LabelFrame(
+            input_frame, **style.STYLE_ENTRY_BORDER)
+        borde_seleccion.grid(row=0, column=4)
+
+        self.precision = tk.IntVar(value=1)
+        for (keys, values) in PRESICION.items():
+            tk.Radiobutton(borde_seleccion,
+                           text=keys,
+                           variable=self.precision,
+                           value=values,
+                           **style.STYLE_RADIO_BUTTON,
+                           border=0,
+                           anchor="center",
+                           borderwidth=0,
+                           relief="flat"
+                           ).pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+        output_frame = tk.Frame(self, background=style.BG)
+        output_frame.columnconfigure(0, weight=1)
+        output_frame.columnconfigure(1, weight=1)
+        output_frame.columnconfigure(2, weight=1)
+        output_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True,)
 
         # label signo
-        tk.Label(outputFrame,
+        tk.Label(output_frame,
                  text="Signo",
                  **style.STYLE_SUBTITTLE,
                  ).grid(row=0, column=0)
 
         # label exponente
-        tk.Label(outputFrame,
+        tk.Label(output_frame,
                  text="Exponente",
                  **style.STYLE_SUBTITTLE,
                  ).grid(row=1, column=0)
 
         # label mantisa
-        tk.Label(outputFrame,
+        tk.Label(output_frame,
                  text="Mantisa",
                  **style.STYLE_SUBTITTLE,
                  ).grid(row=2, column=0)
 
         # label hexadecimal
-        tk.Label(outputFrame,
+        tk.Label(output_frame,
                  text="Representación\nHexadecimal",
                  **style.STYLE_SUBTITTLE,
                  ).grid(row=3, column=0)
 
         # entry desactivado signo
         self.resultado_signo = tk.StringVar()
-        tk.Entry(outputFrame,
+        tk.Entry(output_frame,
                  textvariable=self.resultado_signo,
                  **style.STYLE_ENTRY_DES,
                  ).grid(row=0, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
 
         # entry desactivado exponente
         self.resultado_exponente = tk.StringVar()
-        tk.Entry(outputFrame,
+        tk.Entry(output_frame,
                  textvariable=self.resultado_exponente,
                  **style.STYLE_ENTRY_DES,
                  ).grid(row=1, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
 
         # entry desactivado mantisa
         self.resultado_mantisa = tk.StringVar()
-        tk.Entry(outputFrame,
+        tk.Entry(output_frame,
                  textvariable=self.resultado_mantisa,
                  **style.STYLE_ENTRY_DES,
                  ).grid(row=2, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
 
         # entry desactivado hexadecimal
         self.resultado_hexadecimal = tk.StringVar()
-        tk.Entry(outputFrame,
+        tk.Entry(output_frame,
                  textvariable=self.resultado_hexadecimal,
                  **style.STYLE_ENTRY_DES,
                  ).grid(row=3, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
