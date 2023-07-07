@@ -166,7 +166,7 @@ class PuntoFlotante(tk.Frame):
         borde_entry_3 = tk.LabelFrame(input_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
-        borde_entry_3.grid(row=1, column=3, pady=(20, 0))
+        borde_entry_3.grid(row=1, column=3, pady=(20, 0), sticky=tk.EW)
 
         self.exponente = tk.StringVar()
         tk.Entry(borde_entry_3,
