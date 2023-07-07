@@ -1,21 +1,22 @@
 '''
 Tema: Métodos Numéricos
-#Grupo #
-#Integrantes:
+Grupo 6
+Integrantes:
 
 •	Kevin Josue Amaguaña Rivadeneira
 •	Priscila Veronica Chisag Pillajo
-•	Andy RIcardo Galarza Morales
+•	Andy Ricardo Galarza Morales
 •	Stiven Anthony Pilca Sánchez
 
-#Carrera: Ingeniería en Sistemas de la información
-#Paralelo: SI4 - 002
+Carrera: Ingeniería en Sistemas de la información
+Paralelo: SI4 - 002
 '''
 
 import tkinter as tk
-from tkinter import messagebox
-from static import style
 import functions.events as event
+from static import style
+from functions import funcion_propagacion as propagacion
+from validation import validacion
 
 
 class PropErrores(tk.Frame):
@@ -28,6 +29,13 @@ class PropErrores(tk.Frame):
 
     def move_to_home(self):
         self.controller.move_to_home()
+
+    def validar_campo(self):
+        if validacion.validate_number_float(self.exponente.get()) is True:
+            self.calcular()
+
+    def calcular(self):
+        self.respuesta.set(propagacion.propagacion_errores(float(self.exponente.get())))
 
     def init_widgets(self):
         tk.Label(self,
@@ -57,11 +65,10 @@ class PropErrores(tk.Frame):
                  **style.STYLE_SUBTITTLE,
                  ).grid(row=2, column=0)
 
-        # entry desactivado formula
-        self.formula = tk.StringVar()
-        tk.Entry(inputFrame,
-                 textvariable=self.formula,
-                 **style.STYLE_ENTRY_DES,
+        # label ecuacion usada
+        tk.Label(inputFrame,
+                 text="(e^x)/(e^x)-1",
+                 **style.STYLE_SUBTITTLE,
                  ).grid(row=0, column=1, pady="10", padx="20")
 
         # entry desactivado respuesta
@@ -86,6 +93,7 @@ class PropErrores(tk.Frame):
         boton_calculo = tk.Button(borde_1,
                                   text="Calcular",
                                   **style.STYLE_BUTTON,
+                                  command=self.validar_campo
                                   )
         boton_calculo.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
 
