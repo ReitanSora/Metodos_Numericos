@@ -106,6 +106,7 @@ STYLE_BUTTON_NAV= {
     "cursor": "hand2",
     "bd": 0,
     "width": 10,
+    "height": 3,
     "padx": 20,
 }
 
@@ -120,8 +121,8 @@ STYLE_BUTTON_RETURN_ENTER = {
 }
 
 STYLE_BUTTON_NAV_ENTER = {
-    "bg": "#FFF",
-    "fg": COLOR_AQUA
+    "bg": "#1D6AAD",
+    "fg": "#FFF"
 }
 
 STYLE_ENTRY = {
