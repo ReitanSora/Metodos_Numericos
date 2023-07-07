@@ -85,6 +85,7 @@ class PuntoFlotante(tk.Frame):
             self.resultado_exponente.set(valor_exponente)
             self.resultado_mantisa.set(valor_mantisa)
             self.resultado_hexadecimal.set(valor_hexa)
+            self.resultado_normalizado.set(valor_normalizado)
         except ValueError:
             self.texto_alerta_edecimal.set("Imposible representar")
 
@@ -246,6 +247,12 @@ class PuntoFlotante(tk.Frame):
                  text="Representación\nHexadecimal",
                  **style.STYLE_SUBTITTLE,
                  ).grid(row=3, column=0)
+        
+        # label binario normalizado
+        tk.Label(output_frame,
+                 text="Normalizado a\nHexadecimal",
+                 **style.STYLE_SUBTITTLE,
+                 ).grid(row=4, column=0)
 
         # entry desactivado signo
         self.resultado_signo = tk.StringVar()
@@ -274,3 +281,10 @@ class PuntoFlotante(tk.Frame):
                  textvariable=self.resultado_hexadecimal,
                  **style.STYLE_ENTRY_DES,
                  ).grid(row=3, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
+        
+        # entry desactivado binario normalizado
+        self.resultado_normalizado = tk.StringVar()
+        tk.Entry(output_frame,
+                 textvariable=self.resultado_normalizado,
+                 **style.STYLE_ENTRY_DES,
+                 ).grid(row=4, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
