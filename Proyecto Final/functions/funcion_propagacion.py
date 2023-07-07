@@ -1,3 +1,17 @@
+'''
+Tema: Métodos Numéricos
+Grupo 6
+Integrantes:
+
+•	Kevin Josue Amaguaña Rivadeneira
+•	Priscila Veronica Chisag Pillajo
+•	Andy Ricardo Galarza Morales
+•	Stiven Anthony Pilca Sánchez
+
+Carrera: Ingeniería en Sistemas de la información
+Paralelo: SI4 - 002
+'''
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -28,7 +42,7 @@ def propagacion_errores(exponente):
         plt.plot(x, e(x), label="Función e^x/(e^x)-1", c="black")
         plt.grid(alpha=0.3, lw=1.75, ls="--")
         plt.yticks(range(-1, 4, 1))
-        plt.xticks(range(exponente-5, exponente+6, 1))
+        plt.xticks(range(int(exponente)-5, int(exponente)+6, 1))
         plt.annotate("[{},{}]".format(exponente, respuesta),
                      xy=(exponente+0.25, respuesta+0.25))
         # Etiquetas e informacion de la tabla
@@ -38,5 +52,8 @@ def propagacion_errores(exponente):
         plt.xlabel("Valor de 'x'", c="grey")
         plt.ylabel("Resultado de la ecuación", c="grey")
         plt.show()
+
+        return respuesta
     else:
         print("Ingrese un número correcto")
+
