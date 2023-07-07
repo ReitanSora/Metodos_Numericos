@@ -40,7 +40,7 @@ STYLE_TITTLE = {
 STYLE_SUBTITTLE = {
     "font": ("Corbel", 14, "bold"),
     "bg": BG,
-    "fg": COLOR_TITULO,
+    "fg": COLOR_SUBTITULO,
 }
 
 STYLE_WARNING = {
@@ -127,4 +127,12 @@ STYLE_ENTRY_DES = {
     "cursor": "",
     "state": "readonly",
     "justify": "center"
+}
+
+STYLE_RADIO_BUTTON = {
+    "font": ("Corbel", 14, "bold"),
+    "bg": BG,
+    "fg": COLOR_TITULO,
+    "activebackground": BG,
+    "activeforeground": "#000",
 }
