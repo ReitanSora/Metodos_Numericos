@@ -1,15 +1,15 @@
 '''
 Tema: Métodos Numéricos
-#Grupo #
-#Integrantes:
+Grupo 6
+Integrantes:
 
 •	Kevin Josue Amaguaña Rivadeneira
 •	Priscila Veronica Chisag Pillajo
-•	Andy RIcardo Galarza Morales
+•	Andy Ricardo Galarza Morales
 •	Stiven Anthony Pilca Sánchez
 
-#Carrera: Ingeniería en Sistemas de la información
-#Paralelo: SI4 - 002
+Carrera: Ingeniería en Sistemas de la información
+Paralelo: SI4 - 002
 '''
 
 
