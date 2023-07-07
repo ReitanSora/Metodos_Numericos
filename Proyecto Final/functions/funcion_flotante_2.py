@@ -10,8 +10,11 @@ def busqueda_puesta_punto(numero_binario: str):
 
 # Metodo para quitar la coma
 def quitar_punto(numero_binario: str):
+    print(numero_binario)
     posicion = int(numero_binario.find("."))
+    print(posicion)
     num_exponente = int(len(numero_binario[1:posicion]))
+    print(num_exponente)
     # numero_decimal = str(numero_decimal)
     posicion = int(numero_binario.find("."))
     resultado = numero_binario[:posicion]+numero_binario[posicion+1:]
@@ -39,6 +42,14 @@ def exponente(tipo_pre: int, numero_exponente: int):
     # Proceso para calcular el exponente en un tipo de precision u otro
     exp_binario = 127 + numero_exponente if tipo_pre == 1 else 1023 + numero_exponente
     texto_final = str(bin(exp_binario)[2:])
+    if tipo_pre==1:
+        if len(texto_final)<8:
+            falta= 8-len(texto_final)
+            texto_final = "0"*falta+texto_final
+    else:
+        if len(texto_final)<11:
+            falta= 11-len(texto_final)
+            texto_final = "0"*falta+texto_final
 
     return texto_final
 
@@ -53,7 +64,7 @@ def mantisa(numero_binario: str, tipo_precision: int):
     # Proceso para calcular la mantissa en un tipo de precision u otro
     if num >= 0:
         mant_sp = str(numero_binario)+"."+"0"*num
-        mant_p = quitar_punto(mant_sp)
+        mant_p, exponente = quitar_punto(mant_sp)
         mant_f = quitar_uno(mant_p)
     else:
         slicing = slice(0, num)
@@ -172,8 +183,10 @@ def ingreso_decimal(numero_decimal, tipo_precision):
         mantisa_binario = mantisa(numero_binario, tipo_precision)
         hexadecimal = bin_a_hex(
             signo_binario, exponente_binario, mantisa_binario, tipo_precision)
-        print("Signo: {}\nExponente: {}\nMantisa: {}\nHexadecimal: {}\nComo int, transformado a hexadecimal: {}".format
-              (signo_binario, exponente_binario, mantisa_binario, hexadecimal, numero_binario_normalizado))
+        
+        return (signo_binario, exponente_binario, mantisa_binario, hexadecimal, numero_binario_normalizado)
+        # print("Signo: {}\nExponente: {}\nMantisa: {}\nHexadecimal: {}\nComo int, transformado a hexadecimal: {}".format
+        #       (signo_binario, exponente_binario, mantisa_binario, hexadecimal, numero_binario_normalizado))
     else:
         signo_binario = signo(numero_decimal)
         numero_binario_normalizado = binario_normalizado(numero_decimal)
@@ -187,8 +200,9 @@ def ingreso_decimal(numero_decimal, tipo_precision):
         mantisa_binario = mantisa(numero_binario, tipo_precision)
         hexadecimal = bin_a_hex(
             signo_binario, exponente_binario, mantisa_binario, tipo_precision)
-        print("Signo: {}\nExponente: {}\nMantisa: {}\nHexadecimal: {}\nComo int, transformado a hexadecimal: {}".format
-              (signo_binario, exponente_binario, mantisa_binario, hexadecimal, numero_binario_normalizado))
+        return (signo_binario, exponente_binario, mantisa_binario, hexadecimal, numero_binario_normalizado)
+        # print("Signo: {}\nExponente: {}\nMantisa: {}\nHexadecimal: {}\nComo int, transformado a hexadecimal: {}".format
+        #       (signo_binario, exponente_binario, mantisa_binario, hexadecimal, numero_binario_normalizado))
 
 
 def ingreso_decimal_exponente():
