@@ -57,42 +57,44 @@ class Errores(tk.Frame):
                  **style.STYLE_TITTLE,
                  ).pack(side=tk.TOP, fill=tk.BOTH, pady=30)
 
-        inputFrame = tk.Frame(self, background=style.BG)
-        inputFrame.columnconfigure(0, weight=1)
-        inputFrame.pack(side=tk.TOP, fill=tk.BOTH)
+        input_frame = tk.Frame(self, background=style.BG)
+        input_frame.columnconfigure(0, weight=1)
+        input_frame.columnconfigure(1, weight=1)
+        input_frame.columnconfigure(2, weight=1)
+        input_frame.pack(side=tk.TOP, fill=tk.BOTH)
 
         # label ecuacion
-        tk.Label(inputFrame,
+        tk.Label(input_frame,
                  text="Valor decimal",
                  **style.STYLE_SUBTITTLE,
                  ).grid(row=0, column=0, pady=10, sticky=tk.N)
 
         # label exponente
-        tk.Label(inputFrame,
+        tk.Label(input_frame,
                  text="Valor aproximado",
                  **style.STYLE_SUBTITTLE,
                  ).grid(row=1, column=0)
 
         # label respuesta
-        tk.Label(inputFrame,
+        tk.Label(input_frame,
                  text="Error absoluto",
                  **style.STYLE_SUBTITTLE,
                  ).grid(row=3, column=0)
 
         # label respuesta
-        tk.Label(inputFrame,
+        tk.Label(input_frame,
                  text="Error relativo",
                  **style.STYLE_SUBTITTLE,
                  ).grid(row=4, column=0)
 
         # label informacion
-        tk.Label(inputFrame,
-                 text="Calculo de errores entre el valor ingresado y el aproximado",
+        tk.Label(input_frame,
+                 text="○ Calculo de errores entre el valor ingresado y el aproximado",
                  **style.STYLE_SUBTITTLE,
-                 ).grid(row=2, column=0, columnspan=4, pady=20)
+                 ).grid(row=2, column=0, columnspan=2, pady=20)
 
         # entry valor decimal
-        borde_entry_1 = tk.LabelFrame(inputFrame,
+        borde_entry_1 = tk.LabelFrame(input_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
         borde_entry_1.grid(row=0, column=1, pady=(10, 20), sticky=tk.EW)
@@ -100,8 +102,13 @@ class Errores(tk.Frame):
         self.valor_decimal = tk.StringVar()
         tk.Entry(borde_entry_1,
                  textvariable=self.valor_decimal,
-                 **style.STYLE_ENTRY_NUMBERS,
+                 **style.STYLE_ENTRY,
                  ).pack(fill=tk.BOTH, expand=True)
+        
+        canvas_linea_1 = tk.Canvas(
+            borde_entry_1, **style.STYLE_CANVAS, width=250)
+        canvas_linea_1.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_1.create_line(0, 0, 250, 0, **style.STYLE_CANVAS_LINE)
 
         # label alerta valor decimal
         self.texto_alerta_valor_decimal = tk.StringVar()
@@ -111,30 +118,54 @@ class Errores(tk.Frame):
                  ).pack()
 
         # entry desactivado valor aproximado
+        borde_entry_2 = tk.LabelFrame(input_frame, **style.STYLE_ENTRY_BORDER)
+        borde_entry_2.grid(row=1, column=1, pady=20, sticky=tk.EW)
+
         self.valor_aproximado = tk.StringVar()
-        tk.Entry(inputFrame,
+        tk.Entry(borde_entry_2,
                  textvariable=self.valor_aproximado,
                  **style.STYLE_ENTRY_DES,
-                 ).grid(row=1, column=1, pady=20, sticky=tk.EW)
+                 ).pack()
+        
+        canvas_linea_2 = tk.Canvas(
+            borde_entry_2, **style.STYLE_CANVAS, width=250)
+        canvas_linea_2.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_2.create_line(0, 0, 250, 0, **style.STYLE_CANVAS_LINE)
 
         # entry desactivado respuesta
+        borde_entry_3 = tk.LabelFrame(input_frame, **style.STYLE_ENTRY_BORDER)
+        borde_entry_3.grid(row=3, column=1, pady=30, sticky=tk.EW)
+
         self.respuesta_error_abs = tk.StringVar()
-        tk.Entry(inputFrame,
+        tk.Entry(borde_entry_3,
                  textvariable=self.respuesta_error_abs,
                  **style.STYLE_ENTRY_DES,
-                 ).grid(row=3, column=1, columnspan=2, pady=30, sticky=tk.EW)
+                 ).pack()
+        
+        canvas_linea_3 = tk.Canvas(
+            borde_entry_3, **style.STYLE_CANVAS, width=250)
+        canvas_linea_3.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_3.create_line(0, 0, 250, 0, **style.STYLE_CANVAS_LINE)
 
         # entry desactivado respuesta
+        borde_entry_4 = tk.LabelFrame(input_frame, **style.STYLE_ENTRY_BORDER)
+        borde_entry_4.grid(row=4, column=1, pady=30, sticky=tk.EW)
+
         self.respuesta_error_rel = tk.StringVar()
-        tk.Entry(inputFrame,
+        tk.Entry(borde_entry_4,
                  textvariable=self.respuesta_error_rel,
                  **style.STYLE_ENTRY_DES,
-                 ).grid(row=4, column=1, columnspan=2, pady=30, sticky=tk.EW)
+                 ).pack()
+        
+        canvas_linea_4 = tk.Canvas(
+            borde_entry_4, **style.STYLE_CANVAS, width=250)
+        canvas_linea_4.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_4.create_line(0, 0, 250, 0, **style.STYLE_CANVAS_LINE)
 
         # boton para calcular
-        borde_1 = tk.LabelFrame(inputFrame,
+        borde_1 = tk.LabelFrame(input_frame,
                                 **style.STYLE_BUTTON_BORDER)
-        borde_1.grid(row=0, rowspan=2, column=3, pady="30", padx="20")
+        borde_1.grid(row=0, rowspan=2, column=2, pady=30, padx=20)
 
         boton_calculo = tk.Button(borde_1,
                                   text="Calcular",
