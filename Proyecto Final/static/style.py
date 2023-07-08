@@ -12,23 +12,41 @@ Carrera: Ingeniería en Sistemas de la información
 Paralelo: SI4 - 002
 '''
 
+# 342E37
+# 1D1E2C
+# 12263A
+# 210B2C
+# 39393a
+# 262626
+# 453750
+# 110B11
+# 1A1423
+# 335a85
+# 334985
+#292D3E
+BG = "#292D3E"
+BG_LIGH_MODE = "#DBE4EE"
 
-BG = "#FFF"
+COLOR_TITULO = "#FEFFEA"
+COLOR_TITULO_LIGHT_MODE = "#000"
+COLOR_SUBTITULO = "#FEFFEA"
+COLOR_SUBTITULO_LIGHT_MODE = "#C2C2C2"
 
-COLOR_TITULO = "#000"
-COLOR_SUBTITULO = "#666666"
 COLOR_BLANCO = "#FFF"
+COLOR_NEGRO = "#000"
+COLOR_GRIS = "#C2C2C2"
 COLOR_AQUA = "#257dca"
 COLOR_AQUA_OSCURO = "#1D6AAD"
-COLOR_MAGENTA = "#512BCF"
+COLOR_MAGENTA_NORMAL = "#512BCF"
+COLOR_MAGENTA_CLARO = "#8A67FF"
 COLOR_MAGENTA_OSCURO = "#3b1f98"
-
+COLOR_CIAN = "#FF6B6B"
 
 BG_ENTRY = "#4C4C4C"
 FG_ENTRY = "#4C4C4C"
 
 BG_BUTTON_DES = "#FFF"
-BG_BUTTON_EN = COLOR_MAGENTA
+BG_BUTTON_EN = COLOR_MAGENTA_NORMAL
 FG_BUTTON_DES = "#3b1f98"
 FG_BUTTON_EN = "#FFF"
 
@@ -52,11 +70,14 @@ STYLE_SUBTITTLE = {
 STYLE_WARNING = {
     "font": ("Corbel", 9, "bold"),
     "bg": BG,
-    "fg": "red",
+    "fg": COLOR_GRIS,
 }
 
 STYLE_ENTRY_BORDER = {
+    "font": ("Corbel", 14, "bold"),
     "bg": BG,
+    "fg": COLOR_GRIS,
+    "bd":0,
     "relief": "flat",
 }
 
@@ -100,7 +121,7 @@ STYLE_BUTTON_RETURN = {
     "padx": 20,
 }
 
-STYLE_BUTTON_NAV= {
+STYLE_BUTTON_NAV = {
     "font": ("Corbel", 14, "bold"),
     "bg": COLOR_AQUA,
     "fg": "#FFF",
@@ -132,25 +153,21 @@ STYLE_BUTTON_NAV_ENTER = {
 STYLE_ENTRY = {
     "font": ("Corbel", 14),
     "bg": BG,
-    "bd": 0,
     "fg": COLOR_TITULO,
-    "selectbackground": COLOR_MAGENTA,
-    "justify": "center"
-}
-
-STYLE_ENTRY_NUMBERS = {
-    "font": ("Verdana", 13),
-    "bg": BG_ENTRY,
-    "width": "10",
-    "fg": "#fff",
+    "bd": 0,
+    "selectbackground": COLOR_BLANCO,
+    "selectforeground": COLOR_MAGENTA_NORMAL,
     "justify": "center"
 }
 
 STYLE_ENTRY_DES = {
     "font": ("Verdana", 14),
     "bg": BG,
-    "fg": FG_ENTRY,
+    "fg": COLOR_BLANCO,
     "bd": 0,
+    "selectbackground": COLOR_BLANCO,
+    "selectforeground": COLOR_MAGENTA_NORMAL,
+    "readonlybackground": BG,
     "cursor": "",
     "state": "readonly",
     "justify": "center"
@@ -159,15 +176,25 @@ STYLE_ENTRY_DES = {
 STYLE_RADIO_BUTTON = {
     "font": ("Corbel", 14, "bold"),
     "bg": BG,
-    "fg": COLOR_TITULO,
+    "fg": COLOR_BLANCO,
     "activebackground": BG,
-    "activeforeground": "#000",
+    "activeforeground": COLOR_MAGENTA_CLARO,
+    "selectcolor": BG,
+    "border": "0",
+    "anchor": "center",
+    "borderwidth": "0",
+    "relief": "flat"
 }
 
-STYLE_CANVAS_LINE = {
+STYLE_CANVAS = {
     "bg": BG,
     "height": 3,
     "bd": 0,
     "relief": "flat",
     "highlightthickness": 0
+}
+
+STYLE_CANVAS_LINE = {
+    "width": "3",
+    "fill": COLOR_MAGENTA_CLARO
 }
