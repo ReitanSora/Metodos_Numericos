@@ -20,7 +20,10 @@ class Navegacion (tk.Frame):
 
     def __init__(self, parent):
         super().__init__(parent)
+        self.controller = parent
+        self.init_widgets(parent)
 
+    def init_widgets(self, parent):
         nav_frame = tk.Frame(parent)
         nav_frame.pack(side=tk.LEFT, fill=tk.Y)
         nav_frame.configure(background=style.COLOR_AQUA, borderwidth=0)
@@ -94,3 +97,5 @@ class Navegacion (tk.Frame):
                 foreground="#FFF",
                 justify="center"
                 ).pack(side=tk.BOTTOM, fill=tk.BOTH)
+        
+    
