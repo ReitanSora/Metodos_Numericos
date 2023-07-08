@@ -22,7 +22,6 @@ from model import usuario
 from model import persona
 
 
-
 class Login (tk.Tk):
 
     def __init__(self, *args, **kwargs):
@@ -95,15 +94,17 @@ class Login (tk.Tk):
 
         self.texto_usuario = tk.StringVar()
         entry_usuario = tk.Entry(borde_entry_1,
-                                      textvariable=self.texto_usuario,
-                                      **style.STYLE_ENTRY)
+                                 textvariable=self.texto_usuario,
+                                 **style.STYLE_ENTRY,
+                                 )
         entry_usuario.pack()
 
         entry_usuario.bind("<Return>", self.login_event_keyboard)
 
-        canvas_linea_1 = tk.Canvas(borde_entry_1, **style.STYLE_CANVAS_LINE)
+        canvas_linea_1 = tk.Canvas(borde_entry_1, **style.STYLE_CANVAS)
         canvas_linea_1.pack(side=tk.TOP, fill=tk.X, anchor=tk.CENTER)
-        canvas_linea_1.create_line(0, 0, 275, 0, width=3, fill= style.COLOR_AQUA_OSCURO)
+        canvas_linea_1.create_line(
+            0, 0, 275, 0, **style.STYLE_CANVAS_LINE)
 
         # ingreso clave del usuario
         borde_entry_2 = tk.LabelFrame(info_frame, **style.STYLE_ENTRY_BORDER)
@@ -111,17 +112,18 @@ class Login (tk.Tk):
 
         self.texto_clave = tk.StringVar()
         entry_clave = tk.Entry(borde_entry_2,
-                                    textvariable=self.texto_clave,
-                                    **style.STYLE_ENTRY,
-                                    show="*"
-                                    )
+                               textvariable=self.texto_clave,
+                               **style.STYLE_ENTRY,
+                               show="*"
+                               )
         entry_clave.pack()
 
         entry_clave.bind("<Return>", self.login_event_keyboard)
 
-        canvas_linea_2 = tk.Canvas(borde_entry_2, **style.STYLE_CANVAS_LINE)
+        canvas_linea_2 = tk.Canvas(borde_entry_2, **style.STYLE_CANVAS)
         canvas_linea_2.pack(side=tk.TOP, fill=tk.X, anchor=tk.CENTER)
-        canvas_linea_2.create_line(0, 0, 275, 0, width=3, fill= style.COLOR_AQUA_OSCURO)
+        canvas_linea_2.create_line(
+            0, 0, 275, 0, **style.STYLE_CANVAS_LINE)
 
         # boton para logearse
         borde_1 = tk.LabelFrame(self,
@@ -152,7 +154,7 @@ class Login (tk.Tk):
         boton_registro.bind('<Leave>', event.on_leave)
 
         entry_usuario.bind('<KeyRelease-Return>',
-                                self.login_event_keyboard)
+                           self.login_event_keyboard)
         entry_clave.bind('<KeyRelease-Return>', self.login_event_keyboard)
         entry_usuario.bind('<KeyRelease>', self.clean)
         entry_clave.bind('<KeyRelease>', self.clean)

@@ -133,7 +133,7 @@ class PuntoFlotante(tk.Frame):
         self.decimal_normal = tk.StringVar()
         tk.Entry(borde_entry_1,
                  textvariable=self.decimal_normal,
-                 **style.STYLE_ENTRY_NUMBERS,
+                 **style.STYLE_ENTRY,
                  ).pack(side=tk.TOP, fill=tk.X, expand=True)
 
         # label alerta decimal normal
@@ -152,7 +152,7 @@ class PuntoFlotante(tk.Frame):
         self.decimal_exponente = tk.StringVar()
         tk.Entry(borde_entry_2,
                  textvariable=self.decimal_exponente,
-                 **style.STYLE_ENTRY_NUMBERS,
+                 **style.STYLE_ENTRY,
                  ).pack(side=tk.TOP, fill=tk.X, expand=True)
 
         # label alerta decimal exponente
@@ -171,7 +171,7 @@ class PuntoFlotante(tk.Frame):
         self.exponente = tk.StringVar()
         tk.Entry(borde_entry_3,
                  textvariable=self.exponente,
-                 **style.STYLE_ENTRY_NUMBERS,
+                 **style.STYLE_ENTRY,
                  ).pack(side=tk.TOP, fill=tk.X, expand=True)
 
         # label alerta decimal exponente
@@ -212,10 +212,6 @@ class PuntoFlotante(tk.Frame):
                            variable=self.precision,
                            value=values,
                            **style.STYLE_RADIO_BUTTON,
-                           border=0,
-                           anchor="center",
-                           borderwidth=0,
-                           relief="flat"
                            ).pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
         output_frame = tk.Frame(self, background=style.BG)
