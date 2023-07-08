@@ -33,6 +33,7 @@ class Manager(tk.Tk):
         super().__init__(*args, **kwargs)
         self.title("Métodos Numéricos")
         self.geometry("1000x600")
+        self.resizable(False, False)
 
         # contenedor para los botones de navegacion
         Navegacion(self)
