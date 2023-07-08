@@ -20,13 +20,15 @@ COLOR_SUBTITULO = "#666666"
 COLOR_BLANCO = "#FFF"
 COLOR_AQUA = "#257dca"
 COLOR_AQUA_OSCURO = "#1D6AAD"
+COLOR_MAGENTA = "#512BCF"
+COLOR_MAGENTA_OSCURO = "#3b1f98"
 
 
 BG_ENTRY = "#4C4C4C"
 FG_ENTRY = "#4C4C4C"
 
 BG_BUTTON_DES = "#FFF"
-BG_BUTTON_EN = "#3b1f98"
+BG_BUTTON_EN = COLOR_MAGENTA
 FG_BUTTON_DES = "#3b1f98"
 FG_BUTTON_EN = "#FFF"
 
@@ -129,8 +131,10 @@ STYLE_BUTTON_NAV_ENTER = {
 
 STYLE_ENTRY = {
     "font": ("Corbel", 14),
-    "bg": BG_ENTRY,
-    "fg": "#fff",
+    "bg": BG,
+    "bd": 0,
+    "fg": COLOR_TITULO,
+    "selectbackground": COLOR_MAGENTA,
     "justify": "center"
 }
 
@@ -144,9 +148,9 @@ STYLE_ENTRY_NUMBERS = {
 
 STYLE_ENTRY_DES = {
     "font": ("Verdana", 14),
-    "bg": BG_ENTRY,
+    "bg": BG,
     "fg": FG_ENTRY,
-    "bd": 1,
+    "bd": 0,
     "cursor": "",
     "state": "readonly",
     "justify": "center"
@@ -158,4 +162,12 @@ STYLE_RADIO_BUTTON = {
     "fg": COLOR_TITULO,
     "activebackground": BG,
     "activeforeground": "#000",
+}
+
+STYLE_CANVAS_LINE = {
+    "bg": BG,
+    "height": 3,
+    "bd": 0,
+    "relief": "flat",
+    "highlightthickness": 0
 }

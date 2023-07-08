@@ -30,6 +30,13 @@ class Register(tk.Toplevel):
         self.resizable(False, False)
         self.init_widgets()
 
+    def vaciar_campos(self):
+        self.texto_nombre.set("")
+        self.texto_apellido.set("")
+        self.texto_nickname.set("")
+        self.texto_correo.set("")
+        self.texto_clave.set("")
+
     def comprobar_usuario(self):
         posicion_persona = persona.buscar_correo(self.texto_correo.get())
         posicion_usuario = usuario.buscar_nickname(self.texto_nickname.get())
@@ -86,6 +93,7 @@ class Register(tk.Toplevel):
         ), self.texto_apellido.get(), self.texto_correo.get())
         usuario.ingresar(usuario_ingreso)
         persona.ingresar(persona_ingreso)
+        self.vaciar_campos()
 
     def init_widgets(self):
 
@@ -132,9 +140,7 @@ class Register(tk.Toplevel):
                  ).grid(row=4, column=0, pady=10, sticky=tk.N)
 
         # entry nombre usuario
-        borde_entry_1 = tk.LabelFrame(info_frame,
-                                      **style.STYLE_ENTRY_BORDER
-                                      )
+        borde_entry_1 = tk.LabelFrame(info_frame,**style.STYLE_ENTRY_BORDER)
         borde_entry_1.grid(row=0, column=1, pady=(10,0), sticky=tk.EW)
 
         self.texto_nombre = tk.StringVar()
@@ -143,6 +149,10 @@ class Register(tk.Toplevel):
                                 **style.STYLE_ENTRY,
                                 )
         entry_nombre.pack(side=tk.TOP , expand=True)
+
+        canvas_linea_1 = tk.Canvas(borde_entry_1, **style.STYLE_CANVAS_LINE, width=250)
+        canvas_linea_1.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_1.create_line(0, 0, 250, 0, width=3, fill= style.COLOR_AQUA_OSCURO)
 
         # label alerta nombre
         self.texto_alerta_nombre = tk.StringVar()
@@ -164,6 +174,10 @@ class Register(tk.Toplevel):
                                   )
         entry_apellido.pack(side=tk.TOP , expand=True)
 
+        canvas_linea_2 = tk.Canvas(borde_entry_2, **style.STYLE_CANVAS_LINE, width=250)
+        canvas_linea_2.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_2.create_line(0, 0, 250, 0, width=3, fill= style.COLOR_AQUA_OSCURO)
+
         # label alerta apellido
         self.texto_alerta_apellido = tk.StringVar()
         tk.Label(borde_entry_2,
@@ -183,6 +197,10 @@ class Register(tk.Toplevel):
                                   **style.STYLE_ENTRY
                                   )
         entry_nickname.pack(side=tk.TOP , expand=True)
+
+        canvas_linea_3 = tk.Canvas(borde_entry_3, **style.STYLE_CANVAS_LINE, width=250)
+        canvas_linea_3.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_3.create_line(0, 0, 250, 0, width=3, fill= style.COLOR_AQUA_OSCURO)
 
         # label alerta nickname
         self.texto_alerta_nickname = tk.StringVar()
@@ -204,6 +222,10 @@ class Register(tk.Toplevel):
                                 )
         entry_correo.pack(side=tk.TOP , expand=True)
 
+        canvas_linea_4 = tk.Canvas(borde_entry_4, **style.STYLE_CANVAS_LINE, width=250)
+        canvas_linea_4.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_4.create_line(0, 0, 250, 0, width=3, fill= style.COLOR_AQUA_OSCURO)
+
         # label alerta correo
         self.texto_alerta_correo = tk.StringVar()
         tk.Label(borde_entry_4,
@@ -223,6 +245,10 @@ class Register(tk.Toplevel):
                                **style.STYLE_ENTRY,
                                )
         entry_clave.pack(side=tk.TOP , expand=True)
+
+        canvas_linea_5 = tk.Canvas(borde_entry_5, **style.STYLE_CANVAS_LINE, width=250)
+        canvas_linea_5.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_5.create_line(0, 0, 250, 0, width=3, fill= style.COLOR_AQUA_OSCURO)
 
         # label alerta clave
         self.texto_alerta_clave = tk.StringVar()

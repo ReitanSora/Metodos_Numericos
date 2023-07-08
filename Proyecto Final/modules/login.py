@@ -90,24 +90,38 @@ class Login (tk.Tk):
                  ).grid(row=4, column=0)
 
         # ingreso nombre de usuario
+        borde_entry_1 = tk.LabelFrame(info_frame, **style.STYLE_ENTRY_BORDER)
+        borde_entry_1.grid(row=1, column=0, pady=(0, 20), padx=40)
+
         self.texto_usuario = tk.StringVar()
-        self.entry_usuario = tk.Entry(info_frame,
+        entry_usuario = tk.Entry(borde_entry_1,
                                       textvariable=self.texto_usuario,
                                       **style.STYLE_ENTRY)
-        self.entry_usuario.grid(row=1, column=0, pady=(0, 20))
+        entry_usuario.pack()
 
-        self.entry_usuario.bind("<Return>", self.login_event_keyboard)
+        entry_usuario.bind("<Return>", self.login_event_keyboard)
+
+        canvas_linea_1 = tk.Canvas(borde_entry_1, **style.STYLE_CANVAS_LINE)
+        canvas_linea_1.pack(side=tk.TOP, fill=tk.X, anchor=tk.CENTER)
+        canvas_linea_1.create_line(0, 0, 275, 0, width=3, fill= style.COLOR_AQUA_OSCURO)
 
         # ingreso clave del usuario
+        borde_entry_2 = tk.LabelFrame(info_frame, **style.STYLE_ENTRY_BORDER)
+        borde_entry_2.grid(row=3, column=0, pady=(0, 20), padx=40)
+
         self.texto_clave = tk.StringVar()
-        self.entry_clave = tk.Entry(info_frame,
+        entry_clave = tk.Entry(borde_entry_2,
                                     textvariable=self.texto_clave,
                                     **style.STYLE_ENTRY,
                                     show="*"
                                     )
-        self.entry_clave.grid(row=3, column=0, pady=(0, 20))
+        entry_clave.pack()
 
-        self.entry_clave.bind("<Return>", self.login_event_keyboard)
+        entry_clave.bind("<Return>", self.login_event_keyboard)
+
+        canvas_linea_2 = tk.Canvas(borde_entry_2, **style.STYLE_CANVAS_LINE)
+        canvas_linea_2.pack(side=tk.TOP, fill=tk.X, anchor=tk.CENTER)
+        canvas_linea_2.create_line(0, 0, 275, 0, width=3, fill= style.COLOR_AQUA_OSCURO)
 
         # boton para logearse
         borde_1 = tk.LabelFrame(self,
@@ -137,8 +151,8 @@ class Login (tk.Tk):
         boton_registro.bind('<Enter>', event.on_enter)
         boton_registro.bind('<Leave>', event.on_leave)
 
-        self.entry_usuario.bind('<KeyRelease-Return>',
+        entry_usuario.bind('<KeyRelease-Return>',
                                 self.login_event_keyboard)
-        self.entry_clave.bind('<KeyRelease-Return>', self.login_event_keyboard)
-        self.entry_usuario.bind('<KeyRelease>', self.clean)
-        self.entry_clave.bind('<KeyRelease>', self.clean)
+        entry_clave.bind('<KeyRelease-Return>', self.login_event_keyboard)
+        entry_usuario.bind('<KeyRelease>', self.clean)
+        entry_clave.bind('<KeyRelease>', self.clean)
