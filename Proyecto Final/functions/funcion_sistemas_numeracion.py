@@ -27,6 +27,25 @@ def binario_decimal(numero_binario: int) -> int:
     return decimal
 
 
+# funcion para convertir de octal a decimal
+def octal_decimal(numero_octal: int) -> int:
+    decimal = int()
+    i = int()
+
+    while (numero_octal > 0):
+        digito = numero_octal % 10
+        decimal += digito*(8**i)
+        numero_octal //= 10
+        i += 1
+
+    return decimal
+
+
+# funcion para convertir de hexadecimal a decimal
+def hexa_decimal(numero_hexa: str) -> int:
+    return int(numero_hexa, 16)
+
+
 # funcion para convertir de decimal a binario
 def decimal_binario(numero_decimal: int) -> int:
     binario = int()
@@ -41,20 +60,13 @@ def decimal_binario(numero_decimal: int) -> int:
     return binario
 
 
-# funcion para convertir de octal a decimal
-def octal_decimal(numero_octal: int) -> int:
-    decimal=int()
-    i=int()
+# funcion para convertir de decimal a octal
+def decimal_octal(numero_decimal: int) -> int:
+    octal = oct(numero_decimal).lstrip("0o")
 
-    while(numero_octal>0):
-        digito= numero_octal%10
-        decimal+= digito*(8**i)
-        numero_octal //=10
-        i+=1
-
-    return decimal
+    return int(octal)
 
 
-# funcion para convertir de hexadecimal a decimal
-def hexa_decimal(numero_hexa: str) -> int:
-    return int(numero_hexa, 16)
+#funcion para convertir de decimal a hexadecimal
+def decimal_hexa(numero_decimal:int) -> str:
+    return hex(numero_decimal).lstrip("0x")
