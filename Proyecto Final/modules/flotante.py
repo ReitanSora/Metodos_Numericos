@@ -135,6 +135,11 @@ class PuntoFlotante(tk.Frame):
                  textvariable=self.decimal_normal,
                  **style.STYLE_ENTRY,
                  ).pack(side=tk.TOP, fill=tk.X, expand=True)
+        
+        canvas_linea_1 = tk.Canvas(
+            borde_entry_1, **style.STYLE_CANVAS, width=500)
+        canvas_linea_1.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_1.create_line(0, 0, 500, 0, **style.STYLE_CANVAS_LINE)
 
         # label alerta decimal normal
         self.texto_alerta_ndecimal = tk.StringVar()
@@ -154,6 +159,11 @@ class PuntoFlotante(tk.Frame):
                  textvariable=self.decimal_exponente,
                  **style.STYLE_ENTRY,
                  ).pack(side=tk.TOP, fill=tk.X, expand=True)
+        
+        canvas_linea_2 = tk.Canvas(
+            borde_entry_2, **style.STYLE_CANVAS, width=250)
+        canvas_linea_2.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_2.create_line(0, 0, 250, 0, **style.STYLE_CANVAS_LINE)
 
         # label alerta decimal exponente
         self.texto_alerta_edecimal = tk.StringVar()
@@ -173,6 +183,11 @@ class PuntoFlotante(tk.Frame):
                  textvariable=self.exponente,
                  **style.STYLE_ENTRY,
                  ).pack(side=tk.TOP, fill=tk.X, expand=True)
+        
+        canvas_linea_3 = tk.Canvas(
+            borde_entry_3, **style.STYLE_CANVAS, width=250)
+        canvas_linea_3.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_3.create_line(0, 0, 250, 0, **style.STYLE_CANVAS_LINE)
 
         # label alerta decimal exponente
         self.texto_alerta_exponente = tk.StringVar()
@@ -251,36 +266,76 @@ class PuntoFlotante(tk.Frame):
                  ).grid(row=4, column=0)
 
         # entry desactivado signo
+        borde_entry_4 = tk.LabelFrame(output_frame, **style.STYLE_ENTRY_BORDER)
+        borde_entry_4.grid(row=0, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
+
         self.resultado_signo = tk.StringVar()
-        tk.Entry(output_frame,
+        tk.Entry(borde_entry_4,
                  textvariable=self.resultado_signo,
                  **style.STYLE_ENTRY_DES,
-                 ).grid(row=0, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
+                 ).pack(side=tk.TOP, fill=tk.X, expand=True)
+        
+        canvas_linea_4 = tk.Canvas(
+            borde_entry_4, **style.STYLE_CANVAS, width=500)
+        canvas_linea_4.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_4.create_line(0, 0, 500, 0, **style.STYLE_CANVAS_LINE)
 
         # entry desactivado exponente
+        borde_entry_5 = tk.LabelFrame(output_frame, **style.STYLE_ENTRY_BORDER)
+        borde_entry_5.grid(row=1, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
+
         self.resultado_exponente = tk.StringVar()
-        tk.Entry(output_frame,
+        tk.Entry(borde_entry_5,
                  textvariable=self.resultado_exponente,
                  **style.STYLE_ENTRY_DES,
-                 ).grid(row=1, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
+                 ).pack(side=tk.TOP, fill=tk.X, expand=True)
+        
+        canvas_linea_5 = tk.Canvas(
+            borde_entry_5, **style.STYLE_CANVAS, width=500)
+        canvas_linea_5.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_5.create_line(0, 0, 500, 0, **style.STYLE_CANVAS_LINE)
 
         # entry desactivado mantisa
+        borde_entry_6 = tk.LabelFrame(output_frame, **style.STYLE_ENTRY_BORDER)
+        borde_entry_6.grid(row=2, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
+
         self.resultado_mantisa = tk.StringVar()
-        tk.Entry(output_frame,
+        tk.Entry(borde_entry_6,
                  textvariable=self.resultado_mantisa,
                  **style.STYLE_ENTRY_DES,
-                 ).grid(row=2, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
+                 ).pack(side=tk.TOP, fill=tk.X, expand=True)
+        
+        canvas_linea_6 = tk.Canvas(
+            borde_entry_6, **style.STYLE_CANVAS, width=500)
+        canvas_linea_6.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_6.create_line(0, 0, 500, 0, **style.STYLE_CANVAS_LINE)
 
         # entry desactivado hexadecimal
+        borde_entry_7 = tk.LabelFrame(output_frame, **style.STYLE_ENTRY_BORDER)
+        borde_entry_7.grid(row=3, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
+
         self.resultado_hexadecimal = tk.StringVar()
-        tk.Entry(output_frame,
+        tk.Entry(borde_entry_7,
                  textvariable=self.resultado_hexadecimal,
                  **style.STYLE_ENTRY_DES,
-                 ).grid(row=3, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
+                 ).pack(side=tk.TOP, fill=tk.X, expand=True)
+        
+        canvas_linea_7 = tk.Canvas(
+            borde_entry_7, **style.STYLE_CANVAS, width=500)
+        canvas_linea_7.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_7.create_line(0, 0, 500, 0, **style.STYLE_CANVAS_LINE)
         
         # entry desactivado binario normalizado
+        borde_entry_8 = tk.LabelFrame(output_frame, **style.STYLE_ENTRY_BORDER)
+        borde_entry_8.grid(row=4, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
+
         self.resultado_normalizado = tk.StringVar()
-        tk.Entry(output_frame,
+        tk.Entry(borde_entry_8,
                  textvariable=self.resultado_normalizado,
                  **style.STYLE_ENTRY_DES,
-                 ).grid(row=4, column=1, pady="20", padx=(0, 20), sticky=tk.EW)
+                 ).pack(side=tk.TOP, fill=tk.X, expand=True)
+        
+        canvas_linea_8 = tk.Canvas(
+            borde_entry_8, **style.STYLE_CANVAS, width=500)
+        canvas_linea_8.pack(side=tk.TOP, anchor=tk.CENTER)
+        canvas_linea_8.create_line(0, 0, 500, 0, **style.STYLE_CANVAS_LINE)
