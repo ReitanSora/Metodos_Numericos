@@ -13,6 +13,9 @@ Paralelo: SI4 - 002
 '''
 
 import tkinter as tk
+import pyautogui
+import webbrowser
+from tkinter import filedialog
 from static import style
 from modules.tab_errores import MenuTabErrores
 from modules.tab_numeracion import MenuTabSistemasNumeracion
@@ -87,3 +90,19 @@ class Manager(tk.Tk):
 
     def move_to_bolzano(self):
         self.show_frame(Bolzano)
+
+    def screenshot(self):
+        screenshot = pyautogui.screenshot(
+            region=(self.winfo_rootx(), self.winfo_rooty(), 1000, 600))
+        try:
+            archivo = filedialog.asksaveasfilename(
+                title="Guardar captura de pantalla", initialdir="./", filetypes=[('Imágen png', '*.png'), ('Imágen jpg', '*.jpg')], defaultextension='.png', )
+            screenshot.save(archivo)
+        except ValueError:
+            pass
+
+    def new_window(self):
+        Manager()
+
+    def github(self):
+        webbrowser.open('https://github.com/ReitanSora/Metodos_Numericos.git')
