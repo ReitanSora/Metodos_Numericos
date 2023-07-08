@@ -18,7 +18,7 @@ import webbrowser
 from tkinter import filedialog
 from static import style
 from modules.tab_errores import MenuTabErrores
-from modules.tab_numeracion import MenuTabSistemasNumeracion
+from modules.sistemas import Conversiones
 from modules.flotante import PuntoFlotante
 from modules.home import Home
 from modules.menu import Menu
@@ -59,7 +59,7 @@ class Manager(tk.Tk):
         # diccionario de clases
         self.frames = {}
 
-        for F in (Home, PuntoFlotante, MenuTabErrores, MenuTabSistemasNumeracion, Bolzano):
+        for F in (Home, PuntoFlotante, MenuTabErrores, Conversiones, Bolzano):
             frame = F(container, self)
             self.frames[F] = frame
 
@@ -84,7 +84,7 @@ class Manager(tk.Tk):
         self.show_frame(MenuTabErrores)
 
     def move_to_sistemas(self):
-        self.show_frame(MenuTabSistemasNumeracion)
+        self.show_frame(Conversiones)
 
     def move_to_flotante(self):
         self.show_frame(PuntoFlotante)
