@@ -24,13 +24,15 @@ class Menu(tk.Menu):
         opcion_user = tk.Menu(barra_menu, tearoff=0)
         opcion_file = tk.Menu(barra_menu, tearoff=0)
         opcion_edit = tk.Menu(barra_menu, tearoff=0)
+        opcion_help = tk.Menu(barra_menu, tearoff=0)
 
         barra_menu.add_cascade(label="File", menu=opcion_file)
         barra_menu.add_cascade(label="Edit", menu=opcion_edit)
         barra_menu.add_cascade(label="User", menu=opcion_user)
+        barra_menu.add_cascade(label="Help", menu=opcion_help)
 
-        opcion_file.add_command(label="Guardar Imágen")
-        opcion_file.add_command(label="Nueva ventana")
+        opcion_file.add_command(label="Guardar Imágen", command=parent.screenshot)
+        opcion_file.add_command(label="Nueva ventana", command=parent.new_window)
         opcion_file.add_separator()
         opcion_file.add_command(label="Salir" , command=parent.salir)
 
@@ -42,3 +44,9 @@ class Menu(tk.Menu):
         opcion_user.add_command(label="Cerrar Sesión")
         opcion_user.add_separator()
         opcion_user.add_command(label="Eliminar Cuenta")
+
+        opcion_help.add_command(label="Manual de usuario")
+        opcion_help.add_command(label="Manual técnico")
+        opcion_help.add_command(label="Repositorio en Github", command=parent.github)
+        opcion_help.add_separator()
+        opcion_help.add_command(label="Versión 1.0")
