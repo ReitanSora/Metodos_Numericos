@@ -27,10 +27,6 @@ class Conversiones(tk.Frame):
         self.conversion = tk.IntVar(value=1)
         self.init_widgets()
 
-    def move_to_home(self):
-        self.vaciar_campos()
-        self.controller.move_to_home()
-
     def vaciar_campos(self):
         self.valor_original.set("")
         self.respuesta.set("")
@@ -168,12 +164,12 @@ class Conversiones(tk.Frame):
         tk.Entry(borde_entry_2,
                  textvariable=self.respuesta,
                  **style.STYLE_ENTRY_DES,
-                 ).pack(side=tk.TOP, expand=True)
+                 ).pack(side=tk.TOP, fill=tk.X, expand=True)
 
         canvas_linea_2 = tk.Canvas(
-            borde_entry_2, **style.STYLE_CANVAS, width=250)
+            borde_entry_2, **style.STYLE_CANVAS, width=400)
         canvas_linea_2.pack(side=tk.TOP, anchor=tk.CENTER)
-        canvas_linea_2.create_line(0, 0, 250, 0, **style.STYLE_CANVAS_LINE)
+        canvas_linea_2.create_line(0, 0, 400, 0, **style.STYLE_CANVAS_LINE)
 
         # boton para calcular de binario a decimal
         borde_1 = tk.LabelFrame(info_frame,
@@ -205,7 +201,7 @@ class Conversiones(tk.Frame):
         borde_seleccion_1 = tk.LabelFrame(
             info_frame, text="N a Decimal", **style.STYLE_ENTRY_BORDER)
         borde_seleccion_1.grid(
-            row=1, column=1, columnspan=2, pady=10, sticky=tk.NSEW)
+            row=1, column=1, columnspan=2, padx=(40,0), pady=10, sticky=tk.NSEW)
 
         for keys, values in CONVERSION_1.items():
             tk.Radiobutton(borde_seleccion_1,
@@ -218,7 +214,7 @@ class Conversiones(tk.Frame):
         borde_seleccion_2 = tk.LabelFrame(
             info_frame, text="Decimal a N", **style.STYLE_ENTRY_BORDER)
         borde_seleccion_2.grid(
-            row=2, column=1, columnspan=2, pady=10, sticky=tk.NSEW)
+            row=2, column=1, columnspan=2, padx=(40,0), pady=10, sticky=tk.NSEW)
 
         for keys, values in CONVERSION_2.items():
             tk.Radiobutton(borde_seleccion_2,

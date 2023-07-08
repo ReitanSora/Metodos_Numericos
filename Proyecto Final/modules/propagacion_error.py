@@ -27,9 +27,6 @@ class PropErrores(tk.Frame):
         self.controller = controller
         self.init_widgets()
 
-    def move_to_home(self):
-        self.controller.move_to_home()
-
     def validar_campo(self):
         if validacion.validate_number_float(self.exponente.get()) is True:
             self.calcular()

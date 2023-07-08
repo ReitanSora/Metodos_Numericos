@@ -27,10 +27,6 @@ class PuntoFlotante(tk.Frame):
         self.controller = controller
         self.init_widgets()
 
-    def move_to_home(self):
-        self.vaciar_campos()
-        self.controller.move_to_home()
-
     def vaciar_campos(self):
         self.decimal_normal.set("")
         self.decimal_exponente.set("")
