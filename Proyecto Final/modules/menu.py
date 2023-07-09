@@ -13,18 +13,19 @@ Tema: Métodos Numéricos
 '''
 
 import tkinter as tk
+from static import style
 
 class Menu(tk.Menu):
     def __init__(self, parent):
         super().__init__(parent)
 
-        barra_menu = tk.Menu(parent)
+        barra_menu = tk.Menu(parent , **style.STYLE_MENU_BAR)
         parent.config(menu=barra_menu)
 
-        opcion_user = tk.Menu(barra_menu, tearoff=0)
-        opcion_file = tk.Menu(barra_menu, tearoff=0)
-        opcion_edit = tk.Menu(barra_menu, tearoff=0)
-        opcion_help = tk.Menu(barra_menu, tearoff=0)
+        opcion_user = tk.Menu(barra_menu, **style.STYLE_MENU_BAR)
+        opcion_file = tk.Menu(barra_menu, **style.STYLE_MENU_BAR)
+        opcion_edit = tk.Menu(barra_menu, **style.STYLE_MENU_BAR)
+        opcion_help = tk.Menu(barra_menu, **style.STYLE_MENU_BAR)
 
         barra_menu.add_cascade(label="File", menu=opcion_file)
         barra_menu.add_cascade(label="Edit", menu=opcion_edit)
@@ -36,7 +37,7 @@ class Menu(tk.Menu):
         opcion_file.add_separator()
         opcion_file.add_command(label="Salir" , command=parent.salir)
 
-        opcion_edit.add_command(label="Copiar")
+        opcion_edit.add_command(label="Copiar", command='Ctrl+Z')
         opcion_edit.add_command(label="Cortar")
 
         opcion_user.add_command(label="Actualizar Información")
