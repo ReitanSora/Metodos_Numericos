@@ -12,6 +12,8 @@ Carrera: Ingeniería en Sistemas de la información
 Paralelo: SI4 - 002
 '''
 
+import math
+
 def metodo_biseccion(fun, a, b, eps=None, steps=100):
     # no se puede aplicar el metodo de biseccion
     if fun(a) * fun(b) >= 0:
