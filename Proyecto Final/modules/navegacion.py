@@ -83,6 +83,7 @@ class Navegacion (tk.Frame):
         boton_biseccion = tk.Button(nav_frame,
                   text="Método de\nBisección",
                   **style.STYLE_BUTTON_NAV,
+                  command=parent.move_to_biseccion
                   )
         boton_biseccion.pack(side= tk.TOP, fill=tk.BOTH, expand=False)
 
