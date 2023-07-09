@@ -18,21 +18,41 @@ import numpy as np
 import functions.events as event
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from static import style
+from functions import funcion_biseccion as biseccion
+from validation import validacion
 
 
-
-class Bolzano(tk.Frame):
+class Biseccion(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
         self.controller = controller
         self.configure(background=style.BG)
         self.init_widgets()
 
-    
+    def validar_campos(self):
+        if validacion.validate_number_float(self.valor_a.get()) is True and validacion.validate_number_float(self.valor_b.get()) is True and validacion.validate_number_float(self.valor_c.get()) is True:
+            if validacion.validate_number_float(self.valor_intervalo_a.get()) is True and validacion.validate_number_float(self.valor_intervalo_b.get()) is True:
+                self.texto_alerta.set("")
+                self.calcular()
+            else:
+                self.texto_alerta.set("Error en el intervalo")
+        else:
+            self.texto_alerta.set("Error en la ecuación")
+
+    def calcular(self):
+        a = float(self.valor_a.get())
+        b = float(self.valor_b.get())
+        c = float(self.valor_c.get())
+        f = lambda x: a*(pow(x, 2)) + b*x + c
+        intervalo_a = float(self.valor_intervalo_a.get())
+        intervalo_b = float(self.valor_intervalo_b.get())
+        respuesta = biseccion.metodo_biseccion(f, intervalo_a, intervalo_b)
+        self.respuesta.set(
+            respuesta if respuesta is not None else "No se encontró una solución en el intervalo")
 
     def init_widgets(self):
         tk.Label(self,
-                 text="Teorema de Bolzano",
+                 text="Método de Bisección",
                  **style.STYLE_TITTLE,
                  ).pack(side=tk.TOP, fill=tk.BOTH, pady=30)
 
@@ -182,9 +202,9 @@ class Bolzano(tk.Frame):
 
         self.respuesta = tk.StringVar()
         entry_respuesta = tk.Entry(borde_entry_6,
-                                           textvariable=self.respuesta,
-                                           **style.STYLE_ENTRY,
-                                           )
+                                   textvariable=self.respuesta,
+                                   **style.STYLE_ENTRY,
+                                   )
         entry_respuesta.pack(side=tk.TOP, fill=tk.X, expand=True)
 
         canvas_linea_6 = tk.Canvas(
@@ -202,6 +222,7 @@ class Bolzano(tk.Frame):
         boton_calculo = tk.Button(borde_1,
                                   text="Calcular",
                                   **style.STYLE_BUTTON,
+                                  command=self.validar_campos,
                                   )
         boton_calculo.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
 
@@ -218,9 +239,9 @@ class Bolzano(tk.Frame):
         output_frame = tk.Frame(self, background=style.BG)
         output_frame.pack(side=tk.TOP, fill=tk.BOTH,
                           expand=True)
-        
+
         self.fig = matplotlib.figure.Figure(facecolor=style.BG)
-        self.ax = self.fig.add_subplot(facecolor= style.BG)
+        self.ax = self.fig.add_subplot(facecolor=style.BG)
 
         self.ax.spines['bottom'].set_color(style.COLOR_AQUA)
         self.ax.spines['bottom'].set_linewidth(2)
@@ -231,8 +252,9 @@ class Bolzano(tk.Frame):
         self.ax.spines['top'].set_color(style.COLOR_AQUA)
         self.ax.spines['top'].set_linewidth(2)
 
-        self.ax.tick_params(axis='both', colors= style.COLOR_AQUA, labelsize=10, size= 7, width=2)
+        self.ax.tick_params(axis='both', colors=style.COLOR_AQUA,
+                            labelsize=10, size=7, width=2)
 
         self.canvas_figura = FigureCanvasTkAgg(self.fig, master=output_frame)
         self.canvas_figura.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH,
-                          expand=True)
+                                                expand=True)
