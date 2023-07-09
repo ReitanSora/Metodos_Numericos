@@ -130,7 +130,7 @@ class Conversiones(tk.Frame):
                  **style.STYLE_SUBTITTLE,
                  ).grid(row=3, column=0, pady=10, sticky=tk.N)
 
-        # entry valor binario
+        # entry valor original
         borde_entry_1 = tk.LabelFrame(info_frame,
                                       **style.STYLE_ENTRY_BORDER
                                       )
@@ -148,7 +148,7 @@ class Conversiones(tk.Frame):
         canvas_linea_1.pack(side=tk.TOP, anchor=tk.CENTER)
         canvas_linea_1.create_line(0, 0, 250, 0, **style.STYLE_CANVAS_LINE)
 
-        # label alerta valor binario
+        # label alerta valor original
         self.texto_alerta_valor_original = tk.StringVar()
         tk.Label(borde_entry_1,
                  textvariable=self.texto_alerta_valor_original,
