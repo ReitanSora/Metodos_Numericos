@@ -83,6 +83,7 @@ class PuntoFlotante(tk.Frame):
             self.resultado_hexadecimal.set(valor_hexa)
             self.resultado_normalizado.set(valor_normalizado)
         except ValueError:
+            self.texto_alerta_ndecimal.set("Imposible representar")
             self.texto_alerta_edecimal.set("Imposible representar")
 
     def init_widgets(self):
