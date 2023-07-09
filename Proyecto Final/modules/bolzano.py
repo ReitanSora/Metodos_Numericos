@@ -22,7 +22,6 @@ from functions import funcion_bolzano as bolzano
 from validation import validacion
 
 
-
 class Bolzano(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
@@ -44,12 +43,26 @@ class Bolzano(tk.Frame):
         a = float(self.valor_a.get())
         b = float(self.valor_b.get())
         c = float(self.valor_c.get())
-        f = lambda x: a*(pow(x, 2)) + b*x + c
+        self.f = lambda x: a*(pow(x, 2)) + b*x + c
         intervalo_a = float(self.valor_intervalo_a.get())
         intervalo_b = float(self.valor_intervalo_b.get())
-        respuesta = bolzano.bolzano(f, intervalo_a, intervalo_b)
-        self.respuesta.set(
-            respuesta if respuesta is not None else "No se encontró una solución en el intervalo")
+        self.respuesta = bolzano.bolzano(self.f, intervalo_a, intervalo_b)
+        self.valor_respuesta.set(
+            self.respuesta if self.respuesta is not None else "No se encontró una solución en el intervalo")
+        self.graficar()
+
+    def graficar(self):
+        self.ax.clear()
+        self.ax.axhline(0)
+        x = np.linspace(int(self.valor_intervalo_a.get()), int(self.valor_intervalo_b.get()))
+        self.ax.scatter(self.respuesta, 0, label="Punto de cruce con eje x", c=style.COLOR_BLANCO, zorder = 10)
+        self.ax.plot(x, self.f(x), label="Función", c=style.COLOR_MAGENTA_CLARO, zorder= 5)
+        self.ax.grid(alpha=0.2, lw=1.75, ls="--" )
+        self.ax.annotate("[{}]".format(self.respuesta), xy=(self.respuesta+0.25, self.respuesta+2), c=style.COLOR_BLANCO)
+        self.ax.legend(loc="upper left", facecolor=style.BG, edgecolor= style.BG, labelcolor=style.COLOR_BLANCO)
+        self.canvas_figura.draw()
+
+        self.ax.plot()
 
     def init_widgets(self):
         tk.Label(self,
@@ -201,11 +214,11 @@ class Bolzano(tk.Frame):
         borde_entry_6 = tk.LabelFrame(input_frame, **style.STYLE_ENTRY_BORDER)
         borde_entry_6.grid(row=2, column=1, columnspan=5)
 
-        self.respuesta = tk.StringVar()
+        self.valor_respuesta = tk.StringVar()
         entry_respuesta = tk.Entry(borde_entry_6,
-                                           textvariable=self.respuesta,
-                                           **style.STYLE_ENTRY,
-                                           )
+                                   textvariable=self.valor_respuesta,
+                                   **style.STYLE_ENTRY,
+                                   )
         entry_respuesta.pack(side=tk.TOP, fill=tk.X, expand=True)
 
         canvas_linea_6 = tk.Canvas(
@@ -240,9 +253,9 @@ class Bolzano(tk.Frame):
         output_frame = tk.Frame(self, background=style.BG)
         output_frame.pack(side=tk.TOP, fill=tk.BOTH,
                           expand=True)
-        
+
         self.fig = matplotlib.figure.Figure(facecolor=style.BG)
-        self.ax = self.fig.add_subplot(facecolor= style.BG)
+        self.ax = self.fig.add_subplot(facecolor=style.BG)
 
         self.ax.spines['bottom'].set_color(style.COLOR_AQUA)
         self.ax.spines['bottom'].set_linewidth(2)
@@ -253,8 +266,9 @@ class Bolzano(tk.Frame):
         self.ax.spines['top'].set_color(style.COLOR_AQUA)
         self.ax.spines['top'].set_linewidth(2)
 
-        self.ax.tick_params(axis='both', colors= style.COLOR_AQUA, labelsize=10, size= 7, width=2)
+        self.ax.tick_params(axis='both', colors=style.COLOR_AQUA,
+                            labelsize=10, size=7, width=2)
 
         self.canvas_figura = FigureCanvasTkAgg(self.fig, master=output_frame)
         self.canvas_figura.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH,
-                          expand=True)
+                                                expand=True)
