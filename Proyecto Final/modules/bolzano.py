@@ -18,6 +18,8 @@ import numpy as np
 import functions.events as event
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from static import style
+from functions import funcion_bolzano as bolzano
+from validation import validacion
 
 
 
@@ -28,7 +30,26 @@ class Bolzano(tk.Frame):
         self.configure(background=style.BG)
         self.init_widgets()
 
-    
+    def validar_campos(self):
+        if validacion.validate_number_float(self.valor_a.get()) is True and validacion.validate_number_float(self.valor_b.get()) is True and validacion.validate_number_float(self.valor_c.get()) is True:
+            if validacion.validate_number_float(self.valor_intervalo_a.get()) is True and validacion.validate_number_float(self.valor_intervalo_b.get()) is True:
+                self.texto_alerta.set("")
+                self.calcular()
+            else:
+                self.texto_alerta.set("Error en el intervalo")
+        else:
+            self.texto_alerta.set("Error en la ecuación")
+
+    def calcular(self):
+        a = float(self.valor_a.get())
+        b = float(self.valor_b.get())
+        c = float(self.valor_c.get())
+        f = lambda x: a*(pow(x, 2)) + b*x + c
+        intervalo_a = float(self.valor_intervalo_a.get())
+        intervalo_b = float(self.valor_intervalo_b.get())
+        respuesta = bolzano.bolzano(f, intervalo_a, intervalo_b)
+        self.respuesta.set(
+            respuesta if respuesta is not None else "No se encontró una solución en el intervalo")
 
     def init_widgets(self):
         tk.Label(self,
@@ -202,6 +223,7 @@ class Bolzano(tk.Frame):
         boton_calculo = tk.Button(borde_1,
                                   text="Calcular",
                                   **style.STYLE_BUTTON,
+                                  command=self.validar_campos,
                                   )
         boton_calculo.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
 

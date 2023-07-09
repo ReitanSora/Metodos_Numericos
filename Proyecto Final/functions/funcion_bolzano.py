@@ -41,14 +41,14 @@ def bolzano(f, a, b, epsilon=0.0001, max_iter=100):
         #print("Se alcanzó el número máximo de iteraciones sin convergencia.")
         return None
 
-# Ejemplo de uso:
-def f(x, valor_a, valor_b, valor_c):
-    return (valor_a*pow(x,2))+(valor_b*x)+valor_c
+# # Ejemplo de uso:
+# def f(x, valor_a, valor_b, valor_c):
+#     return (valor_a*pow(x,2))+(valor_b*x)+valor_c
 
-a = float(input("Ingrese el extremo izquierdo del intervalo [a, b]: "))
-b = float(input("Ingrese el extremo derecho del intervalo [a, b]: "))
+# a = float(input("Ingrese el extremo izquierdo del intervalo [a, b]: "))
+# b = float(input("Ingrese el extremo derecho del intervalo [a, b]: "))
 
-root = bolzano(f, a, b)
+# root = bolzano(f, a, b)
 
 # if root is not None:
 #     print("Aproximación de la raíz:", root)
