@@ -24,6 +24,7 @@ from modules.home import Home
 from modules.menu import Menu
 from modules.navegacion import Navegacion
 from modules.bolzano import Bolzano
+from modules.biseccion import Biseccion
 
 
 class Manager(tk.Tk):
@@ -34,6 +35,7 @@ class Manager(tk.Tk):
         self.title("Métodos Numéricos")
         self.geometry("1000x600")
         self.resizable(False, False)
+        #self.overrideredirect(True)
 
         # contenedor para los botones de navegacion
         Navegacion(self)
@@ -59,7 +61,7 @@ class Manager(tk.Tk):
         # diccionario de clases
         self.frames = {}
 
-        for F in (Home, PuntoFlotante, MenuTabErrores, Conversiones, Bolzano):
+        for F in (Home, PuntoFlotante, MenuTabErrores, Conversiones, Bolzano, Biseccion):
             frame = F(container, self)
             self.frames[F] = frame
 
@@ -91,6 +93,9 @@ class Manager(tk.Tk):
 
     def move_to_bolzano(self):
         self.show_frame(Bolzano)
+        
+    def move_to_biseccion(self):
+        self.show_frame(Biseccion)
 
     def screenshot(self):
         screenshot = pyautogui.screenshot(
