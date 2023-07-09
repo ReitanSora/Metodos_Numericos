@@ -20,6 +20,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from static import style
 from functions import funcion_bolzano as bolzano
 from validation import validacion
+from modules.barra_herramientas_grafica import VerticalNavigationToolbar2Tk
 
 
 class Bolzano(tk.Frame):
@@ -252,7 +253,7 @@ class Bolzano(tk.Frame):
 
         output_frame = tk.Frame(self, background=style.BG)
         output_frame.pack(side=tk.TOP, fill=tk.BOTH,
-                          expand=True)
+                          expand=True, padx=10, pady=10)
 
         self.fig = matplotlib.figure.Figure(facecolor=style.BG)
         self.ax = self.fig.add_subplot(facecolor=style.BG)
@@ -270,5 +271,16 @@ class Bolzano(tk.Frame):
                             labelsize=10, size=7, width=2)
 
         self.canvas_figura = FigureCanvasTkAgg(self.fig, master=output_frame)
-        self.canvas_figura.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH,
+        self.canvas_figura.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH,
                                                 expand=True)
+        
+        toolbar = VerticalNavigationToolbar2Tk(self.canvas_figura, output_frame)
+        toolbar.config(background=style.COLOR_MAGENTA_CLARO, bd=3, relief="flat")
+        toolbar.winfo_children()[0].config(**style.STYLE_BUTTON_TOOLBAR)
+        toolbar.winfo_children()[1].config(**style.STYLE_BUTTON_TOOLBAR)
+        toolbar.winfo_children()[2].config(**style.STYLE_BUTTON_TOOLBAR)
+        toolbar.winfo_children()[3].config(**style.STYLE_BUTTON_TOOLBAR)
+        toolbar.winfo_children()[4].config(state="disable", cursor="", background=style.COLOR_MAGENTA_CLARO)
+        toolbar.winfo_children()[5].config(state="disable", cursor="", background=style.COLOR_MAGENTA_CLARO)
+        toolbar.update()
+        toolbar.pack(side=tk.LEFT, fill= tk.Y)

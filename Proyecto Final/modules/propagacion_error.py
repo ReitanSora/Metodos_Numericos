@@ -20,7 +20,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from static import style
 from functions import funcion_propagacion as propagacion
 from validation import validacion
-
+from modules.barra_herramientas_grafica import VerticalNavigationToolbar2Tk
 
 class PropErrores(tk.Frame):
 
@@ -61,7 +61,7 @@ class PropErrores(tk.Frame):
         tk.Label(self,
                  text="Propagación de Errores",
                  **style.STYLE_TITTLE,
-                 ).pack(side=tk.TOP, fill=tk.BOTH, pady=30)
+                 ).pack(side=tk.TOP, fill=tk.BOTH, pady=10)
 
         input_frame = tk.Frame(self, background=style.BG)
         input_frame.columnconfigure(0, weight=1)
@@ -139,7 +139,8 @@ class PropErrores(tk.Frame):
         boton_calculo = tk.Button(borde_1,
                                   text="Calcular",
                                   **style.STYLE_BUTTON,
-                                  command=self.validar_campo
+                                  command=self.validar_campo,
+
                                   )
         boton_calculo.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=0)
 
@@ -172,5 +173,16 @@ class PropErrores(tk.Frame):
                             labelsize=10, size=7, width=2)
 
         self.canvas_figura = FigureCanvasTkAgg(self.fig, master=output_frame)
-        self.canvas_figura.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH,
+        self.canvas_figura.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH,
                                                 expand=True)
+        
+        toolbar = VerticalNavigationToolbar2Tk(self.canvas_figura, output_frame)
+        toolbar.config(background=style.COLOR_MAGENTA_CLARO, bd=3, relief="flat")
+        toolbar.winfo_children()[0].config(**style.STYLE_BUTTON_TOOLBAR)
+        toolbar.winfo_children()[1].config(**style.STYLE_BUTTON_TOOLBAR)
+        toolbar.winfo_children()[2].config(**style.STYLE_BUTTON_TOOLBAR)
+        toolbar.winfo_children()[3].config(**style.STYLE_BUTTON_TOOLBAR)
+        toolbar.winfo_children()[4].config(state="disable", cursor="", background=style.COLOR_MAGENTA_CLARO)
+        toolbar.winfo_children()[5].config(state="disable", cursor="", background=style.COLOR_MAGENTA_CLARO)
+        toolbar.update()
+        toolbar.pack(side=tk.LEFT, fill= tk.Y)
