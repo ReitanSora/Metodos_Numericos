@@ -25,6 +25,7 @@ Paralelo: SI4 - 002
 # 334985
 #292D3E
 BG = "#292D3E"
+BG_OSCURO = "#20232F"
 BG_LIGH_MODE = "#DBE4EE"
 
 COLOR_TITULO = "#FEFFEA"
@@ -197,4 +198,14 @@ STYLE_CANVAS = {
 STYLE_CANVAS_LINE = {
     "width": "3",
     "fill": COLOR_MAGENTA_CLARO
+}
+
+STYLE_MENU_BAR = {
+    "tearoff": 0,
+    "font":("Corbel", 10, "bold"),
+    "bg": BG,
+    "fg": COLOR_BLANCO,
+    "activebackground": COLOR_MAGENTA_CLARO,
+    "bd": -2,
+
 }
