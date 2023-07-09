@@ -24,6 +24,13 @@ class MenuTabErrores (tk.Frame):
         self.configure(background=style.BG)
         self.controller = controller
 
+        estilo = ttk.Style()
+        estilo.theme_use('default')
+        estilo.layout("TNotebook", [])
+        estilo.configure("TNotebook", tabmargins= 0, background= style.BG_OSCURO)
+        estilo.configure("TNotebook.Tab", background= style.BG_OSCURO, font=("Corbel", 12, "bold"), foreground = style.COLOR_BLANCO, expand= True, borderwidth= 0, bordercolor= style.BG_OSCURO)
+        estilo.map("TNotebook.Tab", background= [("selected", style.COLOR_MAGENTA_CLARO)])
+
         errores = ttk.Notebook(self)
         errores.pack(expand=True, fill=tk.BOTH)
 
