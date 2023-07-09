@@ -28,7 +28,7 @@ class PropErrores(tk.Frame):
         super().__init__(parent)
         self.configure(background=style.BG)
         self.controller = controller
-        
+
         self.init_widgets()
 
     def validar_campo(self):
@@ -39,18 +39,23 @@ class PropErrores(tk.Frame):
             self.texto_alerta_exponente.set("Ingrese un valor mayor a 250")
 
     def calcular(self):
-        self.respuesta.set(propagacion.propagacion_errores(
-            int(self.exponente.get())))
+        self.respuesta = propagacion.propagacion_errores(
+            int(self.exponente.get()))
+        self.valor_respuesta.set(self.respuesta)
         self.graficar()
 
     def graficar(self):
         self.ax.clear()
-        x = np.linspace(int(self.exponente.get())-5, int(self.exponente.get())+5)
-        self.ax.scatter(int(self.exponente.get()), propagacion.propagacion_errores(int(self.exponente.get())), c=style.COLOR_BLANCO, zorder = 10)
-        self.ax.plot(x, propagacion.e(x), c=style.COLOR_MAGENTA_CLARO, zorder= 5)
-        self.ax.grid(alpha=0.3, lw=1.75, ls="--" )
+        x = np.linspace(int(self.exponente.get())-5,
+                        int(self.exponente.get())+5)
+        self.ax.scatter(int(self.exponente.get()), self.respuesta, label="Respuesta", c=style.COLOR_BLANCO, zorder=10)
+        self.ax.plot(x, propagacion.e(x), label="Función",
+                     c=style.COLOR_MAGENTA_CLARO, zorder=5)
+        self.ax.grid(alpha=0.2, lw=1.75, ls="--")
+        self.ax.annotate("[{}]".format(self.respuesta), xy=(self.respuesta+0.25, self.respuesta+2), c=style.COLOR_BLANCO)
+        self.ax.legend(loc="upper left", facecolor=style.BG,
+                       edgecolor=style.BG, labelcolor=style.COLOR_BLANCO)
         self.canvas_figura.draw()
-        
 
     def init_widgets(self):
         tk.Label(self,
@@ -116,9 +121,9 @@ class PropErrores(tk.Frame):
         borde_entry_2.grid(row=2, column=1, columnspan=2,
                            pady=10, padx=(20, 0), sticky=tk.EW)
 
-        self.respuesta = tk.StringVar()
+        self.valor_respuesta = tk.StringVar()
         tk.Entry(borde_entry_2,
-                 textvariable=self.respuesta,
+                 textvariable=self.valor_respuesta,
                  **style.STYLE_ENTRY_DES,
                  ).pack(side=tk.TOP, expand=True)
 
@@ -144,15 +149,15 @@ class PropErrores(tk.Frame):
         output_frame = tk.Frame(self, background=style.BG)
         output_frame.pack(side=tk.TOP, fill=tk.BOTH,
                           expand=True, padx=10, pady=10)
-        
+
         # label titulo de la gráfica
         tk.Label(output_frame,
                  text="Función e^x/(e^x)-1",
                  **style.STYLE_SUBTITTLE,
                  ).pack(side=tk.TOP, fill=tk.X, expand=True)
-        
+
         self.fig = matplotlib.figure.Figure(facecolor=style.BG)
-        self.ax = self.fig.add_subplot(facecolor= style.BG)
+        self.ax = self.fig.add_subplot(facecolor=style.BG)
 
         self.ax.spines['bottom'].set_color(style.COLOR_AQUA)
         self.ax.spines['bottom'].set_linewidth(2)
@@ -163,10 +168,9 @@ class PropErrores(tk.Frame):
         self.ax.spines['top'].set_color(style.COLOR_AQUA)
         self.ax.spines['top'].set_linewidth(2)
 
-        self.ax.tick_params(axis='both', colors= style.COLOR_AQUA, labelsize=10, size= 7, width=2)
+        self.ax.tick_params(axis='both', colors=style.COLOR_AQUA,
+                            labelsize=10, size=7, width=2)
 
         self.canvas_figura = FigureCanvasTkAgg(self.fig, master=output_frame)
         self.canvas_figura.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH,
-                          expand=True)
-        
-        
+                                                expand=True)
