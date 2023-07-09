@@ -122,6 +122,17 @@ STYLE_BUTTON_RETURN = {
     "padx": 20,
 }
 
+STYLE_BUTTON_TOOLBAR = {
+    "bg": COLOR_MAGENTA_CLARO,
+    "activebackground": COLOR_BLANCO,
+    "highlightbackground": COLOR_MAGENTA_CLARO,
+    "highlightcolor": COLOR_MAGENTA_CLARO,
+    "relief": "flat",
+    "cursor": "hand2",
+    "bd": 0,
+    "anchor": "center",
+}
+
 STYLE_BUTTON_NAV = {
     "font": ("Corbel", 14, "bold"),
     "bg": COLOR_AQUA,
