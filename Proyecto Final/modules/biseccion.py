@@ -54,16 +54,18 @@ class Biseccion(tk.Frame):
         
     def graficar(self):
         self.ax.clear()
-        self.ax.axhline(0)
-        x = np.linspace(int(self.valor_intervalo_a.get()), int(self.valor_intervalo_b.get()))
-        self.ax.scatter(self.respuesta, 0, label="Punto de cruce con eje x", c=style.COLOR_BLANCO, zorder = 10)
-        self.ax.plot(x, self.f(x), label="Función", c=style.COLOR_MAGENTA_CLARO, zorder= 5)
-        self.ax.grid(alpha=0.2, lw=1.75, ls="--" )
-        self.ax.annotate("[{}]".format(self.respuesta), xy=(self.respuesta+0.25, self.respuesta+2), c=style.COLOR_BLANCO)
-        self.ax.legend(loc="upper left", facecolor=style.BG, edgecolor= style.BG, labelcolor=style.COLOR_BLANCO)
-        self.canvas_figura.draw()
-
-        self.ax.plot()
+        try:
+            self.ax.axhline(0)
+            x = np.linspace(int(self.valor_intervalo_a.get()), int(self.valor_intervalo_b.get()))
+            self.ax.scatter(self.respuesta, 0, label="Punto de cruce con eje x", c=style.COLOR_BLANCO, zorder = 10)
+            self.ax.plot(x, self.f(x), label="Función", c=style.COLOR_MAGENTA_CLARO, zorder= 5)
+            self.ax.grid(alpha=0.2, lw=1.75, ls="--" )
+            self.ax.annotate("[{}]".format(self.respuesta), xy=(self.respuesta+0.25, self.respuesta+2), c=style.COLOR_BLANCO)
+            self.ax.legend(loc="upper left", facecolor=style.BG, edgecolor= style.BG, labelcolor=style.COLOR_BLANCO)
+            self.canvas_figura.draw()
+            self.ax.plot()
+        except TypeError:
+            pass
 
     def init_widgets(self):
         tk.Label(self,
