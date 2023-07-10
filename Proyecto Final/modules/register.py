@@ -112,7 +112,7 @@ class Register(tk.Toplevel):
         tk.Label(self,
                  text="Registro",
                  **style.STYLE_TITTLE
-                 ).pack(side=tk.TOP, fill=tk.BOTH, pady=10)
+                 ).pack(side=tk.TOP, fill=tk.BOTH, pady=(10,0))
 
         info_frame = tk.Frame(self, background=style.BG)
         info_frame.columnconfigure(0, weight=1)
@@ -124,35 +124,35 @@ class Register(tk.Toplevel):
                  text="Nombre",
                  **style.STYLE_SUBTITTLE,
                  justify="center"
-                 ).grid(row=0, column=0, pady=10, sticky=tk.N)
+                 ).grid(row=0, column=0, pady=20, sticky=tk.N)
 
         # label apellido del usuario
         tk.Label(info_frame,
                  text="Apellido",
                  **style.STYLE_SUBTITTLE
-                 ).grid(row=1, column=0, pady=10, sticky=tk.N)
+                 ).grid(row=1, column=0, pady=20, sticky=tk.N)
 
         # label nickname
         tk.Label(info_frame,
                  text="Nickname",
                  **style.STYLE_SUBTITTLE
-                 ).grid(row=2, column=0, pady=10, sticky=tk.N)
+                 ).grid(row=2, column=0, pady=20, sticky=tk.N)
 
         # label correo electrocnico
         tk.Label(info_frame,
                  text="Correo",
                  **style.STYLE_SUBTITTLE
-                 ).grid(row=3, column=0, pady=10, sticky=tk.N)
+                 ).grid(row=3, column=0, pady=20, sticky=tk.N)
 
         # label clave
         tk.Label(info_frame,
                  text="Clave",
                  **style.STYLE_SUBTITTLE
-                 ).grid(row=4, column=0, pady=10, sticky=tk.N)
+                 ).grid(row=4, column=0, pady=20, sticky=tk.N)
 
         # entry nombre usuario
         borde_entry_1 = tk.LabelFrame(info_frame, **style.STYLE_ENTRY_BORDER)
-        borde_entry_1.grid(row=0, column=1, pady=(10, 0), sticky=tk.EW)
+        borde_entry_1.grid(row=0, column=1, pady=(15,0), sticky=tk.EW)
 
         self.texto_nombre = tk.StringVar()
         entry_nombre = tk.Entry(borde_entry_1,
@@ -290,7 +290,7 @@ class Register(tk.Toplevel):
 
         # boton para registrarse
         borde_1 = tk.LabelFrame(borde_entry_6, **style.STYLE_BUTTON_BORDER)
-        borde_1.pack(side=tk.TOP, pady=(20, 0))
+        borde_1.pack(side=tk.TOP, pady=(10,10))
 
         self.boton_register = tk.Button(borde_1,
                                         text="Registrar",
@@ -305,7 +305,7 @@ class Register(tk.Toplevel):
         # boton para regresar
         borde_2 = tk.LabelFrame(
             borde_entry_6, **style.STYLE_BUTTON_RETURN_BORDER)
-        borde_2.pack(side=tk.TOP, pady=(20, 50))
+        borde_2.pack(side=tk.TOP, pady=(20, 40))
 
         boton_regresar = tk.Button(borde_2,
                                    text="Regresar",
