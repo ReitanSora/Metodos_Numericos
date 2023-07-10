@@ -1,15 +1,15 @@
 '''
 Tema: Métodos Numéricos
-#Grupo #
-#Integrantes:
+Grupo 6
+Integrantes:
 
 •	Kevin Josue Amaguaña Rivadeneira
 •	Priscila Veronica Chisag Pillajo
 •	Andy Ricardo Galarza Morales
 •	Stiven Anthony Pilca Sánchez
 
-#Carrera: Ingeniería en Sistemas de la información
-#Paralelo: SI4 - 002
+Carrera: Ingeniería en Sistemas de la información
+Paralelo: SI4 - 002
 '''
 
 import tkinter as tk
@@ -17,9 +17,7 @@ import functions.events as event
 from modules import manager
 from modules import register
 from static import style
-from model.usuario import buscar_clave
 from model import usuario
-from model import persona
 
 
 class Login (tk.Tk):
@@ -34,15 +32,12 @@ class Login (tk.Tk):
 
     def ingresar(self, usuario_nick: str, clave: str):
         usuario.crear_tabla()
-        persona.crear_tabla()
-        clave_registro = buscar_clave(usuario_nick)
-        if clave_registro is not None:
-            if clave == clave_registro:
-                self.destroy()
-                ventana = manager.Manager()
-                ventana.mainloop()
-            else:
-                self.texto_alerta.set("Usuario o contraseña mal ingresados")
+        clave_registro = usuario.buscar(usuario_nick, 3)
+
+        if clave == clave_registro:
+            self.destroy()
+            ventana = manager.Manager()
+            ventana.mainloop()
         else:
             self.texto_alerta.set("Usuario o contraseña mal ingresados")
 
