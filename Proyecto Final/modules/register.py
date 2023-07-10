@@ -88,9 +88,11 @@ class Register(tk.Toplevel):
         if posicion_nickname is not None:
             self.texto_alerta_nickname.set(
                 "Ya existe un usuario con este nickname")
+            self.texto_estado_registro.set("No se pudo completar el registro")
         elif posicion_correo is not None:
             self.texto_alerta_correo.set(
                 "Ya existe un usuario con este correo")
+            self.texto_estado_registro.set("No se pudo completar el registro")
         else:
             self.registrar_usuario()
 
@@ -101,6 +103,7 @@ class Register(tk.Toplevel):
                                           self.texto_clave.get())
         usuario.ingresar(usuario_ingreso)
         self.vaciar_campos()
+        self.texto_estado_registro.set("Usuario registrado exitosamente")
 
     # funcion para inicializar los widgets de la ventana
     def init_widgets(self):
@@ -274,9 +277,19 @@ class Register(tk.Toplevel):
                  **style.STYLE_WARNING
                  ).pack(side=tk.TOP, expand=True)
 
+        # label Frame para los botones
+        borde_entry_6 = tk.LabelFrame(self, **style.STYLE_ENTRY_BORDER)
+        borde_entry_6.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
+        # label de informacion para el usuario
+        self.texto_estado_registro = tk.StringVar()
+        tk.Label(borde_entry_6,
+                 textvariable=self.texto_estado_registro,
+                 **style.STYLE_WARNING,
+                 ).pack(side=tk.TOP, expand=True)
+
         # boton para registrarse
-        borde_1 = tk.LabelFrame(self,
-                                **style.STYLE_BUTTON_BORDER)
+        borde_1 = tk.LabelFrame(borde_entry_6, **style.STYLE_BUTTON_BORDER)
         borde_1.pack(side=tk.TOP, pady=(20, 0))
 
         self.boton_register = tk.Button(borde_1,
@@ -290,8 +303,8 @@ class Register(tk.Toplevel):
         self.boton_register.bind('<Leave>', event.on_leave)
 
         # boton para regresar
-        borde_2 = tk.LabelFrame(self,
-                                **style.STYLE_BUTTON_RETURN_BORDER)
+        borde_2 = tk.LabelFrame(
+            borde_entry_6, **style.STYLE_BUTTON_RETURN_BORDER)
         borde_2.pack(side=tk.TOP, pady=(20, 50))
 
         boton_regresar = tk.Button(borde_2,
