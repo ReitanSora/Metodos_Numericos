@@ -14,7 +14,6 @@ Paralelo: SI4 - 002
 
 import tkinter as tk
 import model.usuario as usuario
-import model.persona as persona
 import functions.events as event
 import validation.validacion as val
 from static import style
@@ -83,8 +82,8 @@ class Register(tk.Toplevel):
 
     # funcion para comprobar si ya existe un usuario con el mismo nickname o correo
     def comprobar_usuario(self):
-        posicion_nickname = usuario.buscar(self.texto_nickname.get(), 1)[0]
-        posicion_correo = usuario.buscar(self.texto_correo.get(), 2)[0]
+        posicion_nickname = usuario.buscar(self.texto_nickname.get(), 1)
+        posicion_correo = usuario.buscar(self.texto_correo.get(), 2)
 
         if posicion_nickname is not None:
             self.texto_alerta_nickname.set(
