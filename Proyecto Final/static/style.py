@@ -12,18 +12,6 @@ Carrera: Ingeniería en Sistemas de la información
 Paralelo: SI4 - 002
 '''
 
-# 342E37
-# 1D1E2C
-# 12263A
-# 210B2C
-# 39393a
-# 262626
-# 453750
-# 110B11
-# 1A1423
-# 335a85
-# 334985
-#292D3E
 BG = "#292D3E"
 BG_OSCURO = "#20232F"
 BG_LIGH_MODE = "#DBE4EE"
@@ -42,19 +30,6 @@ COLOR_MAGENTA_NORMAL = "#512BCF"
 COLOR_MAGENTA_CLARO = "#8A67FF"
 COLOR_MAGENTA_OSCURO = "#3b1f98"
 COLOR_CIAN = "#FF6B6B"
-
-BG_ENTRY = "#4C4C4C"
-FG_ENTRY = "#4C4C4C"
-
-BG_BUTTON_DES = "#FFF"
-BG_BUTTON_EN = COLOR_MAGENTA_NORMAL
-FG_BUTTON_DES = "#3b1f98"
-FG_BUTTON_EN = "#FFF"
-
-BG_BUTTON_RETURN_DES = "#FFF"
-BG_BUTTON_RETURN_EN = "#257dca"
-FG_BUTTON_RETURN_DES = "#257dca"
-FG_BUTTON_RETURN_EN = "#FFF"
 
 STYLE_TITTLE = {
     "font": ("Corbel", 20, "bold"),
@@ -83,14 +58,14 @@ STYLE_ENTRY_BORDER = {
 }
 
 STYLE_BUTTON_BORDER = {
-    "bg": BG_BUTTON_EN,
+    "bg": COLOR_MAGENTA_CLARO,
     "relief": "flat",
     "bd": 3,
     "width": 12,
 }
 
 STYLE_BUTTON_RETURN_BORDER = {
-    "bg": BG_BUTTON_RETURN_EN,
+    "bg": COLOR_AQUA,
     "relief": "flat",
     "bd": 3,
     "width": 12,
@@ -98,10 +73,10 @@ STYLE_BUTTON_RETURN_BORDER = {
 
 STYLE_BUTTON = {
     "font": ("Corbel", 14, "bold"),
-    "bg": BG_BUTTON_DES,
-    "fg": FG_BUTTON_DES,
-    "activeforeground": FG_BUTTON_DES,
-    "activebackground": BG_BUTTON_DES,
+    "bg": COLOR_BLANCO,
+    "fg": COLOR_MAGENTA_CLARO,
+    "activeforeground": COLOR_MAGENTA_CLARO,
+    "activebackground": COLOR_BLANCO,
     "relief": "sunken",
     "cursor": "hand2",
     "bd": 0,
@@ -111,10 +86,10 @@ STYLE_BUTTON = {
 
 STYLE_BUTTON_RETURN = {
     "font": ("Corbel", 14, "bold"),
-    "bg": BG_BUTTON_RETURN_DES,
-    "fg": FG_BUTTON_RETURN_DES,
-    "activeforeground": FG_BUTTON_RETURN_DES,
-    "activebackground": BG_BUTTON_RETURN_DES,
+    "bg": COLOR_BLANCO,
+    "fg": COLOR_AQUA,
+    "activeforeground": COLOR_AQUA,
+    "activebackground": COLOR_BLANCO,
     "relief": "sunken",
     "cursor": "hand2",
     "bd": 0,
@@ -136,9 +111,9 @@ STYLE_BUTTON_TOOLBAR = {
 STYLE_BUTTON_NAV = {
     "font": ("Corbel", 14, "bold"),
     "bg": COLOR_AQUA,
-    "fg": "#FFF",
+    "fg": COLOR_BLANCO,
     "activeforeground": COLOR_AQUA,
-    "activebackground": "#FFF",
+    "activebackground": COLOR_BLANCO,
     "relief": "sunken",
     "cursor": "hand2",
     "bd": 0,
@@ -148,13 +123,13 @@ STYLE_BUTTON_NAV = {
 }
 
 STYLE_BUTTON_ENTER = {
-    "bg": BG_BUTTON_EN,
-    "fg": FG_BUTTON_EN,
+    "bg": COLOR_MAGENTA_CLARO,
+    "fg": COLOR_BLANCO,
 }
 
 STYLE_BUTTON_RETURN_ENTER = {
-    "bg": BG_BUTTON_RETURN_EN,
-    "fg": FG_BUTTON_RETURN_EN,
+    "bg": COLOR_AQUA,
+    "fg": COLOR_BLANCO,
 }
 
 STYLE_BUTTON_NAV_ENTER = {
@@ -213,9 +188,7 @@ STYLE_CANVAS_LINE = {
 
 STYLE_MENU_BAR = {
     "tearoff": 0,
-    "font":("Corbel", 10, "bold"),
-    "bg": BG,
-    "fg": COLOR_BLANCO,
+    "font":("Ubuntu", 11),
     "activebackground": COLOR_MAGENTA_CLARO,
     "bd": -2,
 
