@@ -23,10 +23,14 @@ def crear_tabla() -> None:
 
     sql = '''
     CREATE TABLE usuarios(
-        id_usuario INTEGER,
-        nombre_usuario VARCHAR(50),
-        clave_usuario VARCHAR(10),
-        PRIMARY KEY(id_usuario AUTOINCREMENT) 
+        ID_USUARIO INTEGER,
+        NOMBRE_USUARIO VARCHAR(50),
+        APELLIDO_USUARIO VARCHAR(50),
+        NICKNAME_USUARIO VARCHAR(50),
+        CORREO_USUARIO VARCHAR(50),
+        CLAVE_USUARIO VARCHAR(25),
+
+        PRIMARY KEY(ID_USUARIO AUTOINCREMENT) 
         )
         '''
     try:
@@ -52,13 +56,16 @@ def borrar_tabla():
 
 
 class Usuario:
-    def __init__(self, nombre_usuario, clave_usuario):
+    def __init__(self, nombre_usuario, apellido_usuario, nickname_usuario, correo_usuario, clave_usuario):
         self.id_usuario = None
         self.nombre_usuario = nombre_usuario
+        self.apellido_usuario= apellido_usuario
+        self.nickname_usuario = nickname_usuario
+        self.correo_usuario = correo_usuario
         self.clave_usuario = clave_usuario
 
     def __str__(self):
-        return f'Usuario[{self.nombre_usuario},{self.clave_usuario}]'
+        return f'Usuario[{self.nombre_usuario},{self.apellido_usuario},{self.nickname_usuario},{self.correo_usuario},{self.clave_usuario}]'
 
 
 def ingresar(objeto: Usuario) -> None:
@@ -66,9 +73,9 @@ def ingresar(objeto: Usuario) -> None:
 
     puntero = conexion.cursor_usuario()
 
-    sql = "INSERT INTO usuarios(nombre_usuario, clave_usuario) VALUES(?,?)"
+    sql = "INSERT INTO usuarios(NOMBRE_USUARIO, APELLIDO_USUARIO, NICKNAME_USUARIO, CORREO_USUARIO, CLAVE_USUARIO) VALUES(?,?,?,?,?)"
 
-    data = (objeto.nombre_usuario, objeto.clave_usuario)
+    data = (objeto.nombre_usuario, objeto.apellido_usuario, objeto.nickname_usuario, objeto.correo_usuario, objeto.clave_usuario)
 
     puntero.execute(sql, data)
     conexion.close()
@@ -79,41 +86,49 @@ def editar(objeto: Usuario, id_usuario):
 
     puntero = conexion.cursor_usuario()
 
-    sql = "UPDATE peliculas SET nombre_usuario = ?, clave_usuario = ? WHERE id_usuario = ?"
+    sql = "UPDATE usuarios SET NOMBRE_USUARIO = ?, APELLIDO_USUARIO = ?, NICKNAME_USUARIO = ?, CORREO_USUARIO = ? WHERE ID_USUARIO = ?"
 
-    datos = (objeto.nombre_usuario, objeto.clave_usuario, objeto.id_usuario)
+    data = (objeto.nombre_usuario, objeto.apellido_usuario, objeto.nickname_usuario, objeto.correo_usuario, id_usuario)
 
-    puntero.execute(sql, datos)
+    puntero.execute(sql, data)
     conexion.close()
 
 
-def buscar_clave(nombre_usuario: str) -> str:
+def buscar(dato_usuario: str, opcion: int):
     conexion = ConectionDB()
 
     puntero = conexion.cursor_usuario()
-
-    sql = "SELECT * FROM usuarios WHERE nombre_usuario = ?"
-    dato = (nombre_usuario,)
-    try:
-        puntero.execute(sql, dato)
-        registro = puntero.fetchone()
-        conexion.close()
-        return registro[2]
-    except (sqlite3.OperationalError, TypeError):
-        pass
-
-
-def buscar_nickname(nombre_usuario: str) -> int:
-    conexion = ConectionDB()
-    puntero = conexion.cursor_usuario()
-
-    sql = "SELECT * FROM usuarios WHERE nombre_usuario = ?"
-    dato = (nombre_usuario,)
-
-    try:
-        puntero.execute(sql, dato)
-        registro = puntero.fetchone()
-        conexion.close()
-        return registro[0]
-    except (sqlite3.OperationalError, TypeError):
-        pass
+    
+    #buscar la posicion del nickname ingresado
+    if opcion == 1:
+        sql = "SELECT * FROM usuarios WHERE NICKNAME_USUARIO = ?"
+        dato = (dato_usuario,)
+        try:
+            puntero.execute(sql, dato)
+            registro = puntero.fetchone()
+            conexion.close()
+            return registro[0]
+        except (sqlite3.OperationalError, TypeError):
+            pass
+    #buscar la posicion del correo ingresado
+    elif opcion == 2:
+        sql = "SELECT * FROM usuarios WHERE CORREO_USUARIO = ?"
+        dato = (dato_usuario,)
+        try:
+            puntero.execute(sql, dato)
+            registro = puntero.fetchone()
+            conexion.close()
+            return registro[0]
+        except (sqlite3.OperationalError, TypeError):
+            pass
+    #buscar la clave del nickname ingresado
+    elif opcion == 3:
+        sql = "SELECT * FROM usuarios WHERE NICKNAME_USUARIO = ?"
+        dato = (dato_usuario,)
+        try:
+            puntero.execute(sql, dato)
+            registro = puntero.fetchone()
+            conexion.close()
+            return registro[5]
+        except (sqlite3.OperationalError, TypeError):
+            pass
