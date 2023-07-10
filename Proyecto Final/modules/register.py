@@ -1,15 +1,15 @@
 '''
 Tema: Métodos Numéricos
-#Grupo #
-#Integrantes:
+Grupo 6
+Integrantes:
 
 •	Kevin Josue Amaguaña Rivadeneira
 •	Priscila Veronica Chisag Pillajo
-•	Andy RIcardo Galarza Morales
+•	Andy Ricardo Galarza Morales
 •	Stiven Anthony Pilca Sánchez
 
-#Carrera: Ingeniería en Sistemas de la información
-#Paralelo: SI4 - 002
+Carrera: Ingeniería en Sistemas de la información
+Paralelo: SI4 - 002
 '''
 
 import tkinter as tk
@@ -36,19 +36,25 @@ class Register(tk.Toplevel):
         self.texto_nickname.set("")
         self.texto_correo.set("")
         self.texto_clave.set("")
+        self.texto_alerta_nombre.set("")
+        self.texto_alerta_apellido.set("")
+        self.texto_alerta_nickname.set("")
+        self.texto_alerta_correo.set("")
+        self.texto_alerta_clave.set("")
 
-    def comprobar_usuario(self):
-        posicion_persona = persona.buscar_correo(self.texto_correo.get())
-        posicion_usuario = usuario.buscar_nickname(self.texto_nickname.get())
+    # funcion para validar los datos ingresados por el usuario cuando escribe por teclado
+    def validar_teclado(self, event):
+        self.validar_email()
+        self.validar_nickname_clave()
+        self.validar_letras()
 
-        if posicion_usuario is not None:
-            self.texto_alerta_nickname.set(
-                "Ya existe un usuario con este nickname")
-        elif posicion_persona is not None:
-            self.texto_alerta_correo.set(
-                "Ya existe un usuario con este correo")
-        else:
-            self.registrar_usuario()
+    # funcion para validar los datos ingresados por el usuario cuando presiona el boton registrar
+    def validar(self):
+        self.validar_letras()
+        self.validar_email()
+        self.validar_nickname_clave()
+        if (self.validar_letras() == 1 and self.validar_email() is True and self.validar_nickname_clave() == 1):
+            self.comprobar_usuario()
 
     def validar_email(self):
         estado = val.validate_email(self.texto_correo.get())
@@ -75,29 +81,29 @@ class Register(tk.Toplevel):
             "Campo de hasta 50 carácteres" if estado_apellido is False else "")
         return estado_nombre * estado_apellido
 
-    def validar(self):
-        self.validar_letras()
-        self.validar_email()
-        self.validar_nickname_clave()
-        if (self.validar_letras() == 1 and self.validar_email() is True and self.validar_nickname_clave() == 1):
-            self.comprobar_usuario()
+    # funcion para comprobar si ya existe un usuario con el mismo nickname o correo
+    def comprobar_usuario(self):
+        posicion_nickname = usuario.buscar(self.texto_nickname.get(), 1)[0]
+        posicion_correo = usuario.buscar(self.texto_correo.get(), 2)[0]
 
-    def validar_teclado(self, event):
-        self.validar_email()
-        self.validar_nickname_clave()
-        self.validar_letras()
+        if posicion_nickname is not None:
+            self.texto_alerta_nickname.set(
+                "Ya existe un usuario con este nickname")
+        elif posicion_correo is not None:
+            self.texto_alerta_correo.set(
+                "Ya existe un usuario con este correo")
+        else:
+            self.registrar_usuario()
 
+    # funcion para registrar un usuario en la base de datos
     def registrar_usuario(self):
         usuario.crear_tabla()
-        persona.crear_tabla()
-        usuario_ingreso = usuario.Usuario(self.texto_nickname.get(),
+        usuario_ingreso = usuario.Usuario(self.texto_nombre.get(), self.texto_apellido.get(), self.texto_nickname.get(), self.texto_correo.get(),
                                           self.texto_clave.get())
-        persona_ingreso = persona.Persona(self.texto_nombre.get(
-        ), self.texto_apellido.get(), self.texto_correo.get())
         usuario.ingresar(usuario_ingreso)
-        persona.ingresar(persona_ingreso)
         self.vaciar_campos()
 
+    # funcion para inicializar los widgets de la ventana
     def init_widgets(self):
 
         # titulo del frame
