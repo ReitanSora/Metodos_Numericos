@@ -102,7 +102,7 @@ class Conversiones(tk.Frame):
     def init_widgets(self):
         # label titulo
         tk.Label(self,
-                 text="Transformación de Binario a Decimal",
+                 text="Conversión Sistemas de Numeración",
                  **style.STYLE_TITTLE,
                  ).pack(side=tk.TOP, fill=tk.BOTH, pady=30)
 
