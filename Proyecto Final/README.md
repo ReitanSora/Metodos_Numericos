@@ -65,10 +65,10 @@ Tecnologías usadas:💡
 Capturas de pantalla:📺
 ---
 <p align="center">
-<image src="./resources/screenshot-login.png" alt="Login" caption="Ventana de Login" align="center"/>
-<image src="./resources/screenshot-registro.png" alt="Login" caption="Ventana de Registro" align="center"/>
-<image src="./resources/screenshot-inicio.png" alt="Login" caption="Ventana de inicio" align="center"/>
-<image src="./resources/screenshot-biseccion.png" alt="Login" caption="Ventana de Biseccion" align="center"/>
+<image src="./resources/screenshot-login.png" alt="Login" caption="Ventana de Login" align="center"/><br><br>
+<image src="./resources/screenshot-registro.png" alt="Login" caption="Ventana de Registro" align="center"/><br><br>
+<image src="./resources/screenshot-inicio.png" alt="Login" caption="Ventana de inicio" align="center"/><br><br>
+<image src="./resources/screenshot-biseccion.png" alt="Login" caption="Ventana de Biseccion" align="center"/><br><br>
 <image src="./resources/screenshot-funcionamiento.png" alt="Login" caption="Ventana de Bisección en funcionamiento" align="center"/>
 </p>
 
