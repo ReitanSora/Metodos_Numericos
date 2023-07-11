@@ -3,7 +3,7 @@
 <img src="https://www.webdevelopersnotes.com/wp-content/uploads/create-a-simple-home-page.png" align="center" />
 </p>
 
-# Aplicación de Escritorio 📦
+# Aplicativo de resolución de ejercicios de métodos numéricos  📦
 
   
 Tabla de contenidos:⚙️
@@ -21,14 +21,16 @@ Mediante el programa python se realiza una aplicación de escritorio para el ing
 Librerias:📋
 --- 
 - Tkinder_python
-- re_Expresiones regulares
+- re_Para expresiones regulares
 - os_Manejo de rutas
 - ast_Validar valores flotantes
+- matplotlib_Para realizar gráficas
+- numpy_Funciones matematicas
       
 Funcionamiento del Programa:🔧
 ---
 Como primer paso es registrar el usuario y contraseña una vez creado puede acceder a la ventana en la cual estan los temas<br>
-de los ejercicios segun se requiera resolver para ello de debe llenar los campos para obtener respuesta<br>
+de los ejercicios segun se requiera resolver para ello se debe llenar los campos para obtener respuesta<br>
 
 
 
