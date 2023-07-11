@@ -22,12 +22,12 @@ class Menu(tk.Menu):
         barra_menu = tk.Menu(parent , **style.STYLE_MENU_BAR)
         parent.config(menu=barra_menu)
 
-        opcion_user = tk.Menu(barra_menu, **style.STYLE_MENU_BAR)
+        #opcion_user = tk.Menu(barra_menu, **style.STYLE_MENU_BAR)
         opcion_file = tk.Menu(barra_menu, **style.STYLE_MENU_BAR)
         opcion_help = tk.Menu(barra_menu, **style.STYLE_MENU_BAR)
 
         barra_menu.add_cascade(label="File", menu=opcion_file)
-        barra_menu.add_cascade(label="User", menu=opcion_user)
+        #barra_menu.add_cascade(label="User", menu=opcion_user)
         barra_menu.add_cascade(label="Help", menu=opcion_help)
 
         #opcion_file.add_command(label="Guardar Imágen", command=parent.screenshot)
@@ -35,11 +35,11 @@ class Menu(tk.Menu):
         opcion_file.add_separator()
         opcion_file.add_command(label="Salir" , command=parent.salir)
 
-        opcion_user.add_command(label="Actualizar Información")
-        opcion_user.add_command(label="Cambiar Clave")
-        opcion_user.add_separator()
-        opcion_user.add_command(label="Eliminar Cuenta")
+        # opcion_user.add_command(label="Actualizar Información")
+        # opcion_user.add_command(label="Cambiar Clave")
+        # opcion_user.add_separator()
+        # opcion_user.add_command(label="Eliminar Cuenta", command=parent.eliminar_usuario)
 
         opcion_help.add_command(label="Repositorio en Github", command=parent.github)
         opcion_help.add_separator()
-        opcion_help.add_command(label="Versión 1.0")
+        opcion_help.add_command(label="Versión 1.0", state="disabled")
