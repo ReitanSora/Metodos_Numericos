@@ -65,7 +65,7 @@ Tecnologías usadas:💡
 Capturas de pantalla:📺
 ---
 
-![Imagen de prueba](/resources/math.png)
+<image src="/resources/math.png" alt="Imágen de prueba">
 
 
 
