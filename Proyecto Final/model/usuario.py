@@ -92,6 +92,17 @@ def editar(objeto: Usuario, id_usuario):
     puntero.execute(sql, data)
     conexion.close()
 
+def eliminar(id_usuario):
+    conexion = ConectionDB()
+    puntero = conexion.cursor_usuario()
+
+    sql ="DELETE FROM usuarios WHERE ID_USUARIO = ? "
+    data = (id_usuario,)
+
+    puntero.execute(sql, data)
+
+    conexion.close()
+
 
 def buscar(dato_usuario: str, opcion: int):
     conexion = ConectionDB()
