@@ -40,6 +40,14 @@ STYLE_SUBTITTLE = {
     "fg": COLOR_SUBTITULO,
 }
 
+STYLE_TEXT = {
+    "font": ("Corbel", 14, ""),
+    "bg": BG,
+    "fg": COLOR_SUBTITULO,
+    "wraplength": "575p",
+    "justify": "left",
+}
+
 STYLE_WARNING = {
     "font": ("Corbel", 9, "bold"),
     "bg": BG,
