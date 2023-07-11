@@ -12,9 +12,8 @@ Carrera: Ingeniería en Sistemas de la información
 Paralelo: SI4 - 002
 '''
 
-from .conection import ConectionDB
 import sqlite3
-
+from .conection import ConectionDB
 
 def crear_tabla() -> None:
     conexion = ConectionDB()
