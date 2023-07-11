@@ -66,7 +66,7 @@ Capturas de pantalla:📺
 ---
 
 <image src="./resources/math.png" alt="Imágen de prueba"/>
-![Alt text](/resources/math.png)
+
 
 
 
