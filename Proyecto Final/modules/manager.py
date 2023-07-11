@@ -13,9 +13,9 @@ Paralelo: SI4 - 002
 '''
 
 import tkinter as tk
-import pyautogui
 import webbrowser
 import os
+import pyscreenshot
 from tkinter import filedialog
 from static import style
 from modules.tab_errores import MenuTabErrores
@@ -100,29 +100,20 @@ class Manager(tk.Tk):
     def move_to_biseccion(self):
         self.show_frame(Biseccion)
 
-    def screenshot(self):
-        screenshot = pyautogui.screenshot(
-            region=(self.winfo_rootx(), self.winfo_rooty(), 1000, 600))
-        try:
-            archivo = filedialog.asksaveasfilename(
-                title="Guardar captura de pantalla", initialdir="./", filetypes=[('Imágen png', '*.png'), ('Imágen jpg', '*.jpg')], defaultextension='.png', )
-            screenshot.save(archivo)
-        except ValueError:
-            pass
+    # def screenshot(self):
+    #     ruta = os.path.abspath("./")
+    #     screenshot = pyscreenshot.grab(
+    #         bbox=(self.winfo_rootx(), self.winfo_rooty(), self.winfo_rootx()+1000, self.winfo_rooty()+580))
+    #     try:
+    #         archivo = filedialog.asksaveasfilename(
+    #             title="Guardar captura de pantalla", initialdir=ruta, filetypes=[('Imágen png', '*.png'), ('Imágen jpg', '*.jpg')], defaultextension='.png', )
+    #         screenshot.save(archivo)
+    #     except ValueError:
+    #         pass
 
     def new_window(self):
         Manager()
-
-    def logout(self):
-        ruta = os.path.join(os.getcwd())
-        # ruta_absoluta= os.path.abspath(__file__)
-        # ruta, archivo = os.path.split(ruta_absoluta)
-        ruta_2= ruta+'/main.exe'
-        print(ruta_2)
-        # print("archivo:{}".format(archivo))
-        self.destroy()
-        open(ruta_2)
-        
+    
 
     def github(self):
         webbrowser.open('https://github.com/ReitanSora/Metodos_Numericos.git')
