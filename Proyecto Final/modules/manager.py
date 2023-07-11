@@ -15,9 +15,11 @@ Paralelo: SI4 - 002
 import tkinter as tk
 import webbrowser
 import os
-import pyscreenshot
-from tkinter import filedialog
+# import pyscreenshot
+# from tkinter import filedialog
+from tkinter import simpledialog
 from static import style
+from model import usuario
 from modules.tab_errores import MenuTabErrores
 from modules.sistemas import Conversiones
 from modules.flotante import PuntoFlotante
@@ -37,7 +39,7 @@ class Manager(tk.Tk):
         self.geometry("1000x600")
         self.resizable(False, False)
 
-        ruta_icono= os.path.abspath("./resources/icon.ico")
+        ruta_icono = os.path.abspath("./resources/icon.ico")
         self.iconbitmap(ruta_icono)
 
         # contenedor para los botones de navegacion
@@ -96,7 +98,7 @@ class Manager(tk.Tk):
 
     def move_to_bolzano(self):
         self.show_frame(Bolzano)
-        
+
     def move_to_biseccion(self):
         self.show_frame(Biseccion)
 
@@ -113,7 +115,15 @@ class Manager(tk.Tk):
 
     def new_window(self):
         Manager()
-    
 
     def github(self):
         webbrowser.open('https://github.com/ReitanSora/Metodos_Numericos.git')
+
+    # def eliminar_usuario(self):
+    #     nickname = simpledialog.askstring(
+    #         title="Eliminación de cuenta", prompt="Ingrese su nombre de usuario")
+    #     posicion = usuario.buscar(nickname, 1)
+    #     if posicion is not None:
+    #         usuario.eliminar(posicion)
+    #     else:
+    #         pass
