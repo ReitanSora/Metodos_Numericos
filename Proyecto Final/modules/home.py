@@ -78,7 +78,7 @@ class Home(tk.Frame):
                  ).grid(row=0, column=0, sticky=tk.NW, pady=(0,20))
 
         tk.Label(info_frame,
-                 text="Librerías usadas:\n\n     • tkinter\n     • pyautogui\n     • webbrowser\n     • os\n     • sqlite3\n     • re\n     • math\n     • numpy\n     • matplotlib",
+                 text="Librerías usadas:\n\n     • tkinter\n     • webbrowser\n     • os\n     • sqlite3\n     • re\n     • math\n     • numpy\n     • matplotlib",
                  **style.STYLE_TEXT,
                  ).grid(row=1, column=0, sticky=tk.NW)
 
