@@ -49,8 +49,8 @@ Se debe hacer de preferencia antes de ejecutar el programa por primera vez, si l
 ---  
 Funcionamiento del Programa:🔧
 ---
-Como primer paso es registrar el usuario y contraseña una vez creado puede acceder a la ventana en la cual estan los temas<br>
-de los ejercicios segun se requiera resolver para ello se debe llenar los campos para obtener respuesta<br>
+La primera ventana que cerá al ingresar es la de login donde si no tiene un usuario con anterioridad deberá acceder a la ventana de registro donde ingresará todos los datos solicitados y de forma correcta, una vez creado su usuario podrá ingresar con este mismo en el login, para que luego tenga acceso a todos los temas que se encuentran dentro de la aplicación<br>
+En todos los ejercicios deberá ingresar la información que se solicite para que el programa pueda ofrecerle la respuesta adecuada<br>
 
 
 
