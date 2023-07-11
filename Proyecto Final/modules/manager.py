@@ -15,6 +15,7 @@ Paralelo: SI4 - 002
 import tkinter as tk
 import pyautogui
 import webbrowser
+import os
 from tkinter import filedialog
 from static import style
 from modules.tab_errores import MenuTabErrores
@@ -35,7 +36,9 @@ class Manager(tk.Tk):
         self.title("Métodos Numéricos")
         self.geometry("1000x600")
         self.resizable(False, False)
-        #self.overrideredirect(True)
+
+        ruta_icono= os.path.abspath("./resources/icon.ico")
+        self.iconbitmap(ruta_icono)
 
         # contenedor para los botones de navegacion
         Navegacion(self)
@@ -109,6 +112,17 @@ class Manager(tk.Tk):
 
     def new_window(self):
         Manager()
+
+    def logout(self):
+        ruta = os.path.join(os.getcwd())
+        # ruta_absoluta= os.path.abspath(__file__)
+        # ruta, archivo = os.path.split(ruta_absoluta)
+        ruta_2= ruta+'/main.exe'
+        print(ruta_2)
+        # print("archivo:{}".format(archivo))
+        self.destroy()
+        open(ruta_2)
+        
 
     def github(self):
         webbrowser.open('https://github.com/ReitanSora/Metodos_Numericos.git')

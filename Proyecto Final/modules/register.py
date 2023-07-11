@@ -13,6 +13,7 @@ Paralelo: SI4 - 002
 '''
 
 import tkinter as tk
+import os
 import model.usuario as usuario
 import functions.events as event
 import validation.validacion as val
@@ -27,6 +28,8 @@ class Register(tk.Toplevel):
         self.title("Registro nuevo usuario")
         self.geometry("500x600")
         self.resizable(False, False)
+        ruta_icono = os.path.abspath("./resources/icon.ico")
+        self.iconbitmap(ruta_icono)
         self.init_widgets()
 
     def vaciar_campos(self):

@@ -13,6 +13,7 @@ Paralelo: SI4 - 002
 '''
 
 import tkinter as tk
+import os
 import functions.events as event
 from modules import manager
 from modules import register
@@ -28,6 +29,8 @@ class Login (tk.Tk):
         self.title("Ingreso")
         self.geometry("350x450")
         self.resizable(False, False)
+        ruta_icono = os.path.abspath("./resources/icon.ico")
+        self.iconbitmap(ruta_icono)
         self.init_widgets()
 
     def ingresar(self, usuario_nick: str, clave: str):
