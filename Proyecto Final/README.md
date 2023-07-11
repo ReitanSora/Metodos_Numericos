@@ -61,8 +61,11 @@ Tecnologías usadas:💡
 - numpy 1.25.0
 - Pillow 10.0.0
 
+---
+Capturas de pantalla:📺
+---
 
-
+![Imagen de prueba](/resources/math.png)
 
 
 
