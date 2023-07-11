@@ -12,7 +12,6 @@ Carrera: Ingeniería en Sistemas de la información
 Paralelo: SI4 - 002
 '''
 import tkinter as tk
-from static import style
 
 from matplotlib.backends.backend_tkagg import NavigationToolbar2Tk
 
@@ -21,10 +20,10 @@ class VerticalNavigationToolbar2Tk(NavigationToolbar2Tk):
     def __init__(self, canvas, window):
         super().__init__(canvas, window, pack_toolbar=False)
         self.toolitems = (
-            ('Home', 'Lorem ipsum dolor sit amet', 'home', 'home'),
-            ('Pan', 'tincidunt ut laoreet', 'move', 'pan'),
-            ('Zoom', 'dolore magna aliquam', 'zoom_to_rect', 'zoom'),
-            ('Save', 'sollemnes in futurum', 'filesave', 'save_figure')
+            ('Home', 'Vista predeterminada', 'home', 'home'),
+            ('Pan', 'Mover', 'move', 'pan'),
+            ('Zoom', 'Zoom +', 'zoom_to_rect', 'zoom'),
+            ('Save', 'Guardar imágen', 'filesave', 'save_figure')
         )
         NavigationToolbar2Tk.__init__(self, canvas, window)
 
