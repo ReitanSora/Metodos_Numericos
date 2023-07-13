@@ -47,6 +47,9 @@ Cómo levantar el proyecto:✅
 Ejecutar los siguientes comandos en cmd o en la consola de comandos preferida:
 
 - git clone https://github.com/ReitanSora/Metodos_Numericos.git
+
+Entrar al directorio Proyecto Final y ejecutar:
+
 - pip install -r requirements.txt
 
 Luego de esto puede abrir el programa sin ninguna dificultad
