@@ -44,8 +44,12 @@ Librerias:📋
 ---
 Cómo levantar el proyecto:✅
 ---
-Para poder ejecutar el programa sin ninguna dificultad alguna, se debe instalar todas las librerías que se indicaron con anterioridad en su equipo.<br>Si bien, en el archivo requirements.txt se encuentran muchas más de las que se han nombrado aqui, esto se debe a que el archivo requirements.txt ha sido extraido del ambiente virtual donde se desarrolló el programa, por ende, se encuentran libreías que son innecesarias y otras que se instalan por defecto cuando instala las que han sido listadas.<br><br>
-La instalación de librerías se debe hacer antes de ejecutar el programa por primera vez, si lo desea puede ejecutar el archivo main.py, pero para hacerlo debera cumnplir con lo antes mencionado, y cargar toda la carpeta llamada "Proyecto Final" a su editor de código favorito, para que luego pueda ejecutar el archivo main.py sin problemas.<br><br>En el caso de que quiera ejecutar el archivo main.exe deberá cumplir con el primer paso mencionado en este apartado, y verificar que el ejecutable se encuentre justamente en la ruta /Proyecto Final/main.exe, es decir, que se encuentre dentro del directorio principal, pero sin estar dentro de ninguna otra carpeta, si así lo desea puede crear un acceso directo a este aplicativo y colocar dicho acceso directo en el directorio de su preferencia.<br> Si ha seguido correctamente estos pasos, el programa deberá funcionar adecuadamente, como fue diseñado y programado originalmente.
+Ejecutar los siguientes comandos en cmd o en la consola de comandos preferida:
+
+- git clone https://github.com/ReitanSora/Metodos_Numericos.git
+- pip install -r requirements.txt
+
+Luego de esto puede abrir el programa sin ninguna dificultad
 
 ---  
 Funcionamiento del Programa:🔧
